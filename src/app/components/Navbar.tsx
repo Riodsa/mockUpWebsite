@@ -6,7 +6,7 @@ import * as motion from "motion/react-client";
 
 const Navbar = () => {
   return (
-    <div className="top-0 bg-white w-screen h-18 shadow-md shadow-blue-300/100 m-0 flex flex-row items-center pl-2 sticky">
+    <div className="top-0 bg-white w-screen h-18 m-0 flex flex-row pl-2 items-center justify-center">
       <Link href="/home">
         <Image
           src="/logo.png"
@@ -17,10 +17,19 @@ const Navbar = () => {
           className="ml-10"
         />
       </Link>
-      <div className="flex flex-row self-center ml-35">
-        <NavbarItem text="About Us" />
-        <NavbarItem text="Why join?" />
-        <NavbarItem text="Students" />
+      <div className="flex flex-row self-center ml-35 items-center">
+        <motion.div className="flex flex-row p-3 mr-3 rounded-md" whileHover={{backgroundColor:"#dedede"}}>
+            <div className="flex right-0 mr-1 cursor-pointer">About us</div>
+            <Image src="/dd.png" width={20} height={0} alt="dropdown" style={{objectFit: "contain"}}/>
+        </motion.div>
+        <motion.div className="flex flex-row p-3 mr-3 rounded-md" whileHover={{backgroundColor:"#dedede"}}>
+            <div className="flex right-0 mr-1 cursor-pointer">Why Join?</div>
+            <Image src="/dd.png" width={20} height={0} alt="dropdown" style={{objectFit: "contain"}}/>
+        </motion.div>
+        <motion.div className="flex flex-row p-3 mr-3 rounded-md" whileHover={{backgroundColor:"#dedede"}}>
+            <div className="flex right-0 mr-1 cursor-pointer">Students</div>
+            <Image src="/dd.png" width={20} height={0} alt="dropdown" style={{objectFit: "contain"}}/>
+        </motion.div>
         <NavbarItem text="Event" />
         <NavbarItem text="Blog" />
         <NavbarItem text="How to Apply" />
