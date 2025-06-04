@@ -10,8 +10,7 @@ interface NavProps {
 const NavbarItem = ({ text }: NavProps) => {
   return (
     <Link href={`/${text}`}>
-      <motion.div className="flex right-0 mr-10 cursor-pointer"
-      whileHover={{color:"#29adff"}}>{text}</motion.div>
+      <motion.div className="flex right-0 mr-10">{text}</motion.div>
     </Link>
   );
 };

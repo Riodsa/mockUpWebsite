@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import NavbarDropdown from "./NavbarDropdown";
 import NavbarItem from "./NavbarItem";
 import Link from "next/link";
 import * as motion from "motion/react-client";
@@ -18,18 +19,9 @@ const Navbar = () => {
         />
       </Link>
       <div className="flex flex-row self-center ml-35 items-center">
-        <motion.div className="flex flex-row p-3 mr-3 rounded-md" whileHover={{backgroundColor:"#dedede"}}>
-            <div className="flex right-0 mr-1 cursor-pointer">About us</div>
-            <Image src="/dd.png" width={20} height={0} alt="dropdown" style={{objectFit: "contain"}}/>
-        </motion.div>
-        <motion.div className="flex flex-row p-3 mr-3 rounded-md" whileHover={{backgroundColor:"#dedede"}}>
-            <div className="flex right-0 mr-1 cursor-pointer">Why Join?</div>
-            <Image src="/dd.png" width={20} height={0} alt="dropdown" style={{objectFit: "contain"}}/>
-        </motion.div>
-        <motion.div className="flex flex-row p-3 mr-3 rounded-md" whileHover={{backgroundColor:"#dedede"}}>
-            <div className="flex right-0 mr-1 cursor-pointer">Students</div>
-            <Image src="/dd.png" width={20} height={0} alt="dropdown" style={{objectFit: "contain"}}/>
-        </motion.div>
+        <NavbarDropdown text="About Us"/>
+        <NavbarDropdown text="Why Join?"/>
+        <NavbarDropdown text="Students"/>
         <NavbarItem text="Event" />
         <NavbarItem text="Blog" />
         <NavbarItem text="How to Apply" />
