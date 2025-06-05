@@ -60,11 +60,13 @@ const Navbar = () => {
   };
 
   return (
-    <motion.div className="rounded-full top-5 bg-white w-[97%] h-18 m-0 flex flex-row pl-2 items-center justify-center fixed"
+    <motion.div className="rounded-full top-2 bg-white w-[97%] h-18 m-0 flex flex-row pl-2 items-center justify-center fixed"
       animate = {isHidden ? "hidden" : "visible"}
+      whileHover="visible"
+      onFocusCapture={() => setIsHidden(false)}
       variants={{
         hidden : {
-          y : "-94%"
+          y : "-94.5%"
         },
         visible : {
           y : "0%"
