@@ -1,7 +1,6 @@
 import React from "react";
 import Link from "next/link";
 import * as motion from "motion/react-client";
-import { color } from "motion";
 
 interface NavProps {
   text?: string;

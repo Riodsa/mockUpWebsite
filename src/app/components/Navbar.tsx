@@ -1,13 +1,76 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import NavbarDropdown from "./NavbarDropdown";
 import NavbarItem from "./NavbarItem";
 import Link from "next/link";
 import * as motion from "motion/react-client";
+import { useMotionValueEvent, useScroll } from "motion/react";
+import { useRef } from "react";
 
 const Navbar = () => {
+  const [isHidden, setIsHidden] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const { scrollY } = useScroll()
+  const lastYRef= useRef(0);
+
+  useMotionValueEvent(scrollY , 'change' , (y) => {
+    const different = y - lastYRef.current
+    if(Math.abs(different) > 50){
+      if(different > 0){
+        setIsHidden(true)
+        setActiveDropdown(null)
+      }
+      else{
+        setIsHidden(false)
+      }
+      lastYRef.current = y;
+    }
+  })
+
+  const handleDropdownToggle = (dropdownName: string) => {
+    setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
+  };
+
+  const closeDropdown = () => {
+    setActiveDropdown(null);
+  };
+
+  const dropdownItems = {
+    "About Us": [
+      { label: "What we do", href: "/about#what-we-do" },
+      { label: "Vision", href: "/about#vision" },
+      { label: "Philosophy", href: "/about#philosophy" },
+      { label: "Culture", href: "/about#culture" },
+      { label: "Award", href: "/about#award" },
+    ],
+    "Why Join?": [
+      { label: "Life @ Mitrphol", href: "/why-join#life-at-mitrphol" },
+      { label: "Team", href: "/why-join#team" },
+      { label: "Company Culture", href: "/why-join#career-growth" },
+      { label: "Learning", href: "/why-join#learning" },
+      { label: "Benefits", href: "/why-join#benefits" },
+    ],
+    "Students": [
+      { label: "Testimonial", href: "/students#testimonial" },
+      { label: "Internships", href: "/students#internships" },
+      { label: "Events", href: "/students#events" },
+      { label: "FAQs", href: "/students#faqs" },
+    ],
+  };
+
   return (
-    <div className="top-0 bg-white w-screen h-18 m-0 flex flex-row pl-2 items-center justify-center">
+    <motion.div className="rounded-full top-5 bg-white w-[97%] h-18 m-0 flex flex-row pl-2 items-center justify-center fixed"
+      animate = {isHidden ? "hidden" : "visible"}
+      variants={{
+        hidden : {
+          y : "-94%"
+        },
+        visible : {
+          y : "0%"
+        }
+      }}
+      onClick={() => setIsHidden(!isHidden)}>
       <Link href="/home">
         <Image
           src="/logo.png"
@@ -19,9 +82,27 @@ const Navbar = () => {
         />
       </Link>
       <div className="flex flex-row self-center ml-35 items-center">
-        <NavbarDropdown text="About Us"/>
-        <NavbarDropdown text="Why Join?"/>
-        <NavbarDropdown text="Students"/>
+        <NavbarDropdown
+          text="About Us"
+          items={dropdownItems["About Us"]}
+          isActive={activeDropdown === "About Us"}
+          onToggle={() => handleDropdownToggle("About Us")}
+          onClose={closeDropdown}
+        />
+        <NavbarDropdown
+          text="Why Join?"
+          items={dropdownItems["Why Join?"]}
+          isActive={activeDropdown === "Why Join?"}
+          onToggle={() => handleDropdownToggle("Why Join?")}
+          onClose={closeDropdown}
+        />
+        <NavbarDropdown
+          text="Students"
+          items={dropdownItems["Students"]}
+          isActive={activeDropdown === "Students"}
+          onToggle={() => handleDropdownToggle("Students")}
+          onClose={closeDropdown}
+        />
         <NavbarItem text="Event" />
         <NavbarItem text="Blog" />
         <NavbarItem text="How to Apply" />
@@ -33,7 +114,7 @@ const Navbar = () => {
       >
         Find jobs
       </motion.button>
-    </div>
+    </motion.div>
   );
 };
 
