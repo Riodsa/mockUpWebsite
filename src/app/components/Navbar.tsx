@@ -11,22 +11,22 @@ import { useRef } from "react";
 const Navbar = () => {
   const [isHidden, setIsHidden] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const { scrollY } = useScroll()
-  const lastYRef= useRef(0);
+  const { scrollY } = useScroll();
+  const lastYRef = useRef(0);
 
-  useMotionValueEvent(scrollY , 'change' , (y) => {
-    const different = y - lastYRef.current
-    if(Math.abs(different) > 50){
-      if(different > 0){
-        setIsHidden(true)
-        setActiveDropdown(null)
-      }
-      else{
-        setIsHidden(false)
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const different = y - lastYRef.current;
+    if (Math.abs(different) > 50) {
+      if (different > 0) {
+        setActiveDropdown(null);
+      } else {
       }
       lastYRef.current = y;
     }
-  })
+    if (y > 50) {
+      setIsHidden(true);
+    } else setIsHidden(false);
+  });
 
   const handleDropdownToggle = (dropdownName: string) => {
     setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
@@ -51,7 +51,7 @@ const Navbar = () => {
       { label: "Learning", href: "/why-join#learning" },
       { label: "Benefits", href: "/why-join#benefits" },
     ],
-    "Students": [
+    Students: [
       { label: "Testimonial", href: "/students#testimonial" },
       { label: "Internships", href: "/students#internships" },
       { label: "Events", href: "/students#events" },
@@ -60,19 +60,21 @@ const Navbar = () => {
   };
 
   return (
-    <motion.div className="rounded-full top-2 bg-white w-[97%] h-18 m-0 flex flex-row pl-2 items-center justify-center fixed"
-      animate = {isHidden ? "hidden" : "visible"}
-      whileHover="visible"
-      onFocusCapture={() => setIsHidden(false)}
-      variants={{
-        hidden : {
-          y : "-94.5%"
-        },
-        visible : {
-          y : "0%"
-        }
+    <motion.div
+      className="w-screen h-18 m-0 flex flex-row pl-2 items-center justify-center fixed z-20"
+      style={{
+        backgroundColor: isHidden ? "transparent" : "white",
       }}
-      onClick={() => setIsHidden(!isHidden)}>
+      animate={{
+        backgroundColor: isHidden
+          ? "rgba(255,255,255,0)"
+          : "rgba(255,255,255,1)",
+      }}
+      transition={{ duration: 0.25 }}
+      whileHover={{ backgroundColor: "rgba(255,255,255,1)" }}
+      onFocusCapture={() => setIsHidden(false)}
+      onClick={() => setIsHidden(!isHidden)}
+    >
       <Link href="/home">
         <Image
           src="/logo.png"
