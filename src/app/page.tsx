@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "./components/Navbar";
-import { textBox, textFloatUp } from "./variants/variant";
+import Navbar from "../components/Navbar";
+import { textBox, textFloatUp } from "../variants/variant";
 import * as motion from "motion/react-client";
 
 const page = () => {

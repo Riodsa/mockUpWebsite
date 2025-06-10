@@ -25,12 +25,9 @@ const Navbar = () => {
     }
     if (y > 50) {
       setIsHidden(true);
+      setActiveDropdown(null);
     } else setIsHidden(false);
   });
-
-  const handleDropdownToggle = (dropdownName: string) => {
-    setActiveDropdown(activeDropdown === dropdownName ? null : dropdownName);
-  };
 
   const closeDropdown = () => {
     setActiveDropdown(null);
@@ -87,21 +84,21 @@ const Navbar = () => {
           text="About Us"
           items={dropdownItems["About Us"]}
           isActive={activeDropdown === "About Us"}
-          onToggle={() => handleDropdownToggle("About Us")}
+          onActive={() => setActiveDropdown("About Us")}
           onClose={closeDropdown}
         />
         <NavbarDropdown
           text="Why Join?"
           items={dropdownItems["Why Join?"]}
           isActive={activeDropdown === "Why Join?"}
-          onToggle={() => handleDropdownToggle("Why Join?")}
+          onActive={() => setActiveDropdown("Why Join?")}
           onClose={closeDropdown}
         />
         <NavbarDropdown
           text="Students"
           items={dropdownItems["Students"]}
           isActive={activeDropdown === "Students"}
-          onToggle={() => handleDropdownToggle("Students")}
+          onActive={() => setActiveDropdown("Students")}
           onClose={closeDropdown}
         />
         <NavbarItem text="Event" />
