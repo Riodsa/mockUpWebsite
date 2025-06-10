@@ -12,7 +12,7 @@ interface NavProps {
   text?: string;
   items?: DropdownItem[];
   isActive?: boolean;
-  onToggle?: () => void;
+  onActive?: () => void;
   onClose?: () => void;
 }
 
@@ -20,18 +20,15 @@ const NavbarDropdown = ({
   text,
   items = [],
   isActive = false,
-  onToggle,
+  onActive,
   onClose,
 }: NavProps) => {
   return (
-    <div className="relative">
+    <div className="relative group">
       <motion.div
         className="flex flex-row p-3 mr-3 rounded-md cursor-pointer"
         whileHover={{ backgroundColor: "#dedede" }}
-        onClick={(e) => {
-          e.stopPropagation();
-          onToggle?.();
-        }}
+        onMouseEnter={onActive}
       >
         <div className="flex right-0 mr-1">{text}</div>
         <motion.img
@@ -53,6 +50,7 @@ const NavbarDropdown = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
+            onMouseLeave={onClose}
           >
             {items.map((item, index) => (
               <Link key={index} href={item.href} onClick={onClose}>
