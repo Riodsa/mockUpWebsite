@@ -4,11 +4,12 @@ import * as motion from "motion/react-client";
 
 interface NavProps {
   text?: string;
+  href: string;
 }
 
-const NavbarItem = ({ text }: NavProps) => {
+const NavbarItem = ({ text, href }: NavProps) => {
   return (
-    <Link href={`/${text}`}>
+    <Link href={`${href}`}>
       <motion.div className="flex right-0 mr-10">{text}</motion.div>
     </Link>
   );

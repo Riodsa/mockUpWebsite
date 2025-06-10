@@ -6,11 +6,9 @@ import * as motion from "motion/react-client";
 const page = () => {
   return (
     <div>
-      <div className="flex justify-center mb-18">
-        <Navbar />
-      </div>
-      <div className="relative w-screen h-140 bg-red-300">
-        <div className="flex flex-col justify-center items-center w-screen h-100 bg-blue-400">
+      <Navbar/>
+      <div className="relative w-[100%] h-140 bg-red-300">
+        <div className="flex flex-col justify-center items-center w-[100%] h-120 bg-blue-400">
           <motion.div
             className="relative flex flex-col bg-amber-300 bottom-10 right-65 cursor-default"
             variants={textBox}
