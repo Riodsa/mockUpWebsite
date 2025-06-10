@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Navbar from "../components/Navbar";
 
 const inter = Inter({
   variable: "--font-inter-mono",
@@ -19,7 +20,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="min-h-screen w-auto">{children}</body>
+      <body className="min-h-screen w-auto">
+        <Navbar/>
+        <div className="absolute mt-18 w-full">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
