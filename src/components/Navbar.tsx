@@ -33,32 +33,84 @@ const Navbar = () => {
     setActiveDropdown(null);
   };
 
-  const dropdownItems = {
-    "About Us": [
-      { label: "What we do", href: "/about#what-we-do" },
-      { label: "Vision", href: "/about#vision" },
-      { label: "Philosophy", href: "/about#philosophy" },
-      { label: "Culture", href: "/about#culture" },
-      { label: "Award", href: "/about#award" },
-    ],
-    "Why Join?": [
-      { label: "Life @ Mitrphol", href: "/why-join#life-at-mitrphol" },
-      { label: "Team", href: "/why-join#team" },
-      { label: "Company Culture", href: "/why-join#career-growth" },
-      { label: "Learning", href: "/why-join#learning" },
-      { label: "Benefits", href: "/why-join#benefits" },
-    ],
-    Students: [
-      { label: "Testimonial", href: "/students#testimonial" },
-      { label: "Internships", href: "/students#internships" },
-      { label: "Events", href: "/students#events" },
-      { label: "FAQs", href: "/students#faqs" },
-    ],
-  };
+  
+  interface DropdownItem {
+    label: string;
+    href: string;
+  }
+
+  interface NavItem {
+    label: string;
+    href: string;
+    dropdownItems: DropdownItem[];
+  }
+
+  interface NavItemDict {
+    [key: string]: NavItem;
+  }
+
+  const navbarItems = [
+    "About Us",
+    "Why Join?",
+    "Students",
+    "Event",
+    "Blog",
+    "How to Apply",
+  ]
+
+  const navbarItemDict: NavItemDict = {
+    "About Us": {
+      'label' : "About Us",
+      'href': '/about',
+      'dropdownItems': [
+        { label: "What we do", href: "/about#what-we-do" },
+        { label: "Vision", href: "/about#vision" },
+        { label: "Philosophy", href: "/about#philosophy" },
+        { label: "Culture", href: "/about#culture" },
+        { label: "Award", href: "/about#award" },
+      ],
+    },
+    "Why Join?": {
+      'label' : "Why Join?",
+      'href': '/why-join',
+      'dropdownItems': [
+        { label: "Life @ Mitrphol", href: "/why-join#life-at-mitrphol" },
+        { label: "Team", href: "/why-join#team" },
+        { label: "Company Culture", href: "/why-join#career-growth" },
+        { label: "Learning", href: "/why-join#learning" },
+        { label: "Benefits", href: "/why-join#benefits" },
+      ],
+    },
+    "Students": {
+      'label' : "Students",
+      'href': '/student',
+      'dropdownItems': [
+        { label: "Testimonial", href: "/student#testimonial" },
+        { label: "Internships", href: "/student#internships" },
+        { label: "Events", href: "/student#events" },
+        { label: "FAQs", href: "/student#faqs" },
+      ],
+    },
+    "Event": {
+      'label' : "Event",
+      'href': '/event',
+      'dropdownItems': [],
+    },
+    "Blog": {
+      'label' : "Blog",
+      'href': '/blog',
+      'dropdownItems': [],
+    },
+    "How to Apply": {
+      'label' : "How to Apply",
+      'href': '/how-to-apply',
+      'dropdownItems': [],
+    },
+  }
 
   return (
     <motion.div
-      className="w-screen h-18 m-0 flex flex-row pl-2 items-center justify-center fixed z-20"
+      className="w-screen h-18 flex flex-row pl-2 items-center justify-center fixed z-20"
       animate={{
         backgroundColor: isHidden
           ? "rgba(222,222,222,0.3)"
@@ -80,30 +132,22 @@ const Navbar = () => {
         />
       </Link>
       <div className="flex flex-row self-center ml-35 items-center">
-        <NavbarDropdown
-          text="About Us"
-          items={dropdownItems["About Us"]}
-          isActive={activeDropdown === "About Us"}
-          onActive={() => setActiveDropdown("About Us")}
-          onClose={closeDropdown}
-        />
-        <NavbarDropdown
-          text="Why Join?"
-          items={dropdownItems["Why Join?"]}
-          isActive={activeDropdown === "Why Join?"}
-          onActive={() => setActiveDropdown("Why Join?")}
-          onClose={closeDropdown}
-        />
-        <NavbarDropdown
-          text="Students"
-          items={dropdownItems["Students"]}
-          isActive={activeDropdown === "Students"}
-          onActive={() => setActiveDropdown("Students")}
-          onClose={closeDropdown}
-        />
-        <NavbarItem text="Event" />
-        <NavbarItem text="Blog" />
-        <NavbarItem text="How to Apply" />
+         {navbarItems.map((item,i) => (
+          navbarItemDict[item].dropdownItems.length > 0 ? 
+          <NavbarDropdown
+            key={i}
+            text={navbarItemDict[item].label}
+            href={navbarItemDict[item].href}
+            items={navbarItemDict[item].dropdownItems}
+            isActive={activeDropdown === navbarItemDict[item].label}
+            onActive={() => setActiveDropdown(navbarItemDict[item].label)}
+            onClose={closeDropdown}/>
+          :
+          <NavbarItem
+            key={i}
+            text={navbarItemDict[item].label}
+            href={navbarItemDict[item].href}/>
+        ))}
       </div>
       <motion.button
         className="relative left-10 m-3 p-3 rounded-md bg-sky-400 text-white cursor-pointer"

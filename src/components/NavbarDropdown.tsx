@@ -10,6 +10,7 @@ interface DropdownItem {
 
 interface NavProps {
   text?: string;
+  href: string;
   items?: DropdownItem[];
   isActive?: boolean;
   onActive?: () => void;
@@ -18,6 +19,7 @@ interface NavProps {
 
 const NavbarDropdown = ({
   text,
+  href,
   items = [],
   isActive = false,
   onActive,
@@ -25,22 +27,24 @@ const NavbarDropdown = ({
 }: NavProps) => {
   return (
     <div className="relative group">
-      <motion.div
-        className="flex flex-row p-3 mr-3 rounded-md cursor-pointer"
-        whileHover={{ backgroundColor: "#dedede" }}
-        onMouseEnter={onActive}
-      >
-        <div className="flex right-0 mr-1">{text}</div>
-        <motion.img
-          src="/dd.png"
-          width={20}
-          height={0}
-          alt="dropdown"
-          style={{ objectFit: "contain" }}
-          animate={isActive ? { rotate: 180 } : { rotate: 0 }}
-          transition={{ duration: 0.2 }}
-        />
-      </motion.div>
+      <Link href={`${href}`}>
+        <motion.div
+          className="flex flex-row p-3 mr-3 rounded-md cursor-pointer"
+          whileHover={{ backgroundColor: "#dedede" }}
+          onMouseEnter={onActive}
+        >
+          <div className="flex right-0 mr-1">{text}</div>
+          <motion.img
+            src="/dd.png"
+            width={20}
+            height={0}
+            alt="dropdown"
+            style={{ objectFit: "contain" }}
+            animate={isActive ? { rotate: 180 } : { rotate: 0 }}
+            transition={{ duration: 0.2 }}
+          />
+        </motion.div>
+      </Link>
 
       <AnimatePresence>
         {isActive && (
