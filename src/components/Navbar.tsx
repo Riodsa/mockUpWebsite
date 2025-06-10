@@ -61,24 +61,24 @@ const Navbar = () => {
   const navbarItemDict: NavItemDict = {
     "About Us": {
       'label' : "About Us",
-      'href': '/aboutus',
+      'href': '/about-us',
       'dropdownItems': [
-        { label: "What we do", href: "/aboutus#whatwedo" },
-        { label: "Vision", href: "/aboutus#vision" },
-        { label: "Philosophy", href: "/aboutus#philosophy" },
-        { label: "Culture", href: "/aboutus#culture" },
-        { label: "Award", href: "/aboutus#award" },
+        { label: "What we do", href: "/about-us#what-we-do" },
+        { label: "Vision", href: "/about-us#vision" },
+        { label: "Philosophy", href: "/about-us#philosophy" },
+        { label: "Culture", href: "/about-us#culture" },
+        { label: "Award", href: "/about-us#award" },
       ],
     },
     "Why Join?": {
       'label' : "Why Join?",
-      'href': '/whyjoin',
+      'href': '/why-join',
       'dropdownItems': [
-        { label: "Life @ Mitrphol", href: "/whyjoin#life@mitrphol" },
-        { label: "Team", href: "/whyjoin#team" },
-        { label: "Career Growth", href: "/whyjoin#careergrowth" },
-        { label: "Learning", href: "/whyjoin#learning" },
-        { label: "Benefits", href: "/whyjoin#benefit" },
+        { label: "Life @ Mitrphol", href: "/why-join#life@mitrphol" },
+        { label: "Team", href: "/why-join#team" },
+        { label: "Career Growth", href: "/why-join#career-growth" },
+        { label: "Learning", href: "/why-join#learning" },
+        { label: "Benefits", href: "/why-join#benefit" },
       ],
     },
     "Students": {
