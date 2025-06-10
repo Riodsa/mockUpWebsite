@@ -62,12 +62,9 @@ const Navbar = () => {
   return (
     <motion.div
       className="w-screen h-18 m-0 flex flex-row pl-2 items-center justify-center fixed z-20"
-      style={{
-        backgroundColor: isHidden ? "transparent" : "white",
-      }}
       animate={{
         backgroundColor: isHidden
-          ? "rgba(255,255,255,0)"
+          ? "rgba(222,222,222,0.3)"
           : "rgba(255,255,255,1)",
       }}
       transition={{ duration: 0.25 }}
