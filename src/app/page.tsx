@@ -6,7 +6,7 @@ import * as motion from "motion/react-client";
 const page = () => {
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="relative w-[100%] h-140 bg-red-300">
         <div className="flex flex-col justify-center items-center w-[100%] h-120 bg-blue-400">
           <motion.div
@@ -22,13 +22,13 @@ const page = () => {
               Join us at
             </motion.h1>
             <motion.h1
-              className="mb-3 pl-7 text-5xl font-extrabold inline-block bg-gradient-to-r from-regal-blue to-regal-sky text-transparent bg-clip-text"
+              className="mb-3 pl-5 text-5xl font-extrabold inline-block bg-gradient-to-r from-regal-blue to-regal-sky text-transparent bg-clip-text"
               variants={textFloatUp}
             >
               Mitrphol Group
             </motion.h1>
             <motion.h2
-              className="self-center font-semibold"
+              className="self-center font-medium"
               variants={textFloatUp}
             >
               Your Dream Career Awaits

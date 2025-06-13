@@ -5,6 +5,17 @@
   --foreground: #171717;
 }
 
+@layer components {
+  .underline-animation {
+    @apply relative
+  }
+  .underline-animation::after {
+    @apply absolute content-[''] w-full h-2 left-0 bottom-[-4px]
+    bg-cyan-400 scale-x-0 hover:scale-x-100 origin-bottom-right hover:origin-bottom-left
+    transition-transform duration-300
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

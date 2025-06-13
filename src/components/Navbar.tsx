@@ -24,16 +24,15 @@ const Navbar = () => {
       lastYRef.current = y;
     }
     if (y > 50) {
-      setIsHidden(true);
+      setIsHidden(false);
       setActiveDropdown(null);
-    } else setIsHidden(false);
+    } else setIsHidden(true);
   });
 
   const closeDropdown = () => {
     setActiveDropdown(null);
   };
 
-  
   interface DropdownItem {
     label: string;
     href: string;
@@ -50,19 +49,25 @@ const Navbar = () => {
   }
 
   const navbarItems = [
+    "Home",
     "About Us",
     "Why Join?",
     "Students",
     "Event",
     "Blog",
     "How to Apply",
-  ]
+  ];
 
   const navbarItemDict: NavItemDict = {
+    "Home": {
+      label: "Home",
+      href: "/",
+      dropdownItems: [],
+    },
     "About Us": {
-      'label' : "About Us",
-      'href': '/about',
-      'dropdownItems': [
+      label: "About Us",
+      href: "/about",
+      dropdownItems: [
         { label: "What we do", href: "/about#what-we-do" },
         { label: "Vision", href: "/about#vision" },
         { label: "Philosophy", href: "/about#philosophy" },
@@ -71,9 +76,9 @@ const Navbar = () => {
       ],
     },
     "Why Join?": {
-      'label' : "Why Join?",
-      'href': '/why-join',
-      'dropdownItems': [
+      label: "Why Join?",
+      href: "/why-join",
+      dropdownItems: [
         { label: "Life @ Mitrphol", href: "/why-join#life-at-mitrphol" },
         { label: "Team", href: "/why-join#team" },
         { label: "Company Culture", href: "/why-join#career-growth" },
@@ -81,43 +86,45 @@ const Navbar = () => {
         { label: "Benefits", href: "/why-join#benefits" },
       ],
     },
-    "Students": {
-      'label' : "Students",
-      'href': '/student',
-      'dropdownItems': [
+    Students: {
+      label: "Students",
+      href: "/student",
+      dropdownItems: [
         { label: "Testimonial", href: "/student#testimonial" },
         { label: "Internships", href: "/student#internships" },
         { label: "Events", href: "/student#events" },
         { label: "FAQs", href: "/student#faqs" },
       ],
     },
-    "Event": {
-      'label' : "Event",
-      'href': '/event',
-      'dropdownItems': [],
+    Event: {
+      label: "Event",
+      href: "/event",
+      dropdownItems: [],
     },
-    "Blog": {
-      'label' : "Blog",
-      'href': '/blog',
-      'dropdownItems': [],
+    Blog: {
+      label: "Blog",
+      href: "/blog",
+      dropdownItems: [],
     },
     "How to Apply": {
-      'label' : "How to Apply",
-      'href': '/how-to-apply',
-      'dropdownItems': [],
+      label: "How to Apply",
+      href: "/how-to-apply",
+      dropdownItems: [],
     },
-  }
+  };
 
   return (
     <motion.div
-      className="w-screen h-18 flex flex-row pl-2 items-center justify-center fixed z-20"
+      className="w-screen h-18 pt-2 flex flex-row pl-2 items-center justify-around fixed z-20"
       animate={{
         backgroundColor: isHidden
-          ? "rgba(222,222,222,0.3)"
+          ? "rgba(222,222,222,0)"
           : "rgba(255,255,255,1)",
+        color: isHidden ? "white" : "black",
+        y: isHidden ? [0] : [-72, 0],
+        opacity: isHidden ? [1] : [0, 1],
       }}
-      transition={{ duration: 0.25 }}
-      whileHover={{ backgroundColor: "rgba(255,255,255,1)" }}
+      transition={{ duration: 0.4 }}
       onFocusCapture={() => setIsHidden(false)}
       onClick={() => setIsHidden(!isHidden)}
     >
@@ -132,25 +139,30 @@ const Navbar = () => {
         />
       </Link>
       <div className="flex flex-row self-center ml-35 items-center">
-         {navbarItems.map((item,i) => (
-          navbarItemDict[item].dropdownItems.length > 0 ? 
-          <NavbarDropdown
-            key={i}
-            text={navbarItemDict[item].label}
-            href={navbarItemDict[item].href}
-            items={navbarItemDict[item].dropdownItems}
-            isActive={activeDropdown === navbarItemDict[item].label}
-            onActive={() => setActiveDropdown(navbarItemDict[item].label)}
-            onClose={closeDropdown}/>
-          :
-          <NavbarItem
-            key={i}
-            text={navbarItemDict[item].label}
-            href={navbarItemDict[item].href}/>
-        ))}
+        {navbarItems.map((item, i) =>
+          navbarItemDict[item].dropdownItems.length > 0 ? (
+            <NavbarDropdown
+              key={i}
+              text={navbarItemDict[item].label}
+              href={navbarItemDict[item].href}
+              items={navbarItemDict[item].dropdownItems}
+              isActive={activeDropdown === navbarItemDict[item].label}
+              onActive={() => setActiveDropdown(navbarItemDict[item].label)}
+              onClose={closeDropdown}
+              isVisible={!isHidden}
+            />
+          ) : (
+            <NavbarItem
+              key={i}
+              text={navbarItemDict[item].label}
+              href={navbarItemDict[item].href}
+              onClose={closeDropdown}
+            />
+          )
+        )}
       </div>
       <motion.button
-        className="relative left-10 m-3 p-3 rounded-md bg-sky-400 text-white cursor-pointer"
+        className="relative right-2 m-3 p-3 rounded-md bg-sky-400 text-white cursor-pointer"
         whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.1 }}
       >

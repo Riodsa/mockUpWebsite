@@ -13,6 +13,7 @@ interface NavProps {
   href: string;
   items?: DropdownItem[];
   isActive?: boolean;
+  isVisible?: boolean;
   onActive?: () => void;
   onClose?: () => void;
 }
@@ -24,18 +25,18 @@ const NavbarDropdown = ({
   isActive = false,
   onActive,
   onClose,
+  isVisible,
 }: NavProps) => {
   return (
     <div className="relative group">
-      <Link href={`${href}`}>
+      <Link href={`${href}`} className="cursor-default">
         <motion.div
-          className="flex flex-row p-3 mr-3 rounded-md cursor-pointer"
-          whileHover={{ backgroundColor: "#dedede" }}
+          className="flex flex-row p-2 mr-3 rounded-md cursor-pointer"
           onMouseEnter={onActive}
         >
-          <div className="flex right-0 mr-1">{text}</div>
+          <div className="p-0 m-0 underline-animation flex right-0 mr-1">{text}</div>
           <motion.img
-            src="/dd.png"
+            src={isVisible ? "/dd.png" : "/ddWhite.png"}
             width={20}
             height={0}
             alt="dropdown"
@@ -49,7 +50,7 @@ const NavbarDropdown = ({
       <AnimatePresence>
         {isActive && (
           <motion.div
-            className="absolute top-full left-0 bg-white shadow-lg rounded-md border border-gray-200 min-w-48 z-50"
+            className="absolute top-full left-0 bg-white shadow-lg rounded-sm border border-gray-200 min-w-48 z-50"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
