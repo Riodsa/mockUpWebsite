@@ -1,12 +1,10 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import { textBox, textFloatUp } from "../variants/variant";
 import * as motion from "motion/react-client";
 
 const page = () => {
   return (
     <div>
-      <Navbar/>
       <div className="relative w-[100%] h-140 bg-red-300">
         <div className="flex flex-col justify-center items-center w-[100%] h-120 bg-blue-400">
           <motion.div

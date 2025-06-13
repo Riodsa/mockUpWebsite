@@ -41,7 +41,7 @@ const Navbar = () => {
 
   interface NavItem {
     label: string;
-    href: string;
+    href: string|null;
     dropdownItems: DropdownItem[];
   }
 
@@ -61,40 +61,46 @@ const Navbar = () => {
   const navbarItemDict: NavItemDict = {
     "About Us": {
       'label' : "About Us",
-      'href': '/about',
+      'href': '/about-us',
       'dropdownItems': [
-        { label: "What we do", href: "/about#what-we-do" },
-        { label: "Vision", href: "/about#vision" },
-        { label: "Philosophy", href: "/about#philosophy" },
-        { label: "Culture", href: "/about#culture" },
-        { label: "Award", href: "/about#award" },
+        { label: "What we do", href: "/about-us#what-we-do" },
+        { label: "Vision", href: "/about-us#vision" },
+        { label: "Philosophy", href: "/about-us#philosophy" },
+        { label: "Culture", href: "/about-us#culture" },
+        { label: "Award", href: "/about-us#award" },
       ],
     },
     "Why Join?": {
       'label' : "Why Join?",
       'href': '/why-join',
       'dropdownItems': [
-        { label: "Life @ Mitrphol", href: "/why-join#life-at-mitrphol" },
+        { label: "Life @ Mitrphol", href: "/why-join#life@mitrphol" },
         { label: "Team", href: "/why-join#team" },
-        { label: "Company Culture", href: "/why-join#career-growth" },
+        { label: "Career Growth", href: "/why-join#career-growth" },
         { label: "Learning", href: "/why-join#learning" },
-        { label: "Benefits", href: "/why-join#benefits" },
+        { label: "Benefits", href: "/why-join#benefit" },
       ],
     },
     "Students": {
       'label' : "Students",
       'href': '/student',
       'dropdownItems': [
-        { label: "Testimonial", href: "/student#testimonial" },
-        { label: "Internships", href: "/student#internships" },
-        { label: "Events", href: "/student#events" },
-        { label: "FAQs", href: "/student#faqs" },
+        { label: "My Path to Mitrintern", href: "/student#mitrintern" },
+        { label: "Internship FAQs", href: "/student#faq" },
+        { label: "Browse Our Internships", href: "/student#internships" },
+        { label: "Timeline", href: "/student#timeline" },
+        { label: "Scholarship", href: "/student/scholarship"},
+        { label: "On Campus", href: "/student/oncampus"},
+        { label: "Program", href: "/student/program"}
       ],
     },
     "Event": {
       'label' : "Event",
-      'href': '/event',
-      'dropdownItems': [],
+      'href': null,
+      'dropdownItems': [
+        { label: "Internal Activities", href: "/event/internal" },
+        { label: "Recruitment Activities", href: "/event/recruitment" },
+      ],
     },
     "Blog": {
       'label' : "Blog",
@@ -119,9 +125,9 @@ const Navbar = () => {
       transition={{ duration: 0.25 }}
       whileHover={{ backgroundColor: "rgba(255,255,255,1)" }}
       onFocusCapture={() => setIsHidden(false)}
-      onClick={() => setIsHidden(!isHidden)}
+      onClick={() => setIsHidden(false)}
     >
-      <Link href="/home">
+      <Link href="/">
         <Image
           src="/logo.png"
           alt="logo"
@@ -146,7 +152,7 @@ const Navbar = () => {
           <NavbarItem
             key={i}
             text={navbarItemDict[item].label}
-            href={navbarItemDict[item].href}/>
+            href={navbarItemDict[item].href?? "/"}/>
         ))}
       </div>
       <motion.button

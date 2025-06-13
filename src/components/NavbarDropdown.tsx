@@ -10,7 +10,7 @@ interface DropdownItem {
 
 interface NavProps {
   text?: string;
-  href: string;
+  href: string|null;
   items?: DropdownItem[];
   isActive?: boolean;
   onActive?: () => void;
@@ -26,25 +26,45 @@ const NavbarDropdown = ({
   onClose,
 }: NavProps) => {
   return (
-    <div className="relative group">
-      <Link href={`${href}`}>
-        <motion.div
-          className="flex flex-row p-3 mr-3 rounded-md cursor-pointer"
-          whileHover={{ backgroundColor: "#dedede" }}
-          onMouseEnter={onActive}
-        >
-          <div className="flex right-0 mr-1">{text}</div>
-          <motion.img
-            src="/dd.png"
-            width={20}
-            height={0}
-            alt="dropdown"
-            style={{ objectFit: "contain" }}
-            animate={isActive ? { rotate: 180 } : { rotate: 0 }}
-            transition={{ duration: 0.2 }}
-          />
-        </motion.div>
-      </Link>
+    <div className="relative group"
+      onMouseEnter={onActive}
+      onMouseLeave={onClose}>
+      {href ?
+      
+        <Link href={`${href}`}>
+          <motion.div
+            className="flex flex-row p-3 mr-3 rounded-md cursor-pointer"
+            whileHover={{ backgroundColor: "#dedede" }}
+          >
+            <div className="flex right-0 mr-1">{text}</div>
+            <motion.img
+              src="/dd.png"
+              width={20}
+              height={0}
+              alt="dropdown"
+              style={{ objectFit: "contain" }}
+              animate={isActive ? { rotate: 180 } : { rotate: 0 }}
+              transition={{ duration: 0.2 }}
+            />
+          </motion.div>
+        </Link>
+       :
+         <motion.div
+            className="flex flex-row p-3 mr-3 rounded-md cursor-pointer"
+            whileHover={{ backgroundColor: "#dedede" }}
+          >
+            <div className="flex right-0 mr-1">{text}</div>
+            <motion.img
+              src="/dd.png"
+              width={20}
+              height={0}
+              alt="dropdown"
+              style={{ objectFit: "contain" }}
+              animate={isActive ? { rotate: 180 } : { rotate: 0 }}
+              transition={{ duration: 0.2 }}
+            />
+          </motion.div>
+      }
 
       <AnimatePresence>
         {isActive && (
@@ -54,7 +74,6 @@ const NavbarDropdown = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            onMouseLeave={onClose}
           >
             {items.map((item, index) => (
               <Link key={index} href={item.href} onClick={onClose}>
