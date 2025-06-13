@@ -10,7 +10,7 @@ interface DropdownItem {
 
 interface NavProps {
   text?: string;
-  href: string;
+  href?: string | null;
   items?: DropdownItem[];
   isActive?: boolean;
   isVisible?: boolean;
@@ -31,10 +31,12 @@ const NavbarDropdown = ({
     <div className="relative group">
       <Link href={`${href}`} className="cursor-default">
         <motion.div
-          className="flex flex-row p-2 mr-3 rounded-md cursor-pointer"
+          className="flex flex-row p-2 mr-3 rounded-md cursor-pointer underline-animation group"
           onMouseEnter={onActive}
         >
-          <div className="p-0 m-0 underline-animation flex right-0 mr-1">{text}</div>
+          <div className="p-0 m-0 flex right-0 mr-1" onClick={onClose}>
+            {text}
+          </div>
           <motion.img
             src={isVisible ? "/dd.png" : "/ddWhite.png"}
             width={20}
@@ -44,6 +46,8 @@ const NavbarDropdown = ({
             animate={isActive ? { rotate: 180 } : { rotate: 0 }}
             transition={{ duration: 0.2 }}
           />
+          {isVisible? <span className="absolute bottom-1 left-1 w-0 h-0.5 bg-black group-hover:w-[65%] transition-all duration-300 ease-out"></span>
+          : <span className="absolute bottom-1 left-1 w-0 h-0.5 bg-white group-hover:w-[65%] transition-all duration-300 ease-out"></span>}
         </motion.div>
       </Link>
 

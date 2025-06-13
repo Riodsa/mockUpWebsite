@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import NavbarDropdown from "./NavbarDropdown";
 import NavbarItem from "./NavbarItem";
@@ -9,7 +9,7 @@ import { useMotionValueEvent, useScroll } from "motion/react";
 import { useRef } from "react";
 
 const Navbar = () => {
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(true);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const lastYRef = useRef(0);
@@ -23,7 +23,7 @@ const Navbar = () => {
       }
       lastYRef.current = y;
     }
-    if (y > 50) {
+    if (y > 100) {
       setIsHidden(false);
       setActiveDropdown(null);
     } else setIsHidden(true);
@@ -40,7 +40,7 @@ const Navbar = () => {
 
   interface NavItem {
     label: string;
-    href: string;
+    href: string|null;
     dropdownItems: DropdownItem[];
   }
 
@@ -49,7 +49,6 @@ const Navbar = () => {
   }
 
   const navbarItems = [
-    "Home",
     "About Us",
     "Why Join?",
     "Students",
@@ -59,47 +58,48 @@ const Navbar = () => {
   ];
 
   const navbarItemDict: NavItemDict = {
-    "Home": {
-      label: "Home",
-      href: "/",
-      dropdownItems: [],
-    },
     "About Us": {
-      label: "About Us",
-      href: "/about",
-      dropdownItems: [
-        { label: "What we do", href: "/about#what-we-do" },
-        { label: "Vision", href: "/about#vision" },
-        { label: "Philosophy", href: "/about#philosophy" },
-        { label: "Culture", href: "/about#culture" },
-        { label: "Award", href: "/about#award" },
+      'label' : "About Us",
+      'href': '/about-us',
+      'dropdownItems': [
+        { label: "What we do", href: "/about-us#what-we-do" },
+        { label: "Vision", href: "/about-us#vision" },
+        { label: "Philosophy", href: "/about-us#philosophy" },
+        { label: "Culture", href: "/about-us#culture" },
+        { label: "Award", href: "/about-us#award" },
       ],
     },
     "Why Join?": {
-      label: "Why Join?",
-      href: "/why-join",
-      dropdownItems: [
-        { label: "Life @ Mitrphol", href: "/why-join#life-at-mitrphol" },
+      'label' : "Why Join?",
+      'href': '/why-join',
+      'dropdownItems': [
+        { label: "Life @ Mitrphol", href: "/why-join#life@mitrphol" },
         { label: "Team", href: "/why-join#team" },
-        { label: "Company Culture", href: "/why-join#career-growth" },
+        { label: "Career Growth", href: "/why-join#career-growth" },
         { label: "Learning", href: "/why-join#learning" },
-        { label: "Benefits", href: "/why-join#benefits" },
+        { label: "Benefits", href: "/why-join#benefit" },
       ],
     },
-    Students: {
-      label: "Students",
-      href: "/student",
-      dropdownItems: [
-        { label: "Testimonial", href: "/student#testimonial" },
-        { label: "Internships", href: "/student#internships" },
-        { label: "Events", href: "/student#events" },
-        { label: "FAQs", href: "/student#faqs" },
+    "Students": {
+      'label' : "Students",
+      'href': '/student',
+      'dropdownItems': [
+        { label: "My Path to Mitrintern", href: "/student#mitrintern" },
+        { label: "Internship FAQs", href: "/student#faq" },
+        { label: "Browse Our Internships", href: "/student#internships" },
+        { label: "Timeline", href: "/student#timeline" },
+        { label: "Scholarship", href: "/student/scholarship"},
+        { label: "On Campus", href: "/student/oncampus"},
+        { label: "Program", href: "/student/program"}
       ],
     },
-    Event: {
-      label: "Event",
-      href: "/event",
-      dropdownItems: [],
+    "Event": {
+      'label' : "Event",
+      'href': null,
+      'dropdownItems': [
+        { label: "Internal Activities", href: "/event/internal" },
+        { label: "Recruitment Activities", href: "/event/recruitment" },
+      ],
     },
     Blog: {
       label: "Blog",
@@ -116,19 +116,22 @@ const Navbar = () => {
   return (
     <motion.div
       className="w-screen h-18 pt-2 flex flex-row pl-2 items-center justify-around fixed z-20"
+      initial={{backgroundColor: "rgba(255,255,255,0)",
+        color: "white",
+        y: [0],
+        opacity: [1]
+      }}
       animate={{
         backgroundColor: isHidden
-          ? "rgba(222,222,222,0)"
+          ? "rgba(255,255,255,0)"
           : "rgba(255,255,255,1)",
         color: isHidden ? "white" : "black",
         y: isHidden ? [0] : [-72, 0],
         opacity: isHidden ? [1] : [0, 1],
       }}
       transition={{ duration: 0.4 }}
-      onFocusCapture={() => setIsHidden(false)}
-      onClick={() => setIsHidden(!isHidden)}
     >
-      <Link href="/home">
+      <Link href="/">
         <Image
           src="/logo.png"
           alt="logo"
@@ -157,6 +160,7 @@ const Navbar = () => {
               text={navbarItemDict[item].label}
               href={navbarItemDict[item].href}
               onClose={closeDropdown}
+              isVisible={!isHidden}
             />
           )
         )}

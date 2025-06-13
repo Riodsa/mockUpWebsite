@@ -1,13 +1,12 @@
 import React from "react";
-import Navbar from "../components/Navbar";
 import { textBox, textFloatUp } from "../variants/variant";
 import * as motion from "motion/react-client";
+import Footer from "@/components/Footer";
 
 const page = () => {
   return (
-    <div>
-      <Navbar />
-      <div className="relative w-[100%] h-140 bg-red-300">
+    <div className="h-[400vh]">
+      <div className="relative w-[100%] h-140">
         <div className="flex flex-col justify-center items-center w-[100%] h-120 bg-blue-400">
           <motion.div
             className="relative flex flex-col bg-amber-300 bottom-10 right-65 cursor-default"
@@ -36,6 +35,7 @@ const page = () => {
           </motion.div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
