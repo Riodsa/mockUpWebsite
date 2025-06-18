@@ -29,7 +29,7 @@ const Navbar = () => {
       setIsHidden(false);
       setActiveDropdown(null);
       setIsActive(true);
-    } else if (y == 100) {
+    } else if (y >= 100) {
       setIsActive(false);
     } else if (y >= 0) {
       setIsHidden(true);
@@ -123,7 +123,7 @@ const Navbar = () => {
 
   return (
     <motion.div
-      className="w-screen h-18 pt-2 flex flex-row pl-2 items-center justify-around fixed z-20"
+      className="w-[100%] h-18 pt-2 flex flex-row pl-2 items-center justify-around fixed z-20"
       initial={{
         backgroundColor: "rgba(255,255,255,0)",
         color: "white",
@@ -184,6 +184,7 @@ const Navbar = () => {
         Find jobs
       </motion.button>
     </motion.div>
+    
   );
 };
 

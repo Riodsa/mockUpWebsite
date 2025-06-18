@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-@theme inline {
+:root {
+  --background: #ededed;
+  --foreground: #0a0a0a;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter-mono);
@@ -19,4 +21,5 @@
 body {
   background: #ededed;
   color: #0a0a0a;
+  font-family: var(--font-inter-mono);
 }

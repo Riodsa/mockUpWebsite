@@ -3,10 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 
-const inter = Inter({
-  variable: "--font-inter-mono",
-  subsets: ["latin"]
-})
+
+
+const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,13 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.className}>
-      <body className="min-h-screen w-auto">
+    <html lang="th" className={inter.className}>
+      <body className="min-h-screen w-auto relative">
         <Navbar/>
-        <div className="absolute w-full">
+        <div>
           {children}
         </div>
-      </body>
+      </body> 
     </html>
   );
 }
