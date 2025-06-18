@@ -10,11 +10,13 @@ import { useRef } from "react";
 
 const Navbar = () => {
   const [isHidden, setIsHidden] = useState(true);
+  const [isActive, setIsActive] = useState(true);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const lastYRef = useRef(0);
 
   useMotionValueEvent(scrollY, "change", (y) => {
+    console.log(y);
     const different = y - lastYRef.current;
     if (Math.abs(different) > 50) {
       if (different > 0) {
@@ -23,10 +25,16 @@ const Navbar = () => {
       }
       lastYRef.current = y;
     }
-    if (y > 100) {
+    if (y >= 200) {
       setIsHidden(false);
       setActiveDropdown(null);
-    } else setIsHidden(true);
+      setIsActive(true);
+    } else if (y >= 100) {
+      setIsActive(false);
+    } else {
+      setIsHidden(true);
+      setIsActive(true);
+    }
   });
 
   const closeDropdown = () => {
@@ -40,7 +48,7 @@ const Navbar = () => {
 
   interface NavItem {
     label: string;
-    href: string|null;
+    href: string | null;
     dropdownItems: DropdownItem[];
   }
 
@@ -59,9 +67,9 @@ const Navbar = () => {
 
   const navbarItemDict: NavItemDict = {
     "About Us": {
-      'label' : "About Us",
-      'href': '/about-us',
-      'dropdownItems': [
+      label: "About Us",
+      href: "/about-us",
+      dropdownItems: [
         { label: "What we do", href: "/about-us#what-we-do" },
         { label: "Vision", href: "/about-us#vision" },
         { label: "Philosophy", href: "/about-us#philosophy" },
@@ -70,9 +78,9 @@ const Navbar = () => {
       ],
     },
     "Why Join?": {
-      'label' : "Why Join?",
-      'href': '/why-join',
-      'dropdownItems': [
+      label: "Why Join?",
+      href: "/why-join",
+      dropdownItems: [
         { label: "Life @ Mitrphol", href: "/why-join#life@mitrphol" },
         { label: "Team", href: "/why-join#team" },
         { label: "Career Growth", href: "/why-join#career-growth" },
@@ -116,20 +124,19 @@ const Navbar = () => {
   return (
     <motion.div
       className="w-screen h-18 pt-2 flex flex-row pl-2 items-center justify-around fixed z-20"
-      initial={{backgroundColor: "rgba(255,255,255,0)",
+      initial={{
+        backgroundColor: "rgba(255,255,255,0)",
         color: "white",
-        y: [0],
-        opacity: [1]
+        y: 0,
+        opacity: [1, 0],
       }}
       animate={{
-        backgroundColor: isHidden
-          ? "transparent"
-          : "rgba(56,189,248,1)",
-        color: isHidden ? "white" : "black",
+        backgroundColor: isHidden ? "transparent" : "rgba(56,189,248,1)",
+        color: "white",
         y: isHidden ? [0] : [-72, 0],
-        opacity: 1,
+        opacity: isActive ? (isHidden ? [0, 1] : [0, 1]) : 0,
       }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.6 }}
     >
       <Link href="/">
         <Image
@@ -166,9 +173,13 @@ const Navbar = () => {
         )}
       </div>
       <motion.button
-        className="relative right-2 m-3 p-3 rounded-md bg-sky-400 text-white cursor-pointer"
+        className="relative right-2 m-3 p-3 rounded-md cursor-pointer"
         whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.1 }}
+        animate={{
+          backgroundColor: isHidden ? "rgba(56,189,248,1)" : "white",
+          color: isHidden ? "white" : "rgba(56,189,248,1)",
+        }}
       >
         Find jobs
       </motion.button>

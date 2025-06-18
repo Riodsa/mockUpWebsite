@@ -28,7 +28,7 @@ const NavbarDropdown = ({
   isVisible,
 }: NavProps) => {
   return (
-    <div className="relative group">
+    <div className="relative group" onMouseLeave={setClose}>
       <Link
         href={`${href}`}
         className={`cursor-default`}
@@ -47,7 +47,7 @@ const NavbarDropdown = ({
             {text}
           </div>
           <motion.img
-            src={isVisible ? "/dd.png" : "/ddWhite.png"}
+            src={"/ddWhite.png"}
             width={20}
             height={0}
             alt="dropdown"
@@ -55,11 +55,7 @@ const NavbarDropdown = ({
             animate={isActive ? { rotate: 180 } : { rotate: 0 }}
             transition={{ duration: 0.2 }}
           />
-          {isVisible ? (
-            <span className="absolute bottom-1 left-1 w-0 h-0.5 bg-black group-hover:w-[65%] transition-all duration-300 ease-out"></span>
-          ) : (
-            <span className="absolute bottom-1 left-1 w-0 h-0.5 bg-white group-hover:w-[65%] transition-all duration-300 ease-out"></span>
-          )}
+          <span className="absolute bottom-1 left-1 w-0 h-0.5 bg-white group-hover:w-[65%] transition-all duration-300 ease-out"></span>
         </motion.div>
       </Link>
 
