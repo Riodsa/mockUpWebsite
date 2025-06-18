@@ -102,7 +102,7 @@ const Footer = () => {
       </div>
       <div className='flex flex-row justify-between mt-10'>
         <p className='text-white font-(family-name:--font-thai)'>© 2023 Mitrphol Group. All rights reserved.</p>
-        <div className='flex flex-row w-fit h-fit gap-4 absolute w-full justify-center'>
+        <div className='flex flex-row h-fit gap-4 e w-max justify-center'>
           <Link href="/">
             <FontAwesomeIcon icon={faLinkedin} className='text-white' />
           </Link>
