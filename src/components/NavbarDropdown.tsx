@@ -9,13 +9,13 @@ interface DropdownItem {
 }
 
 interface NavProps {
-  text?: string;
-  href?: string | null;
-  items?: DropdownItem[];
-  isActive?: boolean;
-  isVisible?: boolean;
-  onActive?: () => void;
-  onClose?: () => void;
+  text?: string; // title of dropdown
+  href?: string | null; // link for new page
+  items?: DropdownItem[]; // list of dropdown item
+  isActive?: boolean; // use for control dropdown
+  isVisible?: boolean; // use for changing image while transparent
+  setActive?: () => void; // force to active dropdown
+  setClose?: () => void; // force to close dropdown
 }
 
 const NavbarDropdown = ({
@@ -23,8 +23,8 @@ const NavbarDropdown = ({
   href,
   items = [],
   isActive = false,
-  onActive,
-  onClose,
+  setActive,
+  setClose,
   isVisible,
 }: NavProps) => {
   return (
@@ -35,15 +35,15 @@ const NavbarDropdown = ({
         onClick={(e) => {
           if (!href) {
             e.preventDefault();
-            onActive?.();
+            setActive?.();
           }
         }}
       >
         <motion.div
           className={`flex flex-row p-2 mr-3 rounded-md ${href ? "cursor-pointer" : " "} group`}
-          onMouseEnter={onActive}
+          onMouseEnter={setActive}
         >
-          <div className="p-0 m-0 flex right-0 mr-1" onClick={onClose}>
+          <div className="p-0 m-0 flex right-0 mr-1" onClick={setClose}>
             {text}
           </div>
           <motion.img
@@ -71,10 +71,10 @@ const NavbarDropdown = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            onMouseLeave={onClose}
+            onMouseLeave={setClose}
           >
             {items.map((item, index) => (
-              <Link key={index} href={item.href} onClick={onClose}>
+              <Link key={index} href={item.href} onClick={setClose}>
                 <motion.div className="px-4 py-3 hover:bg-gray-300 cursor-pointer text-gray-700 border-b border-gray-100 last:border-b-0">
                   {item.label}
                 </motion.div>

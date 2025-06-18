@@ -150,8 +150,8 @@ const Navbar = () => {
               href={navbarItemDict[item].href}
               items={navbarItemDict[item].dropdownItems}
               isActive={activeDropdown === navbarItemDict[item].label}
-              onActive={() => setActiveDropdown(navbarItemDict[item].label)}
-              onClose={closeDropdown}
+              setActive={() => setActiveDropdown(navbarItemDict[item].label)}
+              setClose={closeDropdown}
               isVisible={!isHidden}
             />
           ) : (
