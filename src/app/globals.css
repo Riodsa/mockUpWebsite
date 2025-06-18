@@ -5,8 +5,11 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter-mono);
   --font-mono: var(--font-inter-mono);
+  --font-thai: var(--e-global-typography-f55e21b-font-family);
   --color-regal-blue: #6879ED; 
   --color-regal-sky: #98C4FF; 
+  --footer-blue:  #26B4D9;
+
 }
 
 @media (prefers-color-scheme: dark) {
