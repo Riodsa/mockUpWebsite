@@ -142,9 +142,9 @@ const Navbar = () => {
         <Image
           src={"/logoWhite.png"}
           alt="logo"
-          width={100}
+          width={75}
           height={0}
-          // style={{ objectFit: "contain" }}
+          style={{ objectFit: "contain" }}
           className="ml-10 relative"
         />
       </Link>
