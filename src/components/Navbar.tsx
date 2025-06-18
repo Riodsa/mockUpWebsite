@@ -51,10 +51,10 @@ const Navbar = () => {
   const navbarItems = [
     "About Us",
     "Why Join?",
-    "Students",
-    "Event",
-    "Blog",
-    "How to Apply",
+    // "Students",
+    // "Event",
+    // "Blog",
+    // "How to Apply",
   ];
 
   const navbarItemDict: NavItemDict = {
@@ -80,37 +80,37 @@ const Navbar = () => {
         { label: "Benefits", href: "/why-join#benefit" },
       ],
     },
-    "Students": {
-      'label' : "Students",
-      'href': '/student',
-      'dropdownItems': [
-        { label: "My Path to Mitrintern", href: "/student#mitrintern" },
-        { label: "Internship FAQs", href: "/student#faq" },
-        { label: "Browse Our Internships", href: "/student#internships" },
-        { label: "Timeline", href: "/student#timeline" },
-        { label: "Scholarship", href: "/student/scholarship"},
-        { label: "On Campus", href: "/student/oncampus"},
-        { label: "Program", href: "/student/program"}
-      ],
-    },
-    "Event": {
-      'label' : "Event",
-      'href': null,
-      'dropdownItems': [
-        { label: "Internal Activities", href: "/event/internal" },
-        { label: "Recruitment Activities", href: "/event/recruitment" },
-      ],
-    },
-    Blog: {
-      label: "Blog",
-      href: "/blog",
-      dropdownItems: [],
-    },
-    "How to Apply": {
-      label: "How to Apply",
-      href: "/how-to-apply",
-      dropdownItems: [],
-    },
+    // "Students": {
+    //   'label' : "Students",
+    //   'href': '/student',
+    //   'dropdownItems': [
+    //     { label: "My Path to Mitrintern", href: "/student#mitrintern" },
+    //     { label: "Internship FAQs", href: "/student#faq" },
+    //     { label: "Browse Our Internships", href: "/student#internships" },
+    //     { label: "Timeline", href: "/student#timeline" },
+    //     { label: "Scholarship", href: "/student/scholarship"},
+    //     { label: "On Campus", href: "/student/oncampus"},
+    //     { label: "Program", href: "/student/program"}
+    //   ],
+    // },
+    // "Event": {
+    //   'label' : "Event",
+    //   'href': null,
+    //   'dropdownItems': [
+    //     { label: "Internal Activities", href: "/event/internal" },
+    //     { label: "Recruitment Activities", href: "/event/recruitment" },
+    //   ],
+    // },
+    // Blog: {
+    //   label: "Blog",
+    //   href: "/blog",
+    //   dropdownItems: [],
+    // },
+    // "How to Apply": {
+    //   label: "How to Apply",
+    //   href: "/how-to-apply",
+    //   dropdownItems: [],
+    // },
   };
 
   return (
@@ -123,22 +123,22 @@ const Navbar = () => {
       }}
       animate={{
         backgroundColor: isHidden
-          ? "rgba(255,255,255,0)"
-          : "rgba(255,255,255,1)",
+          ? "transparent"
+          : "rgba(56,189,248,1)",
         color: isHidden ? "white" : "black",
         y: isHidden ? [0] : [-72, 0],
-        opacity: isHidden ? [1] : [0, 1],
+        opacity: 1,
       }}
       transition={{ duration: 0.4 }}
     >
       <Link href="/">
         <Image
-          src="/logo.png"
+          src={"/logoWhite.png"}
           alt="logo"
-          width={175}
+          width={100}
           height={0}
-          style={{ objectFit: "contain" }}
-          className="ml-10"
+          // style={{ objectFit: "contain" }}
+          className="ml-10 relative"
         />
       </Link>
       <div className="flex flex-row self-center ml-35 items-center">
