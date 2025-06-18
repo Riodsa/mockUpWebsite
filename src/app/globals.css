@@ -7,6 +7,7 @@
   --font-mono: var(--font-inter-mono);
   --color-regal-blue: #6879ED; 
   --color-regal-sky: #98C4FF; 
+  --footer-blue:  #26B4D9;
 }
 
 @media (prefers-color-scheme: dark) {
