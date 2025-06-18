@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import NavbarDropdown from "./NavbarDropdown";
 import NavbarItem from "./NavbarItem";
@@ -29,9 +29,9 @@ const Navbar = () => {
       setIsHidden(false);
       setActiveDropdown(null);
       setIsActive(true);
-    } else if (y >= 100) {
+    } else if (y == 100) {
       setIsActive(false);
-    } else {
+    } else if (y >= 0) {
       setIsHidden(true);
       setIsActive(true);
     }
