@@ -69,8 +69,8 @@ const navItems = ["Home", "About Us", "Why Join?", "Job"]
 const Footer = () => {
   
   return (
-    <div className='absolute bottom-0 h-100 w-[100%] bg-(--footer-blue) p-10 pr-15 flex flex-col'>
-      <div className='flex flex-row justify-between '>
+    <div className='absolute bottom-0 h-[70dvh] w-[100%] bg-(--footer-blue) p-10 pr-15 flex flex-col justify-between'>
+      <div className='flex flex-row justify-between relative'>
         <div className='flex flex-col'>
           <Image
             src={"/logoWhite.png"}
@@ -100,9 +100,9 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <div className='flex flex-row justify-between mt-10'>
+      <div className='flex flex-row justify-between relative'>
         <p className='text-white font-(family-name:--font-thai)'>© 2023 Mitrphol Group. All rights reserved.</p>
-        <div className='flex flex-row h-fit gap-4 e w-max justify-center'>
+        <div className='flex flex-row h-fit gap-4 absolute w-full justify-center'>
           <Link href="/">
             <FontAwesomeIcon icon={faLinkedin} className='text-white' />
           </Link>
