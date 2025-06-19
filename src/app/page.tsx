@@ -1,21 +1,20 @@
 import React from "react";
 import { Box, FloatUp } from "../variants/variant";
 import * as motion from "motion/react-client";
-import Footer from "@/components/Footer";
 import CardLifeAtMitrphol from "@/components/CardLifeAtMitrphol";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 
 const page = () => {
   return (
-    <div className="relative min-h-screen h-490 w-full overflow-hidden flex flex-col items-center">
+    <div className="relative min-h-screen h-420 w-full overflow-hidden flex flex-col items-center">
       <Navbar />
-      <div className="absolute inset-0 -z-10 h-140">
+      <div className="absolute inset-0 -z-10 h-140 bg-gradient-to-b from-black to-black/50">
         <Image
           src="/homeHeroBg.png"
           alt="background"
           fill
-          className="object-cover"
+          className="object-cover -z-10"
           priority
         />
       </div>
@@ -123,20 +122,28 @@ const page = () => {
           transition={{ duration: 2}}
         >
           <CardLifeAtMitrphol
+            imgSrc="/cardImg.png"
+            imgAlt="life1"
             variant={FloatUp}
-            className={"bg-red-500 w-60 h-70 right-110 top-40"}
+            className={"w-60 h-70 right-110 top-40"}
+            color="red"
           />
           <CardLifeAtMitrphol
+            imgSrc="/cardImg.png"
+            imgAlt="life2"
             variant={FloatUp}
-            className={"bg-green-500 w-45 h-55 right-55 top-20"}
+            className={"w-45 h-55 right-50 top-20"}
+            color="green"
           />
           <CardLifeAtMitrphol
+            imgSrc="/cardImg.png"
+            imgAlt="life3"
             variant={FloatUp}
-            className={"bg-blue-500 w-35 h-45 right-67 top-85"}
+            className={"w-45 h-55 right-55 top-80"}
+            color="blue"
           />
         </motion.div>
       </motion.div>
-      <Footer />
     </div>
   );
 };

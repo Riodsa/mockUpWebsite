@@ -145,7 +145,7 @@ const Navbar = () => {
           width={75}
           height={0}
           style={{ objectFit: "contain" }}
-          className="ml-10 relative"
+          className="ml-10 relative bottom-1"
         />
       </Link>
       <div className="flex flex-row self-center ml-35 items-center">
