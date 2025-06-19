@@ -1,7 +1,6 @@
 import React from "react";
 import { textBox, textFloatUp } from "../variants/variant";
 import * as motion from "motion/react-client";
-import Footer from "@/components/Footer";
 
 const page = () => {
   return (
@@ -35,7 +34,6 @@ const page = () => {
           </motion.div>
         </div>
       </div>
-      <Footer/>
     </div>
   );
 };

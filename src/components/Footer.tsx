@@ -69,7 +69,7 @@ const navItems = ["Home", "About Us", "Why Join?", "Job"]
 const Footer = () => {
   
   return (
-    <div className='absolute bottom-0 h-[70dvh] w-[100%] bg-(--footer-blue) p-10 pr-15 flex flex-col justify-between'>
+    <div className='relative bottom-0 h-[70dvh] w-[100%] bg-(--footer-blue) p-10 pr-15 flex flex-col justify-between'>
       <div className='flex flex-row justify-between relative'>
         <div className='flex flex-col'>
           <Image

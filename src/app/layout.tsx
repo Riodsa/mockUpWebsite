@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
   variable: "--font-inter-mono",
@@ -22,9 +23,10 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className="min-h-screen w-auto">
         <Navbar/>
-        <div className="absolute w-full">
+        <div className="w-full">
           {children}
         </div>
+        <Footer/>
       </body>
     </html>
   );
