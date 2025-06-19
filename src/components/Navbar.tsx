@@ -16,7 +16,7 @@ const Navbar = () => {
   const lastYRef = useRef(0);
 
   useMotionValueEvent(scrollY, "change", (y) => {
-    console.log(y);
+    // console.log(y);
     const different = y - lastYRef.current;
     if (Math.abs(different) > 50) {
       if (different > 0) {

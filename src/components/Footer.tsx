@@ -77,7 +77,7 @@ const Footer = () => {
             alt="logo"
             width={120}
             height={0}
-            objectFit="contain"
+            style={{ objectFit: "contain" }}
             className="relative"
           />
           <p className='text-white whitespace-pre-line mt-5 font-(family-name:--font-thai)'>{address}</p>

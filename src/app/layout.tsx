@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.className}>
-      <body className="min-h-screen w-auto">
+      <body className="w-[100%]">
         <Navbar/>
         <div className="w-full">
           {children}
