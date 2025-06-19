@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-@theme inline {
+:root {
+  --background: #ededed;
+  --foreground: #0a0a0a;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter-mono);
@@ -10,6 +12,8 @@
   --color-regal-sky: #98C4FF; 
   --footer-blue:  #26B4D9;
 
+  --color-regal-text: #154C8D;
+  --color-regal-text2: #5BB7B9;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,4 +26,6 @@
 body {
   background: #ededed;
   color: #0a0a0a;
+  font-family: var(--font-inter-mono);
+  box-sizing: border-box;
 }

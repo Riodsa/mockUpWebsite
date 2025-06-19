@@ -29,7 +29,7 @@ const Navbar = () => {
       setIsHidden(false);
       setActiveDropdown(null);
       setIsActive(true);
-    } else if (y == 100) {
+    } else if (y >= 100) {
       setIsActive(false);
     } else if (y >= 0) {
       setIsHidden(true);
@@ -123,7 +123,7 @@ const Navbar = () => {
 
   return (
     <motion.div
-      className="w-screen h-18 pt-2 flex flex-row pl-2 items-center justify-around fixed z-20"
+      className="w-full max-w-7xl h-18 pt-2 flex flex-row pl-2 self-center items-center justify-around fixed z-20"
       initial={{
         backgroundColor: "rgba(255,255,255,0)",
         color: "white",
@@ -174,11 +174,12 @@ const Navbar = () => {
       </div>
       <motion.button
         className="relative right-2 m-3 p-3 rounded-md cursor-pointer"
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.1}}
         transition={{ duration: 0.1 }}
         animate={{
-          backgroundColor: isHidden ? "rgba(56,189,248,1)" : "white",
+          backgroundColor: isHidden ? "transparent" : "white",
           color: isHidden ? "white" : "rgba(56,189,248,1)",
+          border: isHidden ? "1px solid rgba(255,255,255,1)" : "none",
         }}
       >
         <Link href="/job">
@@ -186,6 +187,7 @@ const Navbar = () => {
         </Link>
       </motion.button>
     </motion.div>
+    
   );
 };
 
