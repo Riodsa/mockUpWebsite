@@ -82,9 +82,9 @@ const Navbar = () => {
       href: "/why-join",
       dropdownItems: [
         { label: "Life @ Mitrphol", href: "/why-join#life@mitrphol" },
-        { label: "Team", href: "/why-join#team" },
+        // { label: "Team", href: "/why-join#team" },
         { label: "Career Growth", href: "/why-join#career-growth" },
-        { label: "Learning", href: "/why-join#learning" },
+        // { label: "Learning", href: "/why-join#learning" },
         { label: "Benefits", href: "/why-join#benefit" },
       ],
     },
@@ -181,7 +181,9 @@ const Navbar = () => {
           color: isHidden ? "white" : "rgba(56,189,248,1)",
         }}
       >
-        Find jobs
+        <Link href="/job">
+          Find jobs
+        </Link>
       </motion.button>
     </motion.div>
   );
