@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Variants } from "motion/react";
 import React from "react";
 
@@ -33,9 +34,11 @@ const CardLAMWhyJoin = ({
         <h1 className="indent-4">{title}</h1>
         <p className="indent-4">{description}</p>
         {hyperlink && (
-          <a href={link} className="text-white text-sm">
-            {link}
-          </a>
+          <Link href={link || ""} target="_blank">
+            <button className="ml-4 text-white text-md px-1 py-2 bg-sky-400 rounded-md transition-all duration-300 hover:scale-110 cursor-pointer">
+              Explore
+            </button>
+          </Link>
         )}
       </div>
     </div>
