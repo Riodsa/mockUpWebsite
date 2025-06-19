@@ -5,5 +5,11 @@ export const FloatUp = {
 
 export const Box = {
     hidden: {opacity: 0},
-    visible: {opacity: 1, transition:  { staggerChildren: 0.35 }}
+    visible: {
+        opacity: 1, 
+        transition: { 
+            duration: 2,
+            staggerChildren: 0.35 
+        }
+    }
 }

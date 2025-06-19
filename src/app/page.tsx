@@ -2,67 +2,140 @@ import React from "react";
 import { Box, FloatUp } from "../variants/variant";
 import * as motion from "motion/react-client";
 import Footer from "@/components/Footer";
+import CardLifeAtMitrphol from "@/components/CardLifeAtMitrphol";
+import Image from "next/image";
+import Navbar from "@/components/Navbar";
 
 const page = () => {
   return (
-    <div className="h-[355vh]">
-      <div className="relative w-[100%] h-140">
-        <div className="flex flex-col justify-center items-center w-[100%] h-140 bg-blue-400">
-          <motion.div
-            className="relative flex flex-col bg-amber-300 bottom-0 right-60 cursor-default text-5xl text-white"
-            variants={Box}
-            initial="hidden"
-            whileInView="visible"
-          >
-            <motion.h1 className="mb-3 font-extrabold" variants={FloatUp}>
-              DRIVEN BY INNOVATION <div></div>
-              POWERED BY PEOPLE
-            </motion.h1>
-            <motion.h1 className="mb-3 font-extrabold" variants={FloatUp}>
-              ขับเคลื่อนด้วยนวัตกรรม <div></div>
-              เติบโตได้เพราะคน
-            </motion.h1>
-          </motion.div>
-        </div>
+    <div className="relative min-h-screen h-490 w-full overflow-hidden flex flex-col items-center">
+      <Navbar />
+      <div className="absolute inset-0 -z-10 h-140">
+        <Image
+          src="/homeHeroBg.png"
+          alt="background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+      <div className="w-full relative flex max-w-7xl flex-col h-140">
         <motion.div
-          className="flex flex-col justify-center items-center w-[100%] h-140 bg-red-400"
+          className="relative top-50 left-25 w-160 flex flex-col max-w-7xl cursor-default text-5xl text-white text-shadow-amber-300 text-shadow-2xl"
           variants={Box}
           initial="hidden"
           whileInView="visible"
         >
-          <motion.div
-            className="relative gap-1 flex flex-col bg-amber-300 bottom-20 left-60 cursor-default text-5xl text-white"
+          <motion.h1
+            className="mb-3 font-extrabold max-w-[25ch]"
             variants={FloatUp}
-            initial="hidden"
-            whileInView="visible"
           >
-            <h1 className="mb-3 font-extrabold">WHAT WE DO</h1>
-            <h1 className="mb-3 font-extrabold">พวกเราทำอะไร</h1>
-            <button className="p-2 m-2 rounded-md bg-blue-500 cursor-pointer text-sm self-start">
-              More About Us
-            </button>
-          </motion.div>
-        </motion.div>
-        <motion.div className="flex flex-col justify-center items-center w-[100%] h-140 bg-amber-400" variants={Box} initial="hidden" whileInView="visible">
-          <motion.div
-            className="relative flex flex-col bg-amber-300 bottom-0 right-60 cursor-default text-5xl text-white"
+            DRIVEN BY INNOVATION POWERED BY PEOPLE
+          </motion.h1>
+          <motion.h1
+            className="mb-3 font-extrabold max-w-[20ch]"
             variants={FloatUp}
-            initial="hidden"
-            whileInView="visible"
           >
-            <h1 className="mb-3 font-extrabold text-7xl">
-              LIFE @ MITR
-            </h1>
-            <h1 className="mb-3 font-extrabold">
-              More Than Work <div></div>
-              It's Where You Belong
-            </h1>
-            <button className="p-2 m-2 rounded-md bg-blue-500 cursor-pointer text-xl self-start">
-              Explore
-            </button>
-          </motion.div>
+            ขับเคลื่อนด้วยนวัตกรรม เติบโตได้เพราะคน
+          </motion.h1>
         </motion.div>
       </div>
+      <div className="absolute inset-0 -z-10 h-140 mt-140">
+        <Image
+          src="/homeJoinUsBg.png"
+          alt="background"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+      <motion.div
+        className="relative max-w-7xl flex flex-col w-[100%] h-140"
+        variants={Box}
+        initial="hidden"
+        whileInView="visible"
+      >
+        <motion.div
+          className="right-40 top-35 absolute gap-1 flex flex-col cursor-default text-5xl text-(--color-regal-text) font-bold"
+          variants={FloatUp}
+          initial="hidden"
+          whileInView="visible"
+        >
+          <h1 className="mb-3 font-extrabold">WHAT WE DO</h1>
+          <h1 className="mb-3 font-extrabold">พวกเราทำอะไร</h1>
+          <motion.button
+            className="p-2 m-2 rounded-md bg-blue-500 text-white cursor-pointer text-sm self-start"
+            whileHover={{ scale: 1.1 }}
+            transition={{ duration: 0.1 }}
+          >
+            More About Us
+          </motion.button>
+        </motion.div>
+      </motion.div>
+      <div className="absolute inset-0 -z-10 h-140 mt-280 bg-black">
+        <Image
+          src="/homeLifeBg.png"
+          alt="background"
+          fill
+          className="object-fill opacity-100"
+          priority
+        />
+      </div>
+      <motion.div
+        className="relative flex max-w-7xl flex-row w-[100%] h-140"
+        variants={Box}
+        initial="hidden"
+        whileInView="visible"
+      >
+        <motion.div
+          className="absolute flex flex-col cursor-default text-4xl text-white left-25 top-40"
+          variants={FloatUp}
+          initial="hidden"
+          whileInView="visible"
+        >
+          <h1 className="mb-3 font-extrabold text-6xl italic pl- text-(--color-regal-text2)">
+            {"LIFE @ MITR".split("").map((letter: String, index: number) => (
+              <motion.span
+                key={index}
+                className="inline-block"
+                whileHover={{ scale: 1.2, y: -20 }}
+                transition={{ duration: 0.1 }}
+              >
+                {letter}
+              </motion.span>
+            ))}
+          </h1>
+          <h1 className="mb-3 font-semibold">
+            More Than Work <div></div>
+            It's Where You Belong
+          </h1>
+          <motion.button className="p-2 m-2 rounded-md bg-blue-500 cursor-pointer text-sm font-bold self-start"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.1 }}>
+            Explore
+          </motion.button>
+        </motion.div>
+        <motion.div
+          className="flex flex-row w-auto h-full"
+          variants={Box}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 2}}
+        >
+          <CardLifeAtMitrphol
+            variant={FloatUp}
+            className={"bg-red-500 w-60 h-70 right-110 top-40"}
+          />
+          <CardLifeAtMitrphol
+            variant={FloatUp}
+            className={"bg-green-500 w-45 h-55 right-55 top-20"}
+          />
+          <CardLifeAtMitrphol
+            variant={FloatUp}
+            className={"bg-blue-500 w-35 h-45 right-67 top-85"}
+          />
+        </motion.div>
+      </motion.div>
       <Footer />
     </div>
   );
