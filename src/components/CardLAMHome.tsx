@@ -38,8 +38,8 @@ const CardLifeAtMitrphol = ({
       >
         <motion.h1
           className="text-white text-[1em] font-bold mt-[7%]"
-          initial={{ opacity: 0, marginBottom: 16 }}
-          animate={{ opacity: 1, marginBottom: isHover ? 4 : 16 }}
+          initial={{ opacity:0, marginBottom: 16 }}
+          animate={{ opacity:1, marginBottom: isHover ? 4 : 16 }}
           transition={{ duration: 0.35, ease: "easeInOut" }}
         >
           Header

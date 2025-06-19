@@ -1,14 +1,14 @@
 import React from "react";
 import { Box, FloatUp } from "../variants/variant";
 import * as motion from "motion/react-client";
-import CardLifeAtMitrphol from "@/components/CardLifeAtMitrphol";
+import CardLifeAtMitrphol from "@/components/CardLAMHome";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 
 const page = () => {
   return (
     <div className="relative min-h-screen h-420 w-full overflow-hidden flex flex-col items-center">
-      <Navbar />
+      <Navbar isAnimate={true} />
       <div className="absolute inset-0 -z-10 h-140 bg-gradient-to-b from-black to-black/50">
         <Image
           src="/homeHeroBg.png"

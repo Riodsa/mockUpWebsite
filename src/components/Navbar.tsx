@@ -6,17 +6,17 @@ import NavbarItem from "./NavbarItem";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { useMotionValueEvent, useScroll } from "motion/react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
-const Navbar = () => {
-  const [isHidden, setIsHidden] = useState(true);
+const Navbar = ({ isAnimate }: { isAnimate: boolean }) => {
+  const [isHidden, setIsHidden] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const lastYRef = useRef(0);
 
   useMotionValueEvent(scrollY, "change", (y) => {
-    console.log(y);
+    if (!isAnimate) return;
     const different = y - lastYRef.current;
     if (Math.abs(different) > 50) {
       if (different > 0) {
@@ -36,6 +36,18 @@ const Navbar = () => {
       setIsActive(true);
     }
   });
+
+  useEffect(() => {
+    if (!isAnimate) {
+      setIsHidden(false);
+      setIsActive(true);
+      setActiveDropdown(null);
+    } else if (scrollY.get() == 0) {
+      setIsHidden(true);
+      setIsActive(true);
+      setActiveDropdown(null);
+    }
+  }, []);
 
   const closeDropdown = () => {
     setActiveDropdown(null);
@@ -123,7 +135,7 @@ const Navbar = () => {
 
   return (
     <motion.div
-      className="w-full max-w-7xl h-18 pt-2 flex flex-row pl-2 self-center items-center justify-around fixed z-20"
+      className="w-full max-w-7xl h-18 pt-2 flex flex-row pl-2 self-center items-center justify-around fixed z-20 mb-18"
       initial={{
         backgroundColor: "rgba(255,255,255,0)",
         color: "white",
@@ -174,7 +186,7 @@ const Navbar = () => {
       </div>
       <motion.button
         className="relative right-2 m-3 p-3 rounded-md cursor-pointer"
-        whileHover={{ scale: 1.1}}
+        whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.1 }}
         animate={{
           backgroundColor: isHidden ? "transparent" : "white",
@@ -182,12 +194,9 @@ const Navbar = () => {
           border: isHidden ? "1px solid rgba(255,255,255,1)" : "none",
         }}
       >
-        <Link href="/job">
-          Find jobs
-        </Link>
+        <Link href="/job">Find jobs</Link>
       </motion.button>
     </motion.div>
-    
   );
 };
 
