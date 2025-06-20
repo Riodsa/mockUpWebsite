@@ -13,7 +13,6 @@ import Autoplay from "embla-carousel-autoplay";
 import { Box, FloatUp } from "@/variants/variant";
 import CardCG from "@/components/CardCG";
 import CardBenefits from "@/components/CardBenefits";
-import { once } from "events";
 
 const lifeAtMitrpholCarousels = [
   {
@@ -32,7 +31,8 @@ const lifeAtMitrpholCarousels = [
   },
   {
     title: "WORK HARD???",
-    description: "Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7",
+    description:
+      "Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7",
     hyperlink: true,
     link: "https://www.google.com",
     BGColor: "green",
@@ -94,8 +94,8 @@ export default function WhyJoinPage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute opacity-75 left-70 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
-            <CarouselNext className="absolute opacity-75 left-80 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
+            <CarouselPrevious className="absolute opacity-75 left-35 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
+            <CarouselNext className="absolute opacity-75 left-45 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
           </Carousel>
         </div>
         <div className="w-full relative flex">
@@ -118,7 +118,7 @@ export default function WhyJoinPage() {
               Remember, Work is not a destination but a journey then success
               will follow
             </motion.p>
-            <div className= "w-screen flex flex-row flex-wrap justify-center items-center mt-10">
+            <div className="w-screen flex flex-row flex-wrap justify-center items-center mt-10">
               <CardCG iconSrc="/iconMock.png" title="Learn" />
               <CardCG iconSrc="/iconMock.png" title="Work" />
               <CardCG iconSrc="/iconMock.png" title="Grow" />
@@ -129,7 +129,13 @@ export default function WhyJoinPage() {
           <div>
             <motion.div
               className="gap-x-4 w-240 grid grid-cols-3 pl-20 pr-10"
-              variants={{ "hidden" : { opacity: 0}, "visible": { opacity: 1, transition: { staggerChildren: 0.1, duration: 0.1 } } }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.1, duration: 0.1 },
+                },
+              }}
               initial="hidden"
               whileInView="visible"
             >
