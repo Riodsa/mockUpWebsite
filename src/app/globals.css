@@ -10,6 +10,7 @@
   --color-regal-sky: #98C4FF; 
   --footer-blue:  #26B4D9;
   --color-business-blue: #5BB7B9;
+  --color-switch-tab-button-blue: #154C8D;
 }
 
 @media (prefers-color-scheme: dark) {

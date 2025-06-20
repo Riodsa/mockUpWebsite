@@ -15,17 +15,6 @@ const BusinessCard = ({ title, description, image }: CardProps) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        // <div className="bg-white shadow-md rounded-lg relative w-60 lg:w-72 h-90">
-        //     <div className="w-[100%] h-[40%] py-10 px-2 mx-4 mt-4">
-        //         <h2 className="text-3xl font-bold text-(--color-business-blue)">{title}</h2>
-        //     </div>
-        //     <div className="w-[100%] h-[60%] relative">
-                
-        //         {/* <p className="text-gray-600">{description}</p> */}
-        //         <Image src={image} alt={title} fill={true} objectFit={"cover"} className="rounded-b-md" />
-        //     </div>
-
-        // </div>
         <motion.div
             className="bg-white shadow-md rounded-lg relative w-60 lg:w-72 h-90 group"
             whileHover={{ scale: 1.05 , opacity: 1,}}
@@ -40,6 +29,7 @@ const BusinessCard = ({ title, description, image }: CardProps) => {
                 <Image
                     src={image}
                     alt={title}
+                    sizes="(max-width: 640px) 100vw, (min-width: 641px) 50vw"
                     fill={true}
                     style={{ objectFit: 'cover' }}
                     className="rounded-b-md"

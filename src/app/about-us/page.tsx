@@ -1,7 +1,11 @@
 'use client'
 import BusinessCard from "@/components/BusinessCard"
 import { useState, useEffect } from "react"
-import { usePathname,useSearchParams } from 'next/navigation';
+import { motion,AnimatePresence } from "motion/react"
+import SwitchTabButton from "@/components/SwitchTabButton"
+import PhilosophyIcon from "@/components/PhilosophyIcon"
+import { faCircleUser } from "@fortawesome/free-regular-svg-icons"
+
 
 const cards = [
     {
@@ -36,21 +40,35 @@ const cards = [
     }
 ]   
 
+const tab = [
+    { label: "Vision", value: "vision" },
+    { label: "Philosophy", value: "philosophy" }
+]
+
+const visionContent = "เรามุ่งมั่นที่จะเป็นแบบอย่างของธุรกิจที่ให้ความเคารพ\nและแสดงความรับผิดชอบต่อมนุษยชนและสิ่งแวดล้อม"
+const philosophyContent = "เป็นเวลากว่าครึ่งศตวรรษที่ กลุ่มมิตรผล ดำเนินกิจการบนเส้นทางธุรกิจ\nอุตสาหกรรมอ้อยและน้ำตาลเคียงคู่วิถีชีวิตคนไทยภายใต้ปรัชญาการดำเนินงาน"
+
+const philosophyIcon = [
+    {
+        icon: faCircleUser,
+        text: "Philosophy 1"
+    },
+    {
+        icon: faCircleUser,
+        text: "Philosophy 2"
+    },
+    {
+        icon: faCircleUser,
+        text: "Philosophy 3"
+    },
+    {
+        icon: faCircleUser,
+        text: "Philosophy 4"
+    }
+]
+
 export default function AboutUsPage() {
     const [activeSection, setActiveSection] = useState<string>("vision");
-    const pathName = usePathname();
-    const param = useSearchParams();
-
-    useEffect(()=>{
-       const hash = pathName.split('#')[1] || window.location.hash.replace('#', '');
-        if (hash === 'vision') {
-            setActiveSection('vision');
-        } else if (hash === 'philosophy') {
-            setActiveSection('philosophy');
-        }
-  }, [pathName]);
-
-    console.log(pathName)
 
     return (
         <div className="z-0 relative flex flex-col">
@@ -67,10 +85,51 @@ export default function AboutUsPage() {
                     ))}
                 </div>
             </div>
-            <div id='vision' className="w-[100%] relative h-dvh flex flex-col p-20">
-
+            <div id='vision&philosophy' className="w-[100%] min-h-dvh relative flex flex-col p-20">
+                <div className="flex flex-row self-center gap-10 z-10">
+                    {tab.map((item) => (
+                        <SwitchTabButton
+                            key={item.value}
+                            isActive={activeSection === item.value}
+                            onClick={() => setActiveSection(item.value)}
+                            label={item.label}
+                        />
+                    ))}
+                </div>
+                <AnimatePresence >
+                    {activeSection === 'vision' && (
+                        <motion.div
+                            key="vision"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                        >
+                            <div className="w-[100%] relative flex flex-col p-20 gap-10 text-shadow-lg">
+                                <h1 className="text-4xl font-bold text-(--color-switch-tab-button-blue) self-center">Vision</h1>
+                                <p className="text-2xl font-bold text-(--color-switch-tab-button-blue) text-center whitespace-pre-line text-shadow-lg">{visionContent}</p>
+                            </div>
+                            <div className="bg-blue-100 absolute inset-0 -z-10"></div>
+                        </motion.div>
+                    )}
+                    {activeSection === 'philosophy' && (
+                        <motion.div
+                            key="philosophy"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                        >
+                            <div className="w-[100%] relative flex flex-col p-20 gap-10 text-shadow-lg">
+                                <h1 className="text-4xl self-center font-bold text-(--color-switch-tab-button-blue)">Philosophy</h1>
+                                <p className="text-2xl font-bold text-(--color-switch-tab-button-blue) text-center whitespace-pre-line">{philosophyContent}</p>
+                                <div className="w-fit flex flex-row items-center self-center mt-20 gap-30">
+                                    {philosophyIcon.map((item, index) => (
+                                        <PhilosophyIcon key={index} icon={item.icon} text={item.text} />
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="bg-red-100 absolute inset-0 -z-10"></div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
-            <div id='philosophy' className="w-[100%] relative h-dvh">Philosophy</div>
             <div id='culture' className="w-[100%] relative h-dvh">Culture</div>
             <div id='award' className="w-[100%] relative h-dvh">Award</div>
 
