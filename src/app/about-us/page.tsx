@@ -6,6 +6,7 @@ import SwitchTabButton from "@/components/SwitchTabButton"
 import PhilosophyIcon from "@/components/PhilosophyIcon"
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons"
 import Image from "next/image"
+import AwardCard from "@/components/AwardCard"
 
 
 const cards = [
@@ -70,8 +71,8 @@ const philosophyIcon = [
 
 const awardCards = [
     {
-        title: "Award 1",
-        description: "Description for Award 1",
+        title: "Award 1 Award 1 Award 1",
+        description: "คนเดินเท้าเบียดเสียดร่มกันไปมาด้วยอารมณ์ไม่ดีทั่วไป และเสียหลักที่มุมถนน ซึ่งคนเดินเท้าอีกหลายหมื่นคนลื่นไถลมาตั้งแต่เช้า (ถ้าวันนี้เคยมีเช้า) เพิ่มตะกอนใหม่ลงบนเปลือกโคลนหนาๆ ติดแน่นอยู่ที่จุดเหล่านั้นบนทางเท้า และสะสมด้วยดอกเบี้ยทบต้น",
         image: "/mock-award.png"
     },
     {
@@ -123,8 +124,8 @@ export default function AboutUsPage() {
                             animate={{ opacity: 1 }}
                         >
                             <div className="w-[100%] relative flex flex-col p-20 gap-10 text-shadow-lg">
-                                <h1 className="text-4xl font-bold text-(--color-switch-tab-button-blue) self-center">Vision</h1>
-                                <p className="text-2xl font-bold text-(--color-switch-tab-button-blue) text-center whitespace-pre-line text-shadow-lg">{visionContent}</p>
+                                <h1 className="text-4xl font-bold text-(--color-primary-dark-blue) self-center">Vision</h1>
+                                <p className="text-2xl font-bold text-(--color-primary-dark-blue) text-center whitespace-pre-line text-shadow-lg">{visionContent}</p>
                             </div>
                             <div className="absolute inset-0 -z-10">
                                 <Image
@@ -143,8 +144,8 @@ export default function AboutUsPage() {
                             animate={{ opacity: 1 }}
                         >
                             <div className="w-[100%] relative flex flex-col p-20 gap-10 text-shadow-lg">
-                                <h1 className="text-4xl self-center font-bold text-(--color-switch-tab-button-blue)">Philosophy</h1>
-                                <p className="text-2xl font-bold text-(--color-switch-tab-button-blue) text-center whitespace-pre-line">{philosophyContent}</p>
+                                <h1 className="text-4xl self-center font-bold text-(--color-primary-dark-blue)">Philosophy</h1>
+                                <p className="text-2xl font-bold text-(--color-primary-dark-blue) text-center whitespace-pre-line">{philosophyContent}</p>
                                 <div className="w-fit flex flex-row items-center self-center mt-20 gap-30">
                                     {philosophyIcon.map((item, index) => (
                                         <PhilosophyIcon key={index} icon={item.icon} text={item.text} />
@@ -164,8 +165,19 @@ export default function AboutUsPage() {
                 </AnimatePresence>
             </div>
             <div id='culture' className="w-[100%] relative min-h-dvh">Culture</div>
-            <div id='award' className="w-[100%] relative min-h-dvh">
-                Award
+            <div id='award' className="w-[100%] relative min-h-dvh flex flex-col p-20">
+                <h1 className="text-4xl font-bold text-(--color-primary-dark-blue) self-center">Awards</h1>
+                <div className="relative flex flex-col justify-center gap-10 mt-10">
+                    {awardCards.map((card, index) => (
+                        <AwardCard
+                            key={index}
+                            number={index}
+                            title={card.title}
+                            description={card.description}
+                            image={card.image}
+                        />
+                    ))}
+                </div>
             </div>
 
         </div>
