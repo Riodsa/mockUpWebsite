@@ -5,6 +5,7 @@ import { motion,AnimatePresence } from "motion/react"
 import SwitchTabButton from "@/components/SwitchTabButton"
 import PhilosophyIcon from "@/components/PhilosophyIcon"
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons"
+import Image from "next/image"
 
 
 const cards = [
@@ -67,12 +68,30 @@ const philosophyIcon = [
     }
 ]
 
+const awardCards = [
+    {
+        title: "Award 1",
+        description: "Description for Award 1",
+        image: "/mock-award.png"
+    },
+    {
+        title: "Award 2",
+        description: "Description for Award 2",
+        image: "/mock-award.png"
+    },
+    {
+        title: "Award 3",
+        description: "Description for Award 3",
+        image: "/mock-award.png"
+    }
+]
+
 export default function AboutUsPage() {
     const [activeSection, setActiveSection] = useState<string>("vision");
 
     return (
         <div className="z-0 relative flex flex-col">
-            <div id='what-we-do' className="bg-green-400 w-[100%] relative flex flex-col p-20 pt-30 justify-center items-center gap-10">
+            <div id='what-we-do' className="bg-green-400 w-[100%] min-h-dvh relative flex flex-col p-20 pt-30 justify-center items-center gap-10">
                 <h1 className="text-5xl font-bold text-white">Our Businesses</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
                     {cards.map((card, index) => (
@@ -107,7 +126,14 @@ export default function AboutUsPage() {
                                 <h1 className="text-4xl font-bold text-(--color-switch-tab-button-blue) self-center">Vision</h1>
                                 <p className="text-2xl font-bold text-(--color-switch-tab-button-blue) text-center whitespace-pre-line text-shadow-lg">{visionContent}</p>
                             </div>
-                            <div className="bg-blue-100 absolute inset-0 -z-10"></div>
+                            <div className="absolute inset-0 -z-10">
+                                <Image
+                                    src="/mock-vision.png"
+                                    alt="Vision Background"
+                                    fill={true}
+                                    style={{ objectFit: "cover" }}
+                                />
+                            </div>
                         </motion.div>
                     )}
                     {activeSection === 'philosophy' && (
@@ -125,13 +151,22 @@ export default function AboutUsPage() {
                                     ))}
                                 </div>
                             </div>
-                            <div className="bg-red-100 absolute inset-0 -z-10"></div>
+                            <div className="bg-red-100 absolute inset-0 -z-10">
+                                <Image
+                                    src="/mock-philosophy.png"
+                                    alt="Philosophy Background"
+                                    fill={true}
+                                    style={{ objectFit: "cover" }}
+                                />
+                            </div>
                         </motion.div>
                     )}
                 </AnimatePresence>
             </div>
-            <div id='culture' className="w-[100%] relative h-dvh">Culture</div>
-            <div id='award' className="w-[100%] relative h-dvh">Award</div>
+            <div id='culture' className="w-[100%] relative min-h-dvh">Culture</div>
+            <div id='award' className="w-[100%] relative min-h-dvh">
+                Award
+            </div>
 
         </div>
     )
