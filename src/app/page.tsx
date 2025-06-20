@@ -4,6 +4,7 @@ import * as motion from "motion/react-client";
 import CardLifeAtMitrphol from "@/components/CardLAMHome";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
+import Link from "next/dist/client/link";
 
 const page = () => {
   return (
@@ -108,18 +109,22 @@ const page = () => {
             More Than Work <div></div>
             It's Where You Belong
           </h1>
-          <motion.button className="p-2 m-2 rounded-md bg-blue-500 cursor-pointer text-sm font-bold self-start"
-          whileHover={{ scale: 1.1 }}
-          transition={{ duration: 0.1 }}>
-            Explore
-          </motion.button>
+          <Link href="/why-join">
+            <motion.button
+              className="p-2 m-2 rounded-md bg-blue-500 cursor-pointer text-sm font-bold self-start"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.1 }}
+            >
+              Explore
+            </motion.button>
+          </Link>
         </motion.div>
         <motion.div
           className="flex flex-row w-auto h-full"
           variants={Box}
           initial="hidden"
           whileInView="visible"
-          transition={{ duration: 2}}
+          transition={{ duration: 2 }}
         >
           <CardLifeAtMitrphol
             imgSrc="/cardImg.png"
