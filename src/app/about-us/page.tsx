@@ -7,6 +7,7 @@ import PhilosophyIcon from "@/components/PhilosophyIcon"
 import { faCircleUser } from "@fortawesome/free-regular-svg-icons"
 import Image from "next/image"
 import AwardCard from "@/components/AwardCard"
+import CultureCard from "@/components/CultureCard"
 
 
 const cards = [
@@ -69,6 +70,33 @@ const philosophyIcon = [
     }
 ]
 
+const cultureCards = [
+    {
+        letter: "M",
+        full: "Mastery",
+        description: "มองภาพใหญ่ มองให้ลึก มองให้ไกล",
+        color: "bg-red-500"
+    },
+    {
+        letter: "I",
+        full: "Innovation",
+        description: "คิดต่าง คิดสร้างสรรค์ ลงมือทำให้เกิดขึ้นจริง",
+        color: "bg-blue-500"
+    },
+    {
+        letter: "T",
+        full: "Trustworthiness",
+        description: "ยึดมั่นในคุณธรรม ทำในสิ่งที่ถูกต้อง",
+        color: "bg-green-500"
+    },
+    {
+        letter: "R",
+        full: "Resilience",
+        description: "ทำทันทีด้วยความเร็วและคล่องตัว",
+        color: "bg-yellow-500"
+    }
+]
+
 const awardCards = [
     {
         title: "Award 1 Award 1 Award 1",
@@ -89,6 +117,16 @@ const awardCards = [
 
 export default function AboutUsPage() {
     const [activeSection, setActiveSection] = useState<string>("vision");
+    const [activeCultureCard, setActiveCultureCard] = useState<number | null>(null);
+    const [allClosed, setAllClosed] = useState<boolean>(true);
+
+    const handleCultureCardClick = (index: number) => {
+        setActiveCultureCard(activeCultureCard === index ? null : index);
+    };
+
+    useEffect(() => {
+        setAllClosed(activeCultureCard === null);
+    }, [activeCultureCard]);
 
     return (
         <div className="z-0 relative flex flex-col">
@@ -164,7 +202,27 @@ export default function AboutUsPage() {
                     )}
                 </AnimatePresence>
             </div>
-            <div id='culture' className="w-[100%] relative min-h-dvh">Culture</div>
+            <div id='culture' className="bg-blue-800 w-[100%] relative min-h-dvh">
+                <div className="flex flex-col justify-center items-center p-20 gap-10">
+                    <h1 className="text-4xl font-bold text-white self-center">Culture</h1>
+                    <div className="flex flex-row relative">
+                        {
+                            cultureCards.map((card, index) => (
+                                <CultureCard
+                                    key={index}
+                                    letter={card.letter}
+                                    full={card.full}
+                                    description={card.description}
+                                    color={card.color}
+                                    isExpanded={activeCultureCard === index}
+                                    allClosed={allClosed}
+                                    onClick={() => handleCultureCardClick(index)}
+                                />
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
             <div id='award' className="w-[100%] relative min-h-dvh flex flex-col p-20">
                 <h1 className="text-4xl font-bold text-(--color-primary-dark-blue) self-center">Awards</h1>
                 <div className="relative flex flex-col justify-center gap-10 mt-10">
