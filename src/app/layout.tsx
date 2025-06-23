@@ -24,9 +24,9 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       </head>
-      <body className="min-h-screen w-auto relative mx-auto">
+      <body className="w-[100%] relative mx-auto">
         
-        <div>
+        <div className="w-full">
           {children}
         </div>
         <Footer/>

@@ -83,8 +83,7 @@ const Navbar = ({ isAnimate }: { isAnimate: boolean }) => {
       href: "/about-us",
       dropdownItems: [
         { label: "What we do", href: "/about-us#what-we-do" },
-        { label: "Vision", href: "/about-us#vision" },
-        { label: "Philosophy", href: "/about-us#philosophy" },
+        { label: "Vision & Philosophy", href: "/about-us#vision&philosophy" },
         { label: "Culture", href: "/about-us#culture" },
         { label: "Award", href: "/about-us#award" },
       ],

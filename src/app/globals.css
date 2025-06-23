@@ -11,8 +11,10 @@
   --font-thai: var(--e-global-typography-f55e21b-font-family);
   --color-regal-blue: #6879ED; 
   --color-regal-sky: #98C4FF; 
+  --color-primary-dark-blue: #154C8D;
+  --color-secondary-brown: #C9A882;
   --footer-blue:  #26B4D9;
-
+  --color-business-blue: #5BB7B9;
   --color-regal-text: #154C8D;
   --color-regal-text2: #5BB7B9;
   --radius: 0.625rem;
