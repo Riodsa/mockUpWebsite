@@ -92,18 +92,7 @@ const page = () => {
           >
             <motion.div variants={FloatUp}>
               <h1 className="mb-3 font-extrabold text-6xl italic text-(--color-regal-text2)">
-                {"LIFE @ MITR"
-                  .split("")
-                  .map((letter: String, index: number) => (
-                    <motion.span
-                      key={index}
-                      className="inline-block"
-                      whileHover={{ scale: 1.2, y: -20 }}
-                      transition={{ duration: 0.1 }}
-                    >
-                      {letter}
-                    </motion.span>
-                  ))}
+                LIFE@MITR
               </h1>
               <h1 className="mb-3 font-semibold">
                 More Than Work <div></div>
