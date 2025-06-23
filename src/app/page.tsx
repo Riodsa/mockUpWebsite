@@ -10,7 +10,7 @@ const page = () => {
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center">
       <Navbar isAnimate={true} />
-      <div className="relative w-full flex max-w-7xl flex-col h-180">
+      <div className="relative w-full flex max-w-screen flex-col h-180">
         <div className="w-full flex -z-10">
           <Image
             src="/homeHeroBg.png"
@@ -21,7 +21,7 @@ const page = () => {
           />
         </div>
         <motion.div
-          className="relative top-50 left-25 w-160 flex flex-col max-w-7xl cursor-default text-5xl text-white"
+          className="relative top-50 left-25 w-160 flex flex-col max-w-screen cursor-default text-5xl text-white"
           variants={Box}
           initial="hidden"
           whileInView="visible"
@@ -40,7 +40,7 @@ const page = () => {
           </motion.h1>
         </motion.div>
       </div>
-      <div className="relative w-full flex max-w-7xl flex-col h-180 z-1 bg-black">
+      <div className="relative w-full flex max-w-screen flex-col h-180 z-1 bg-black">
         <div className="w-full flex -z-10 opacity-80">
           <Image
             src="/homeJoinUsBg.png"
@@ -51,13 +51,13 @@ const page = () => {
           />
         </div>
         <motion.div
-          className="flex h-full w-full flex-col max-w-7xl cursor-default text-5xl text-(--color-regal-text) font-bold items-end justify-center"
+          className="flex h-full w-full flex-col max-w-screen cursor-default text-5xl text-(--color-regal-text) font-bold items-end justify-center"
           variants={Box}
           initial="hidden"
           whileInView="visible"
         >
           <motion.div
-            className="relative w-85 right-40 flex flex-col max-w-7xl cursor-default text-5xl"
+            className="relative w-85 right-40 flex flex-col max-w-screen cursor-default text-5xl"
             variants={FloatUp}
             whileInView="visible"
           >
@@ -73,7 +73,7 @@ const page = () => {
           </motion.div>
         </motion.div>
       </div>
-      <div className="relative flex max-w-7xl flex-row w-full h-180 z-1 bg-black">
+      <div className="relative flex max-w-screen flex-row w-full h-180 z-1 bg-black">
         <div className="flex -z-10 opacity-70">
           <Image
             src="/homeLifeBg.png"
