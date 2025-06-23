@@ -202,8 +202,8 @@ export default function AboutUsPage() {
                     )}
                 </AnimatePresence>
             </div>
-            <div id='culture' className="bg-blue-800 w-[100%] relative min-h-dvh">
-                <div className="flex flex-col justify-center items-center p-20 gap-10">
+            <div id='culture' className="bg-blue-800 w-[100%] relative min-h-[120dvh]">
+                <div className="flex flex-col justify-center items-center p-20 gap-20">
                     <h1 className="text-4xl font-bold text-white self-center">Culture</h1>
                     <div className="flex flex-row relative">
                         {
