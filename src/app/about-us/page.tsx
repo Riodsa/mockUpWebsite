@@ -8,6 +8,7 @@ import { faCircleUser } from "@fortawesome/free-regular-svg-icons"
 import Image from "next/image"
 import AwardCard from "@/components/AwardCard"
 import CultureCard from "@/components/CultureCard"
+import Navbar from "@/components/Navbar"
 
 
 const cards = [
@@ -130,6 +131,7 @@ export default function AboutUsPage() {
 
     return (
         <div className="z-0 relative flex flex-col">
+            <Navbar isAnimate={true} />
             <div id='what-we-do' className="bg-green-400 w-[100%] min-h-dvh relative flex flex-col p-20 pt-30 justify-center items-center gap-10">
                 <h1 className="text-5xl font-bold text-white">Our Businesses</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
