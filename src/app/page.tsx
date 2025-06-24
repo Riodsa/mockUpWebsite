@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { Box, FloatUp } from "../variants/variant";
 import * as motion from "motion/react-client";
 import CardLifeAtMitrphol from "@/components/CardLAMHome";
@@ -7,19 +8,65 @@ import Navbar from "@/components/Navbar";
 import Link from "next/dist/client/link";
 
 const page = () => {
+  const [quoteEng, setQuoteEng] = useState<string>("");
+  const [quoteTh, setQuoteTh] = useState<string>("");
+  const [imageHero, setImageHero] = useState<string>("");
+  const fetchTexts = async (section: string, type: string) => {
+    try {
+      const response = await fetch(
+        `/api/texts?page=home&type=${type}&section=${section}`
+      );
+      const data = await response.json();
+      return data[0];
+    } catch (error) {
+      console.error("Error fetching texts:", error);
+    }
+  };
+
+  const fetchImages = async (section: string) => {
+    try {
+      const response = await fetch(`/api/images?page=home&section=${section}`);
+      const data = await response.json();
+      return data[0];
+    } catch (error) {
+      console.error("Error fetching images:", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchQuote = async () => {
+      const result = await fetchTexts("hero", "heading");
+      if (result) {
+        console.log("Fetched texts:", result);
+        setQuoteEng(result.text_en);
+        setQuoteTh(result.text);
+      } else console.error("No result found");
+    };
+    const fetchImage = async () => {
+      const result = await fetchImages("hero");
+      if (result) {
+        console.log("Fetched images:", result);
+        setImageHero(result.image_url);
+      } else console.error("No result found");
+    };
+    fetchQuote();
+    fetchImage();
+  }, []);
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center">
       <Navbar isAnimate={true} />
-      <div className="relative w-full flex max-w-screen flex-col h-180">
-        <div className="w-full flex -z-10">
-          <Image
-            src="/homeHeroBg.png"
+      <div className="relative w-full flex max-w-screen flex-col h-180 -z-10 bg-black">
+        <motion.div className="w-full flex">
+          <motion.img
+            src={imageHero || "/homeHeroBg.png"}
             alt="background"
-            fill
-            className="object-cover"
-            priority
+            className="object-fill absolute opacity-80"
+            initial={{ scale: 1 }}
+            animate={{ scale: 1.15 }}
+            transition={{ duration: 15, ease: "linear" }}
           />
-        </div>
+        </motion.div>
         <motion.div
           className="relative top-50 left-25 w-160 flex flex-col max-w-screen cursor-default text-5xl text-white"
           variants={Box}
@@ -30,13 +77,13 @@ const page = () => {
             className="mb-3 font-extrabold max-w-[25ch]"
             variants={FloatUp}
           >
-            DRIVEN BY INNOVATION POWERED BY PEOPLE
+            {quoteEng}
           </motion.h1>
           <motion.h1
             className="mb-3 font-extrabold max-w-[20ch]"
             variants={FloatUp}
           >
-            ขับเคลื่อนด้วยนวัตกรรม เติบโตได้เพราะคน
+            {quoteTh}
           </motion.h1>
         </motion.div>
       </div>
@@ -122,7 +169,7 @@ const page = () => {
               variant={FloatUp}
               className={"w-60 h-70 right-20"}
               color="red"
-              title="Title"
+              title="Title1"
               content="Sleepppppppppppppppppppppppppppppppppppppppppppaaa"
             />
             <CardLifeAtMitrphol
