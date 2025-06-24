@@ -1,0 +1,7 @@
+# docker build -f dockerfile.db -t career .
+# docker run -p 5433:5432  -e POSTGRES_HOST_AUTH_METHOD=trust -d career
+ 
+FROM postgres:latest
+RUN localedef -i th_TH -c -f UTF-8 -A /usr/share/locale/locale.alias th_TH.UTF-8
+ENV LANG=th_TH.utf8
+COPY /sql/init.sql /docker-entrypoint-initdb.d/
