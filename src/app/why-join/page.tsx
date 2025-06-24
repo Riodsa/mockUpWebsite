@@ -60,7 +60,7 @@ export default function WhyJoinPage() {
       <div className="relative w-full overflow-hidden flex flex-col items-center bg-white cursor-default">
         <div
           id="life-at-mitrphol"
-          className="w-full h-160 relative flex flex-col justify-center items-center bg-red-300"
+          className="w-full h-160 relative flex flex-col justify-center items-center bg-blue-300"
         >
           <motion.h1
             className="absolute top-24 font-bold tracking-widest text-white text-5xl"
@@ -94,38 +94,57 @@ export default function WhyJoinPage() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute opacity-75 left-35 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
-            <CarouselNext className="absolute opacity-75 left-45 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
+            <CarouselPrevious className="shadow-lg shadow-black/20 absolute opacity-75 left-40 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
+            <CarouselNext className="shadow-lg shadow-black/20 absolute   opacity-75 left-50 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
           </Carousel>
         </div>
         <div className="w-full relative flex">
-          <motion.div
-            className="w-full h-140 pt-20 self-center relative flex flex-col justify-start items-center bg-amber-400"
-            variants={Box}
-            initial="hidden"
-            whileInView="visible"
-          >
-            <motion.h1
-              className="font-bold tracking-widest text-white text-5xl mb-5"
-              variants={FloatUp}
+          <div id="career-growth" className="w-full h-140 pt-20 self-center relative flex flex-col justify-start items-center bg-amber-400">
+            <motion.div
+              className="flex flex-col justify-start items-center"
+              variants={Box}
+              initial="hidden"
+              whileInView="visible"
             >
-              Career Growth
-            </motion.h1>
-            <motion.p
-              className="font-bold tracking-widest text-white text-xl max-w-[40ch] text-center"
-              variants={FloatUp}
-            >
-              Remember, Work is not a destination but a journey then success
-              will follow
-            </motion.p>
-            <div className="w-screen flex flex-row flex-wrap justify-center items-center mt-10">
-              <CardCG iconSrc="/iconMock.png" title="Learn" />
-              <CardCG iconSrc="/iconMock.png" title="Work" />
-              <CardCG iconSrc="/iconMock.png" title="Grow" />
-            </div>
-          </motion.div>
+              <motion.h1
+                className="font-bold tracking-widest text-white text-5xl mb-5"
+                variants={FloatUp}
+              >
+                Career Growth
+              </motion.h1>
+              <motion.p
+                className="font-bold tracking-widest text-white text-xl max-w-[40ch] text-center"
+                variants={FloatUp}
+              >
+                Remember, Work is not a destination but a journey then success
+                will follow
+              </motion.p>
+              <motion.div
+                className="w-screen flex flex-row flex-wrap justify-center items-center mt-10"
+                variants={Box}
+                initial="hidden"
+                whileInView="visible"
+              >
+                <CardCG
+                  iconSrc="/iconMock.png"
+                  title="Learn"
+                  variant={FloatUp}
+                />
+                <CardCG
+                  iconSrc="/iconMock.png"
+                  title="Work"
+                  variant={FloatUp}
+                />
+                <CardCG
+                  iconSrc="/iconMock.png"
+                  title="Grow"
+                  variant={FloatUp}
+                />
+              </motion.div>
+            </motion.div>
+          </div>
         </div>
-        <div className="w-full h-170 py-10 bg-sky-200 flex flex-col justify-center items-center">
+        {/* <div className="w-full h-170 py-10 bg-sky-200 flex flex-col justify-center items-center">
           <div>
             <motion.div
               className="gap-x-4 w-240 grid grid-cols-3 pl-20 pr-10"
@@ -149,7 +168,7 @@ export default function WhyJoinPage() {
               ))}
             </motion.div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

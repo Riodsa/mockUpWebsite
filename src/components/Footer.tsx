@@ -56,7 +56,7 @@ const navItemDict: NavItemDict = {
     items: [
       { label: "Life @ Mitrphol", href: "/why-join#life@mitrphol" },
       { label: "Career Growth", href: "/why-join#career-growth" },
-      { label: "Benefits", href: "/why-join#benefit" },
+      // { label: "Benefits", href: "/why-join#benefit" },
     ],
   },
   Job: {

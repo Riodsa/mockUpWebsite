@@ -27,9 +27,9 @@ const CardLAMWhyJoin = ({
 }: props) => {
   return (
     <div
-      className={`w-250 h-80 rounded-2xl overflow-hidden relative bg-red-400 ${className}`}
+      className={`w-250 h-80 rounded-2xl overflow-hidden relative bg-blue-400 ${className}`}
     >
-      <div className="absolute w-60 h-65 left-20 my-7     rounded-2xl overflow-hidden bg-gray-400"></div>
+      <div className="absolute w-60 h-65 left-20 my-7 rounded-2xl overflow-hidden bg-gray-200"></div>
       <div className="absolute w-140 h-65 left-90 my-7 overflow-hidden flex flex-col justify-start items-start">
         <h1 className="pl-4 text-2xl font-bold mt-5">{title}</h1>
         <p className="pl-4 mt-5">{description}</p>

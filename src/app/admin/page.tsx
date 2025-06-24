@@ -1,9 +1,12 @@
-import ContentEditor from "@/components/admin/ContentEditor"
+import Sidebar from '@/components/admin/Sidebar'
+import React from 'react'
 
-export default function AdminPage() {
+const page = () => {
   return (
-    <div>
-      <ContentEditor/>
+    <div className='relative min-h-screen w-full overflow-hidden flex flex-col items-center'>
+      <Sidebar />
     </div>
-  );
+  )
 }
+
+export default page
