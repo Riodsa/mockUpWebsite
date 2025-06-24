@@ -3,7 +3,7 @@ import {query} from "@/libs/db"
 
 export async function GET(request: Request) {
   try {
-    const result = await query("SELECT * FROM users ORDER BY users.name ASC");
+    const result = await query("SELECT * FROM users ORDER BY id ASC");
 
     return NextResponse.json(result.rows);
   } catch (error) {
