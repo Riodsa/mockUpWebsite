@@ -96,7 +96,7 @@ const Navbar = ({ isAnimate }: { isAnimate: boolean }) => {
         // { label: "Team", href: "/why-join#team" },
         { label: "Career Growth", href: "/why-join#career-growth" },
         // { label: "Learning", href: "/why-join#learning" },
-        { label: "Benefits", href: "/why-join#benefit" },
+        // { label: "Benefits", href: "/why-join#benefit" },
       ],
     },
     // "Students": {

@@ -49,14 +49,14 @@ const CardLifeAtMitrphol = ({
         transition={{ duration: 0.35, ease: "easeInOut" }}
       >
         <motion.h1
-          className="text-white text-[13cqw] font-bold mt-[3%] break-all max-w-[10ch] whitespace-normal"
+          className="text-white text-[13cqw] font-bold mt-[3%] break-all max-w-[10ch]"
           initial={{ opacity: 0, marginBottom: 50 }}
           animate={{ opacity: 1, marginBottom: isHover ? 1.5 : 50 }}
           transition={{ duration: 0.35, ease: "easeInOut" }}
         >
           {title}
         </motion.h1>
-        <p className="mr-2 font-semibold text-white text-[8cqw] break-all whitespace-normal">
+        <p className="mr-2 font-semibold text-white text-[8cqw] break-all">
           {content}
         </p>
       </motion.div>
