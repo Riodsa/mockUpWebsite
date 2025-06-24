@@ -1,4 +1,4 @@
-import pool from "../db";
+import { query } from "../db"
 import fetch from "node-fetch";
 
 export async function login(username : string, email: string, password: string) {
@@ -11,12 +11,14 @@ export async function login(username : string, email: string, password: string) 
     if (!password) {
       throw new Error('Missing Password');
     }
-
-    const matchingUser = await pool.query('SELECT * FROM users WHERE (user_name = $1 OR email = $2) LIMIT 1', [username, email]);
+    
+    const matchingUser = await query('SELECT * FROM users WHERE (user_name = $1 OR email = $2) LIMIT 1', [username, email]);
+    console.log("User xxxxxxxxxxxxxxxxx");
 
     if (!matchingUser)  {
       throw new Error('User not found');
     }
+
 
     const token = await getAPIMToken();
     if (!token) {
@@ -29,6 +31,7 @@ export async function login(username : string, email: string, password: string) 
     } else if (email) {
       requestBody.email = email;
     }
+
 
     const response = await fetch(`https://${process.env.service_host}/userinfo/api/v2/authen/profile`, {
       method: 'POST',
@@ -49,13 +52,14 @@ export async function login(username : string, email: string, password: string) 
       return res;
     }
   } catch (error : any) {
-    // console.error('Authentication error:', error.message);
+    console.error('Authentication error:', error.message);
     throw new Error(error.message);
   }
 }
 
 export async function getAPIMToken() {
   try {
+    console.log("Fetching API token...");
     const response = await fetch(`https://login.microsoftonline.com/${process.env.Tenant_ID}/oauth2/v2.0/token`, {
       method: 'POST',
       headers: {

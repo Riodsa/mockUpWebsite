@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { query } from "@/lib/db";
+import { query } from "@/libs/db";
 
 export async function GET(request: NextRequest) {
   try {
@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(result.rows, {
       status: 200,
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
     });
   } catch (error) {
@@ -50,7 +50,10 @@ export async function PUT(request: NextRequest) {
     const { image_url } = await request.json();
 
     if (!page || !section || !image_url) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 }
+      );
     }
 
     const sqlQuery = `
@@ -66,7 +69,11 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: "Image not found" }, { status: 404 });
     }
 
-    return NextResponse.json({status: 200, message: "Image updated successfully", data: result.rows[0]});
+    return NextResponse.json({
+      status: 200,
+      message: "Image updated successfully",
+      data: result.rows[0],
+    });
   } catch (error) {
     console.error("Error uploading image:", error);
     return new Response("Error uploading image", { status: 500 });
