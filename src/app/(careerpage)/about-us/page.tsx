@@ -101,24 +101,24 @@ const cultureCards = [
   },
 ];
 
-const mockAwardCards = [
-  {
-    title: "Award 1 Award 1 Award 1",
-    description:
-      "คนเดินเท้าเบียดเสียดร่มกันไปมาด้วยอารมณ์ไม่ดีทั่วไป และเสียหลักที่มุมถนน ซึ่งคนเดินเท้าอีกหลายหมื่นคนลื่นไถลมาตั้งแต่เช้า (ถ้าวันนี้เคยมีเช้า) เพิ่มตะกอนใหม่ลงบนเปลือกโคลนหนาๆ ติดแน่นอยู่ที่จุดเหล่านั้นบนทางเท้า และสะสมด้วยดอกเบี้ยทบต้น",
-    image: "/mock-award.png",
-  },
-  {
-    title: "Award 2",
-    description: "Description for Award 2",
-    image: "/mock-award.png",
-  },
-  {
-    title: "Award 3",
-    description: "Description for Award 3",
-    image: "/mock-award.png",
-  },
-];
+// const mockAwardCards = [
+//   {
+//     title: "Award 1 Award 1 Award 1",
+//     description:
+//       "คนเดินเท้าเบียดเสียดร่มกันไปมาด้วยอารมณ์ไม่ดีทั่วไป และเสียหลักที่มุมถนน ซึ่งคนเดินเท้าอีกหลายหมื่นคนลื่นไถลมาตั้งแต่เช้า (ถ้าวันนี้เคยมีเช้า) เพิ่มตะกอนใหม่ลงบนเปลือกโคลนหนาๆ ติดแน่นอยู่ที่จุดเหล่านั้นบนทางเท้า และสะสมด้วยดอกเบี้ยทบต้น",
+//     image: "/mock-award.png",
+//   },
+//   {
+//     title: "Award 2",
+//     description: "Description for Award 2",
+//     image: "/mock-award.png",
+//   },
+//   {
+//     title: "Award 3",
+//     description: "Description for Award 3",
+//     image: "/mock-award.png",
+//   },
+// ];
 
 export default function AboutUsPage() {
   const [activeSection, setActiveSection] = useState<string>("vision");
