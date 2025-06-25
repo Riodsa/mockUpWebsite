@@ -1,19 +1,19 @@
 import React from "react";
 import Image from "next/image";
 import * as motion from "motion/react-client";
+import { FloatUp } from "@/variants/variant";
 
 type CardCGProps = {
   iconSrc: string;
   title: string;
-  variant: any;
 };
 
-const CardCG = ({ iconSrc, title, variant }: CardCGProps) => {
+const CardCG = ({ iconSrc, title }: CardCGProps) => {
   return (
     <div className="relative w-70 h-60 flex flex-col justify-center items-center">
       <motion.div
         className="relative rounded-full mb-2 border-none overflow-hidden"
-        variants={variant}
+        variants={FloatUp}
         initial={{ opacity: 1, y: 0, rotate: 0 }}
         whileHover={{
           scale: [1, 1.1, 1.1, 1],

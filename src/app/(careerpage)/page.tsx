@@ -6,11 +6,13 @@ import CardLifeAtMitrphol from "@/components/CardLAMHome";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Link from "next/dist/client/link";
+import CircularProgress from '@mui/material/CircularProgress';
 
 const page = () => {
   const [quoteEng, setQuoteEng] = useState<string>("");
   const [quoteTh, setQuoteTh] = useState<string>("");
   const [imageHero, setImageHero] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const fetchTexts = async (section: string, type: string) => {
     try {
       const response = await fetch(
@@ -49,9 +51,29 @@ const page = () => {
         setImageHero(result.image_url);
       } else console.error("No result found");
     };
-    fetchQuote();
-    fetchImage();
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        await Promise.all([fetchQuote(), fetchImage()]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center w-full">
+        <Navbar isAnimate={false} />
+        <div className="flex justify-center items-center h-screen">
+          <CircularProgress />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center">
