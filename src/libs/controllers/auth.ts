@@ -21,8 +21,8 @@ export async function login(username : string, email: string, password: string) 
     }
 
 
-    const token = await getAPIMToken();
-    if (!token) {
+    const apiToken = await getAPIMToken();
+    if (!apiToken) {
       throw new Error('Failed to retrieve API token');
     }
 
@@ -38,7 +38,7 @@ export async function login(username : string, email: string, password: string) 
       method: 'POST',
       headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Bearer ${apiToken}`,
       'Ocp-Apim-Subscription-Key': process.env.Subscription_Key || '',
       },
       body: JSON.stringify(requestBody),
@@ -46,14 +46,22 @@ export async function login(username : string, email: string, password: string) 
 
     const data = await response.json() as { code: number; result?: any; message?: string };
 
-    if (data.code === 200 && process.env.JWT_SECRET) {
-
-      const token = jwt.sign({ id: matchingUser.rows[0].id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-
-      const res = { success: true, message: data.message, user: matchingUser.rows[0], token };
-
-      return res;
+    if (data.code !== 200) {
+      if (data.message) {
+        throw new Error(data.message);
+      }
     }
+
+    if (!process.env.JWT_SECRET) {
+      throw new Error('JWT_SECRET is not defined');
+    }
+
+    const jwtToken = jwt.sign({ id: matchingUser.rows[0].id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+    const res = { success: true, message: data.message, user: matchingUser.rows[0], token: jwtToken };
+
+    return res;
+    
   } catch (error : any) {
     console.error('Authentication error:', error.message);
     throw new Error(error.message);
