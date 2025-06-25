@@ -23,7 +23,7 @@ const CultureCard = ({ letter, full, description, isExpanded, allClosed, color, 
 
     return (
         <motion.div onClick={onClick} className="relative h-[60dvh] -ml-6 rounded-2xl p-10 overflow-hidden flex- flex-col content-center"
-            style={{ width }}
+            // style={{ width }}
             animate={{ width }}
             transition={{ type: "spring", stiffness: 200, damping: 30 , duration: 0.5 }}
         >

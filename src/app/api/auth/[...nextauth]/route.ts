@@ -25,7 +25,12 @@ export const authOptions: NextAuthOptions = {
 
             if (response.success && response.user) {
                 console.log(response)
-                return response.user;
+                return {
+                    id: response.user.id,
+                    email: response.user.email,
+                    name: response.user.name,
+                    token: response.token
+                };
             }
 
             return null;
@@ -38,21 +43,22 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/admin', // Custom Uppercase custom login page
   },
-//   callbacks: {
-//     async jwt({ token, user }) {
-//       return { ...token, ...user };
-//     },
-//     async session({ session, token, user }) {
-//         session.user = token as any
-//         return session
-//     }, async redirect({ url, baseUrl }) {
-//     return `/`
-//     }
-//   },
+  callbacks: {
+    async jwt({ token, user }) {
+      return { ...token, ...user };
+    },
+    async session({ session, token, user }) {
+      session.user = token as any;
+      return session;
+    },
+  // async redirect({ url, baseUrl }) {
+  //   return `/`
+  // }
+  },
   secret: process.env.NEXTAUTH_SECRET,
-//   session: {
-//     strategy: 'jwt',
-//   },
+  session: {
+    strategy: 'jwt',
+  },
 };
 
 const handler = NextAuth(authOptions);

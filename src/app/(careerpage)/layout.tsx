@@ -2,9 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import Navbar from "../../components/Navbar";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
-import NextAuthProvider from "@/providers/NextAuthProvider";
 
 import Footer from "@/components/Footer";
 
@@ -23,9 +20,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
   return (
-    <NextAuthProvider session={session}>
         <html lang="en">
         <head>
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -38,6 +33,5 @@ export default async function RootLayout({
           <Footer/>
         </body>
       </html>
-    </NextAuthProvider>
   );
 }
