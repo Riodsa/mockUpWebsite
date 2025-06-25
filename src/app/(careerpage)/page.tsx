@@ -22,7 +22,7 @@ const page = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          cache: "force-cache",
+          cache: "no-cache",
         }
       );
       const data = await response.json();
@@ -39,7 +39,7 @@ const page = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        cache: "no-cache",
       });
       const data = await response.json();
       return data[0];

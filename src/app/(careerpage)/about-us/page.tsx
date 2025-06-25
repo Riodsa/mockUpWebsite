@@ -137,7 +137,7 @@ export default function AboutUsPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        cache: "no-cache",
       });
       const data = await response.json();
       setBusinessCards(data);
@@ -153,7 +153,7 @@ export default function AboutUsPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        cache: "no-cache",
       });
       const data = await response.json();
       setAwardCards(data);

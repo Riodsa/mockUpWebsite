@@ -30,7 +30,7 @@ export default function WhyJoinPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        cache: "no-cache",
       });
       const data = await response.json();
       setCareerGrowthCards(data);
@@ -47,7 +47,7 @@ export default function WhyJoinPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        cache: "no-cache",
       });
       const data = await response.json();
       setLifeAtMitrpholCards(data);

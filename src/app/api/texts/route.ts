@@ -72,16 +72,37 @@ export async function PUT(request: NextRequest) {
     const { text_en, text } = await request.json();
     console.log("Updated to ", text_en, " and ", text);
 
-    if (!section || !page || !type || !text_en || !text) {
+    if (!section || !page || !type) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
+    let sqlQuery = "UPDATE Texts SET ";
+    let paramCount = 0;
+    let values: any[] = [];
+
+    if (text_en) {
+      paramCount++;
+      sqlQuery += ` text_en = $${paramCount},`;
+      values.push(text_en);
+    }
+
+    if (text) {
+      paramCount++;
+      sqlQuery += ` text = $${paramCount},`;
+      values.push(text);
+    }
+
+    sqlQuery = sqlQuery.slice(0, -1); // Remove trailing comma
+    sqlQuery += ` WHERE section = $${++paramCount} AND page = $${++paramCount} AND type = $${++paramCount} RETURNING *`;
+
+    values.push(section, page, type);
+
     const result = await query(
-      "UPDATE Texts SET text_en = $1, text = $2 WHERE section = $3 AND page = $4 AND type = $5 RETURNING *",
-      [text_en, text, section, page, type]
+      sqlQuery,
+      values
     );
 
     if (result.rowCount === 0) {
