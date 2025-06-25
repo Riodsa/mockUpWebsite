@@ -6,17 +6,17 @@ import NavbarItem from "./NavbarItem";
 import Link from "next/link";
 import * as motion from "motion/react-client";
 import { useMotionValueEvent, useScroll } from "motion/react";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
-const Navbar = () => {
-  const [isHidden, setIsHidden] = useState(true);
+const Navbar = ({ isAnimate }: { isAnimate: boolean }) => {
+  const [isHidden, setIsHidden] = useState(false);
   const [isActive, setIsActive] = useState(true);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const { scrollY } = useScroll();
   const lastYRef = useRef(0);
 
   useMotionValueEvent(scrollY, "change", (y) => {
-    console.log(y);
+    if (!isAnimate) return;
     const different = y - lastYRef.current;
     if (Math.abs(different) > 50) {
       if (different > 0) {
@@ -29,13 +29,25 @@ const Navbar = () => {
       setIsHidden(false);
       setActiveDropdown(null);
       setIsActive(true);
-    } else if (y == 100) {
+    } else if (y >= 100) {
       setIsActive(false);
     } else if (y >= 0) {
       setIsHidden(true);
       setIsActive(true);
     }
   });
+
+  useEffect(() => {
+    if (!isAnimate) {
+      setIsHidden(false);
+      setIsActive(true);
+      setActiveDropdown(null);
+    } else if (scrollY.get() == 0) {
+      setIsHidden(true);
+      setIsActive(true);
+      setActiveDropdown(null);
+    }
+  }, []);
 
   const closeDropdown = () => {
     setActiveDropdown(null);
@@ -71,8 +83,7 @@ const Navbar = () => {
       href: "/about-us",
       dropdownItems: [
         { label: "What we do", href: "/about-us#what-we-do" },
-        { label: "Vision", href: "/about-us#vision" },
-        { label: "Philosophy", href: "/about-us#philosophy" },
+        { label: "Vision & Philosophy", href: "/about-us#vision&philosophy" },
         { label: "Culture", href: "/about-us#culture" },
         { label: "Award", href: "/about-us#award" },
       ],
@@ -82,10 +93,10 @@ const Navbar = () => {
       href: "/why-join",
       dropdownItems: [
         { label: "Life @ Mitrphol", href: "/why-join#life@mitrphol" },
-        { label: "Team", href: "/why-join#team" },
+        // { label: "Team", href: "/why-join#team" },
         { label: "Career Growth", href: "/why-join#career-growth" },
-        { label: "Learning", href: "/why-join#learning" },
-        { label: "Benefits", href: "/why-join#benefit" },
+        // { label: "Learning", href: "/why-join#learning" },
+        // { label: "Benefits", href: "/why-join#benefit" },
       ],
     },
     // "Students": {
@@ -123,7 +134,7 @@ const Navbar = () => {
 
   return (
     <motion.div
-      className="w-screen h-18 pt-2 flex flex-row pl-2 items-center justify-around fixed z-20"
+      className="w-full max-w-screen h-18 pt-2 flex flex-row pl-2 self-center items-center justify-around fixed z-20 mb-18"
       initial={{
         backgroundColor: "rgba(255,255,255,0)",
         color: "white",
@@ -142,10 +153,10 @@ const Navbar = () => {
         <Image
           src={"/logoWhite.png"}
           alt="logo"
-          width={100}
+          width={75}
           height={0}
-          // style={{ objectFit: "contain" }}
-          className="ml-10 relative"
+          style={{ objectFit: "contain" }}
+          className="ml-10 relative bottom-1"
         />
       </Link>
       <div className="flex flex-row self-center ml-35 items-center">
@@ -177,11 +188,12 @@ const Navbar = () => {
         whileHover={{ scale: 1.1 }}
         transition={{ duration: 0.1 }}
         animate={{
-          backgroundColor: isHidden ? "rgba(56,189,248,1)" : "white",
+          backgroundColor: isHidden ? "transparent" : "white",
           color: isHidden ? "white" : "rgba(56,189,248,1)",
+          border: isHidden ? "1px solid rgba(255,255,255,1)" : "none",
         }}
       >
-        Find jobs
+        <Link href="/job">Find jobs</Link>
       </motion.button>
     </motion.div>
   );
