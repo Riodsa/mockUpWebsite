@@ -122,7 +122,9 @@ const mockAwardCards = [
 
 export default function AboutUsPage() {
   const [activeSection, setActiveSection] = useState<string>("vision");
-  const [activeCultureCard, setActiveCultureCard] = useState<number | null>(null);
+  const [activeCultureCard, setActiveCultureCard] = useState<number | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(false);
   const [businessCards, setBusinessCards] = useState<any[]>([]);
   const [awardCards, setAwardCards] = useState<any[]>([]);
@@ -130,7 +132,13 @@ export default function AboutUsPage() {
 
   const fetchBusinessCards = async () => {
     try {
-      const response = await fetch("/api/business-cards");
+      const response = await fetch("/api/business-cards", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "force-cache",
+      });
       const data = await response.json();
       setBusinessCards(data);
     } catch (error) {
@@ -140,7 +148,13 @@ export default function AboutUsPage() {
 
   const fetchAwardCards = async () => {
     try {
-      const response = await fetch("/api/award-cards");
+      const response = await fetch("/api/award-cards", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "force-cache",
+      });
       const data = await response.json();
       setAwardCards(data);
     } catch (error) {
@@ -160,10 +174,7 @@ export default function AboutUsPage() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        await Promise.all([
-          fetchBusinessCards(),
-          fetchAwardCards(),
-        ]);
+        await Promise.all([fetchBusinessCards(), fetchAwardCards()]);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {

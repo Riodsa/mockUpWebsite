@@ -25,7 +25,13 @@ export default function WhyJoinPage() {
 
   const fetchCareerGrowthCards = async () => {
     try {
-      const response = await fetch("/api/career-growth-cards");
+      const response = await fetch("/api/career-growth-cards", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "force-cache",
+      });
       const data = await response.json();
       setCareerGrowthCards(data);
       console.log("Fetched career growth cards:", data);
@@ -36,7 +42,13 @@ export default function WhyJoinPage() {
 
   const fetchLifeAtMitrpholCards = async () => {
     try {
-      const response = await fetch("/api/life-at-mitrphol-cards");
+      const response = await fetch("/api/life-at-mitrphol-cards", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "force-cache",
+      });
       const data = await response.json();
       setLifeAtMitrpholCards(data);
       console.log("Fetched life at mitrphol cards:", data);

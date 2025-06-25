@@ -6,7 +6,7 @@ import CardLifeAtMitrphol from "@/components/CardLAMHome";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Link from "next/dist/client/link";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 
 const page = () => {
   const [quoteEng, setQuoteEng] = useState<string>("");
@@ -16,7 +16,14 @@ const page = () => {
   const fetchTexts = async (section: string, type: string) => {
     try {
       const response = await fetch(
-        `/api/texts?page=home&type=${type}&section=${section}`
+        `/api/texts?page=home&type=${type}&section=${section}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          cache: "force-cache",
+        }
       );
       const data = await response.json();
       return data[0];
@@ -27,7 +34,13 @@ const page = () => {
 
   const fetchImages = async (section: string) => {
     try {
-      const response = await fetch(`/api/images?page=home&section=${section}`);
+      const response = await fetch(`/api/images?page=home&section=${section}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "force-cache",
+      });
       const data = await response.json();
       return data[0];
     } catch (error) {
