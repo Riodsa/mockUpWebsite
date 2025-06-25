@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { query } from "@/libs/db";
+import { authMiddleware } from "@/libs/controllers/auth";
 
 export async function GET(request: NextRequest) {
   try {
+    authMiddleware(request);
+
     const searchParams = request.nextUrl.searchParams;
     const page = searchParams.get("page");
     const type = searchParams.get("type");
@@ -62,6 +65,8 @@ export async function GET(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    authMiddleware(request);
+    
     const searchParams = request.nextUrl.searchParams;
     const page = searchParams.get("page");
     const type = searchParams.get("type");

@@ -100,8 +100,6 @@ CREATE TABLE Images (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE Images;
-
 -- Create Texts table
 CREATE TABLE Texts (
     id SERIAL PRIMARY KEY,

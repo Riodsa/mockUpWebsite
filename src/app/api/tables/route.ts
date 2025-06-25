@@ -1,8 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import {query} from "@/libs/db"
+import { authMiddleware } from "@/libs/controllers/auth";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
+    authMiddleware(request);
+
     const result = await query("SELECT * FROM information_schema.tables WHERE table_schema = 'public'");
 
     return NextResponse.json(result.rows);

@@ -1,5 +1,7 @@
 import { query } from "../db"
 import fetch from "node-fetch";
+import jwt from 'jsonwebtoken'
+import { NextRequest, NextResponse } from "next/server";
 
 export async function login(username : string, email: string, password: string) {
   try {
@@ -13,7 +15,6 @@ export async function login(username : string, email: string, password: string) 
     }
     
     const matchingUser = await query('SELECT * FROM users WHERE (user_name = $1 OR email = $2) LIMIT 1', [username, email]);
-    console.log("User xxxxxxxxxxxxxxxxx");
 
     if (!matchingUser)  {
       throw new Error('User not found');
@@ -45,9 +46,11 @@ export async function login(username : string, email: string, password: string) 
 
     const data = await response.json() as { code: number; result?: any; message?: string };
 
-    if (data.code === 200) {
-      
-      const res = { success: true, message: data.message, user: matchingUser.rows[0] };
+    if (data.code === 200 && process.env.JWT_SECRET) {
+
+      const token = jwt.sign({ id: matchingUser.rows[0].id }, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+      const res = { success: true, message: data.message, user: matchingUser.rows[0], token };
 
       return res;
     }
@@ -57,9 +60,8 @@ export async function login(username : string, email: string, password: string) 
   }
 }
 
-export async function getAPIMToken() {
+async function getAPIMToken() {
   try {
-    console.log("Fetching API token...");
     const response = await fetch(`https://login.microsoftonline.com/${process.env.Tenant_ID}/oauth2/v2.0/token`, {
       method: 'POST',
       headers: {
@@ -80,4 +82,21 @@ export async function getAPIMToken() {
     console.error('Token retrieval error:', error);
     throw new Error('Token retrieval failed');
   }
+}
+
+export function authMiddleware(req: NextRequest) {
+  const token = req.headers.get('authorization')?.split(' ')[1];
+  if (!token) {
+    throw new Error('Unauthorized');
+  }
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET is not defined');
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      throw new Error('Invalid token');
+    }
+  });
+  return NextResponse.next();
 }

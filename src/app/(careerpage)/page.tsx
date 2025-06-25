@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Box, FloatUp } from "../../variants/variant";
-import * as motion from "motion/react-client";
+import {motion} from "motion/react";
 import CardLifeAtMitrphol from "@/components/CardLAMHome";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
@@ -40,14 +40,14 @@ const page = () => {
         console.log("Fetched texts:", result);
         setQuoteEng(result.text_en);
         setQuoteTh(result.text);
-      } else console.error("No result found");
+      }
     };
     const fetchImage = async () => {
       const result = await fetchImages("hero");
       if (result) {
         console.log("Fetched images:", result);
         setImageHero(result.image_url);
-      } else console.error("No result found");
+      }
     };
     fetchQuote();
     fetchImage();
