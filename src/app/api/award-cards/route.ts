@@ -1,15 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { query } from "@/libs/db";
-import { authMiddleware } from "@/libs/controllers/auth";
 
 export async function GET(request: NextRequest) {
   try {
-    const result = await query("SELECT * FROM businesscards ORDER BY id ASC");
+    const result = await query("SELECT * FROM awardcards ORDER BY id ASC");
     return NextResponse.json(result.rows);
   } catch (error) {
     console.error("Database error:", error);
     return NextResponse.json(
-      { error: "Failed to fetch business cards" },
+      { error: "Failed to fetch award cards" },
       { status: 500 }
     );
   }
@@ -34,7 +33,7 @@ export async function POST(request: NextRequest) {
     }
 
     let sqlQuery =
-      "INSERT INTO businesscards (title, title_en, body, body_en, image_url ";
+      "INSERT INTO awardcards (title, title_en, body, body_en, image_url ";
     let maxParamCount = 5;
     if (href) {
       sqlQuery += `, href `;
@@ -73,13 +72,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       status: 200,
-      message: "Business card added successfully",
+      message: "Award card added successfully",
       data: result.rows[0],
     });
   } catch (error) {
     console.error("Database error:", error);
     return NextResponse.json(
-      { error: "Failed to add business card" },
+      { error: "Failed to add award card" },
       { status: 500 }
     );
   }

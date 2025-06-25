@@ -24,6 +24,8 @@ export async function GET(request: NextRequest) {
       values.push(section);
     }
 
+    sqlQuery += " ORDER BY id ASC";
+
     // Fetch the image from your database or storage
     const result = await query(sqlQuery, values);
 

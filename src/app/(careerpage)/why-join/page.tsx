@@ -1,6 +1,7 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import { motion } from "motion/react";
+import { Card } from "../../../../interface";
 import CardLAMWhyJoin from "@/components/CardLAMWhyJoin";
 import {
   Carousel,
@@ -13,49 +14,80 @@ import Autoplay from "embla-carousel-autoplay";
 import { Box, FloatUp } from "@/variants/variant";
 import CardCG from "@/components/CardCG";
 import CardBenefits from "@/components/CardBenefits";
-
-const lifeAtMitrpholCarousels = [
-  {
-    title: "WORK HARD???",
-    description: "Yea here we working like 24/7",
-    hyperlink: false,
-    link: "",
-    BGColor: "green",
-  },
-  {
-    title: "WORK HARD???",
-    description: "Yea here we working like 24/7",
-    hyperlink: false,
-    link: "",
-    BGColor: "green",
-  },
-  {
-    title: "WORK HARD???",
-    description:
-      "Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7Yea here we working like 24/7",
-    hyperlink: true,
-    link: "https://www.google.com",
-    BGColor: "green",
-  },
-  {
-    title: "WORK HARD???",
-    description: "Yea here we working like 24/7",
-    hyperlink: false,
-    link: "",
-    BGColor: "green",
-  },
-  {
-    title: "WORK HARD???",
-    description: "Yea here we working like 24/7",
-    hyperlink: false,
-    link: "",
-    BGColor: "red",
-  },
-];
+import { useEffect, useState } from "react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function WhyJoinPage() {
+  // Use useState to manage the fetched data
+  const [careerGrowthCards, setCareerGrowthCards] = useState([]);
+  const [lifeAtMitrpholCards, setLifeAtMitrpholCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchCareerGrowthCards = async () => {
+    try {
+      const response = await fetch("/api/career-growth-cards", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "force-cache",
+      });
+      const data = await response.json();
+      setCareerGrowthCards(data);
+      console.log("Fetched career growth cards:", data);
+    } catch (error) {
+      console.error("Error fetching career growth cards:", error);
+    }
+  };
+
+  const fetchLifeAtMitrpholCards = async () => {
+    try {
+      const response = await fetch("/api/life-at-mitrphol-cards", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "force-cache",
+      });
+      const data = await response.json();
+      setLifeAtMitrpholCards(data);
+      console.log("Fetched life at mitrphol cards:", data);
+    } catch (error) {
+      console.error("Error fetching life at mitrphol cards:", error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        await Promise.all([
+          fetchCareerGrowthCards(),
+          fetchLifeAtMitrpholCards(),
+        ]);
+      } catch (error) {
+        console.error("Error fetching cards:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center w-full">
+        <Navbar isAnimate={false} />
+        <div className="flex justify-center items-center h-screen">
+          <CircularProgress />
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-col  items-center w-full">
+    <div className="flex flex-col items-center w-full">
       <Navbar isAnimate={false} />
       <div className="relative w-full overflow-hidden flex flex-col items-center bg-white cursor-default">
         <div
@@ -82,24 +114,28 @@ export default function WhyJoinPage() {
             ]}
           >
             <CarouselContent className="ml-30">
-              {lifeAtMitrpholCarousels.map((_, index) => (
+              {lifeAtMitrpholCards.map((card: Card, index) => (
                 <CarouselItem key={index} className="pl-2">
                   <CardLAMWhyJoin
-                    title={_.title + " - " + (index + 1)}
-                    description={_.description}
-                    hyperlink={_.hyperlink}
-                    link={_.link}
-                    BGColor={_.BGColor}
+                    title={card.title}
+                    description={card.body}
+                    link={card.href}
+                    imgSrc={card.image_url}
+                    imgAlt={"image for LAM card " + (index + 1)}
+                    BGColor="#4ADE80"
                   />
                 </CarouselItem>
               ))}
             </CarouselContent>
             <CarouselPrevious className="shadow-lg shadow-black/20 absolute opacity-75 left-40 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
-            <CarouselNext className="shadow-lg shadow-black/20 absolute   opacity-75 left-50 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
+            <CarouselNext className="shadow-lg shadow-black/20 absolute opacity-75 left-50 top-87 cursor-pointer hover:scale-110 hover:opacity-100 transition-all duration-300" />
           </Carousel>
         </div>
         <div className="w-full relative flex">
-          <div id="career-growth" className="w-full h-140 pt-20 self-center relative flex flex-col justify-start items-center bg-amber-400">
+          <div
+            id="career-growth"
+            className="w-full h-140 pt-20 self-center relative flex flex-col justify-start items-center bg-amber-400"
+          >
             <motion.div
               className="flex flex-col justify-start items-center"
               variants={Box}
@@ -125,50 +161,17 @@ export default function WhyJoinPage() {
                 initial="hidden"
                 whileInView="visible"
               >
-                <CardCG
-                  iconSrc="/iconMock.png"
-                  title="Learn"
-                  variant={FloatUp}
-                />
-                <CardCG
-                  iconSrc="/iconMock.png"
-                  title="Work"
-                  variant={FloatUp}
-                />
-                <CardCG
-                  iconSrc="/iconMock.png"
-                  title="Grow"
-                  variant={FloatUp}
-                />
+                {careerGrowthCards.map((card: Card, index) => (
+                  <CardCG
+                    key={index}
+                    iconSrc={card.image_url}
+                    title={card.title}
+                  />
+                ))}
               </motion.div>
             </motion.div>
           </div>
         </div>
-        {/* <div className="w-full h-170 py-10 bg-sky-200 flex flex-col justify-center items-center">
-          <div>
-            <motion.div
-              className="gap-x-4 w-240 grid grid-cols-3 pl-20 pr-10"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.1, duration: 0.1 },
-                },
-              }}
-              initial="hidden"
-              whileInView="visible"
-            >
-              {Array.from({ length: 6 }).map((_, index) => (
-                <motion.div variants={FloatUp} key={index}>
-                  <CardBenefits
-                    iconSrc="/iconMock.png"
-                    title={`Benefits ${index + 1}`}
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </div> */}
       </div>
     </div>
   );
