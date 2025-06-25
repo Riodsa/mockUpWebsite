@@ -4,8 +4,6 @@ import { authMiddleware } from "@/libs/controllers/auth";
 
 export async function GET(request: NextRequest) {
   try {
-    authMiddleware(request);
-
     const result = await query("SELECT * FROM information_schema.tables WHERE table_schema = 'public'");
 
     return NextResponse.json(result.rows);

@@ -4,8 +4,6 @@ import { authMiddleware } from "@/libs/controllers/auth";
 
 export async function GET(request: NextRequest) {
   try {
-    authMiddleware(request);
-    
     const searchParams = request.nextUrl.searchParams;
     const page = searchParams.get("page");
     const section = searchParams.get("section");
