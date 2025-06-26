@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 
-import Sidebar from "@/components/admin/Sidebar";
 
 
 
@@ -32,7 +31,6 @@ export default async function RootLayout({
         </head>
         <body className="w-[100%] relative mx-auto">
           <div className="w-full relative">
-            <Sidebar />
             {children}
           </div>
         </body>
