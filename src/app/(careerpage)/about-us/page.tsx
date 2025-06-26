@@ -153,7 +153,7 @@ export default function AboutUsPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "no-cache",
+        next: { revalidate: 600 }
       });
       const data = await response.json();
       setAwardCards(data);

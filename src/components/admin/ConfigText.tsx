@@ -2,31 +2,28 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import { IoPencil } from "react-icons/io5";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import { useSession } from "next-auth/react";
 
 type ConfigTextProps = {
   label: string;
   required?: boolean;
-  page: string;
-  section: string;
-  type: string;
-  lang: string;
-  openSnackbar: Function
+  path: string;
   className?: string;
 };
 
 const ConfigText = ({
   label,
   required,
-  page,
-  section,
-  type,
-  lang,
-  openSnackbar,
+  path,
   className,
 }: ConfigTextProps) => {
   const [isDisable, setIsDisable] = useState(true);
+  const [isDisableEn, setIsDisableEn] = useState(true);
+  const [isSnackbarOpen, setSnackbarOpen] = useState(false);
   const [text, setText] = useState("");
+  const [textEn, setTextEn] = useState("");
 
   const { data: session } = useSession();
 
@@ -34,32 +31,39 @@ const ConfigText = ({
     setText(event.target.value);
   };
 
+   const handleTextEnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTextEn(event.target.value);
+  };
+
+  const openSnackbar = () => {
+    setSnackbarOpen(true);
+  };
+
   const handleEdit = () => {
     setIsDisable(!isDisable);
+  };
+
+  const handleEditEn = () => {
+    setIsDisableEn(!isDisableEn);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `/api/texts?page=${page}&section=${section}&type=${type}`
+        `${path}`
       );
       const data = await response.json();
-      if (lang === "en") {
-        setText(data[0].text_en);
-        console.log("Fetched text:", data[0].text_en);
-      } else if (lang === "th") {
-        setText(data[0].text);
-        console.log("Fetched text:", data[0].text);
-      }
+      setText(data[0].text);
+      setTextEn(data[0].text_en);
     };
 
     fetchData();
   }, []);
 
-  const handleSave = async () => {
+  const handleSave = async (lang: "th" | "en") => {
     try {
       const response = await fetch(
-        `/api/texts?page=${page}&section=${section}&type=${type}`,
+        `${path}`,
         {
           method: "PUT",
           headers: {
@@ -67,7 +71,11 @@ const ConfigText = ({
             Authorization: `Bearer ${session?.user?.token}`,
           },
           body: JSON.stringify({
-            ...(lang === "th" ? { text: text } : lang === "en" ? { text_en: text } : {}),
+            ...(lang === "th"
+              ? { text: text }
+              : lang === "en"
+                ? { text_en: textEn }
+                : {}),
           }),
         }
       );
@@ -85,7 +93,7 @@ const ConfigText = ({
   };
 
   return (
-    <div className={` w-120 ${className}`}>
+    <div className={`w-100 mb-5 flex flex-col ${className}`}>
       <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
         <label>{label || "This is label"}</label>
         <IoPencil onClick={handleEdit} className="cursor-pointer" />
@@ -101,13 +109,43 @@ const ConfigText = ({
         />
         {!isDisable ? (
           <button
-            onClick={handleSave}
+            onClick={(th) => { handleSave("th") }}
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
           >
             Save
           </button>
         ) : null}
       </div>
+      <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
+        <label>{label + " (EN)" || "This is label"}</label>
+        <IoPencil onClick={handleEditEn} className="cursor-pointer" />
+      </div>
+      <div className="flex flex-row justify-start items-center gap-5">
+        <TextField
+          variant="outlined"
+          required={required || false}
+          disabled={isDisable}
+          value={textEn}
+          onChange={handleTextEnChange}
+          className="mr-5 w-80"
+        />
+        {!isDisable ? (
+          <button
+            onClick={(en) => { handleSave("en") }}
+            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
+          >
+            Save
+          </button>
+        ) : null}
+      </div>
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={4000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity="success">Text changed successfully!</Alert>
+      </Snackbar>
     </div>
   );
 };
