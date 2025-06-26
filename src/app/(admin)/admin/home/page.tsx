@@ -3,17 +3,11 @@
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ConfigText from "@/components/admin/ConfigText";
-<<<<<<< HEAD
 import { Suspense, useEffect, useState } from "react";
 import ConfigImage from "@/components/admin/ConfigImage";
 import Loading from "@/components/Loading";
 import { section } from "motion/react-client";
-=======
-import Snackbar from "@mui/material/Snackbar";
-import { useEffect, useState } from "react";
-import Alert from '@mui/material/Alert';
 import Sidebar from "@/components/admin/Sidebar";
->>>>>>> bbad4192c93cb8a87c3fb562ced99bb369884d5f
 
 const sections = [
   {
@@ -43,12 +37,8 @@ export default function ConfigHomePage() {
   // }, [isSnackbarOpen]);
 
   return (
-<<<<<<< HEAD
     <div className="min-h-screen bg-gray-100 w-screen pb-100">
-=======
-    <div className="min-h-screen bg-gray-100">
-      <Sidebar />
->>>>>>> bbad4192c93cb8a87c3fb562ced99bb369884d5f
+      <Sidebar/>
       <div className="h-screen w-full flex flex-col">
         {sections.map((section,index) => (
           <div key={index} className="mt-10 ml-80 w-fit flex flex-col gap-10 bg-red-400">
