@@ -1,12 +1,8 @@
-"use client";
-
-import { useSession, signOut } from "next-auth/react";
+"use client"
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ConfigText from "@/components/admin/ConfigText";
-import { Suspense, useEffect, useState } from "react";
 import ConfigImage from "@/components/admin/ConfigImage";
-import Loading from "@/components/Loading";
-import { section } from "motion/react-client";
 import Sidebar from "@/components/admin/Sidebar";
 
 const sections = [
@@ -37,7 +33,7 @@ export default function ConfigHomePage() {
   // }, [isSnackbarOpen]);
 
   return (
-    <div className="min-h-screen bg-gray-100 w-screen pb-100">
+    <div className="min-h-screen w-screen pb-100">
       <Sidebar/>
       <div className="h-screen w-full flex flex-col flex-wrap">
         {sections.map((section,index) => (
