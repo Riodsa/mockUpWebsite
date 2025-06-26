@@ -109,7 +109,7 @@ const ConfigText = ({
         />
         {!isDisable ? (
           <button
-            onClick={(th) => { handleSave("th") }}
+            onClick={() => { handleSave("th") }}
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
           >
             Save
@@ -131,7 +131,7 @@ const ConfigText = ({
         />
         {!isDisable ? (
           <button
-            onClick={(en) => { handleSave("en") }}
+            onClick={() => { handleSave("en") }}
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
           >
             Save

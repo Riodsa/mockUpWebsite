@@ -22,7 +22,7 @@ const sections = [
         type: "text",
         label: "Title",
         path: "/api/texts?page=home&section=hero&type=heading",
-      },
+      }
     ]
   }
 ]
@@ -39,18 +39,26 @@ export default function ConfigHomePage() {
   return (
     <div className="min-h-screen bg-gray-100 w-screen pb-100">
       <Sidebar/>
-      <div className="h-screen w-full flex flex-col">
+      <div className="h-screen w-full flex flex-col flex-wrap">
         {sections.map((section,index) => (
-          <div key={index} className="mt-10 ml-80 w-fit flex flex-col gap-10 bg-red-400">
+          <div key={index} className="mt-10 ml-80 w-fit flex flex-col flex-wrap gap-10">
             <h1 className="text-5xl">{section.title}</h1>
-            <div className="flex flex-row w-screen">
+            <div className="flex flex-row w-fit flex-wrap">
               {section.config.map((item) => (
                 <div key={item.label}>
-                  <ConfigText
-                    label={item.label}
-                    required
-                    path={item.path}
-                  />
+                  {item.type === "image" ? (
+                    <ConfigImage
+                      label={item.label}
+                      required
+                      path={item.path}
+                    />
+                  ) : (
+                    <ConfigText
+                      label={item.label}
+                      required
+                      path={item.path}
+                    />
+                  )}
                 </div>
               ))}
             </div>
