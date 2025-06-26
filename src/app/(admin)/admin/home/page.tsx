@@ -4,24 +4,32 @@ import { useRouter } from "next/navigation";
 import ConfigText from "@/components/admin/ConfigText";
 import ConfigImage from "@/components/admin/ConfigImage";
 import Sidebar from "@/components/admin/Sidebar";
+import { configDictType } from "../../../../../interface";
 
 const sections = [
-  {
-    title: "Hero Section",
-    config: [
-      {
+    {
+        title: "Hero Section",
+        configs: [
+            "hero-banner",
+            "hero-title"
+        ]
+    }
+]
+
+const configDict : configDictType = {
+    "hero-banner": {
         type: "image",
         label: "Hero Banner",
-        path: "/api/images?page=home&section=hero"
-      },
-      {
+        path: "/api/images?page=home&section=hero",
+        data: [],
+    },
+    "hero-title": {
         type: "text",
         label: "Title",
         path: "/api/texts?page=home&section=hero&type=heading",
-      }
-    ]
-  }
-]
+        data: [],
+    }
+}
 
 export default function ConfigHomePage() {
   const router = useRouter();
@@ -40,19 +48,19 @@ export default function ConfigHomePage() {
           <div key={index} className="mt-10 ml-80 w-fit flex flex-col flex-wrap gap-10">
             <h1 className="text-5xl">{section.title}</h1>
             <div className="flex flex-row w-fit flex-wrap">
-              {section.config.map((item) => (
-                <div key={item.label}>
-                  {item.type === "image" ? (
+              {section.configs.map((item: string) => (
+                <div key={configDict[item].label}>
+                  {(configDict[item].type === "image" && configDict[item].label) ? (
                     <ConfigImage
-                      label={item.label}
+                      label={configDict[item].label}
                       required
-                      path={item.path}
+                      path={configDict[item].path}
                     />
-                  ) : (
+                  ) : configDict[item].label && (
                     <ConfigText
-                      label={item.label}
+                      label={configDict[item].label}
                       required
-                      path={item.path}
+                      path={configDict[item].path}
                     />
                   )}
                 </div>

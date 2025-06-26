@@ -1,13 +1,14 @@
 'use client'
 import React from "react";
 import EditCardModal from "@/components/admin/ModalCard";
+import ConfirmModal from "@/components/admin/ConfirmModal";
 
 const page = () => {
   return (
     <div>
-      <EditCardModal
+      {/* <EditCardModal
         isOpen={true}
-        onClose={() => {}}
+        onClose={() => {}}  
         onSave={() => {}}
         data={{
           id: "1",
@@ -18,6 +19,14 @@ const page = () => {
           body: "This is a sample description for the card.",
           body_en: "This is a sample description for the card in English.",
         }}
+        path="/api/cards/1" */}
+      <ConfirmModal
+        isOpen={true}
+        onClose={() => {}}
+        data={{
+          id: "1",
+        }}
+        path="/api/cards/1"
       />
     </div>
   );

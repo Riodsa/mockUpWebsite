@@ -8,3 +8,11 @@ export interface Card {
   href?: string;
   is_active?: boolean;
 }
+export interface configDictType {
+    [key: string]: {
+        type: string;
+        label? : string;
+        path: string;
+        data: Card[]
+    }
+}

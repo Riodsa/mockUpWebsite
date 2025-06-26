@@ -80,8 +80,10 @@ export default async function ConfigAboutUsPage() {
                                                     key={`card-${card.id}`}
                                                     id={card.id}
                                                     title={card.title}
+                                                    title_en={card.title_en}
                                                     image_url={card.image_url}
                                                     body={card.body}
+                                                    body_en={card.body_en}
                                                     href={card.href}
                                                     is_active={card.is_active ??  true}
                                                     path={configDict[config].path}

@@ -1,6 +1,6 @@
 import Sidebar from "@/components/admin/Sidebar";
 import ConfigCard from "@/components/admin/ConfigCard"
-import { Card } from "../../../../../interface";
+import { Card,configDictType } from "../../../../../interface";
 
 const sections = [
     {
@@ -27,14 +27,6 @@ const configDict : configDictType = {
         type: "card",
         path: "career-growth-cards",
         data: [],
-    }
-}
-
-interface configDictType {
-    [key: string]: {
-        type: string;
-        path: string;
-        data: Card[]
     }
 }
 
