@@ -11,16 +11,14 @@ import CircularProgress from "@mui/material/CircularProgress";
 type ConfigImageProps = {
   label: string;
   required?: boolean;
-  page: string;
-  section: string;
+  path: string;
   className?: string;
 };
 
 const ConfigImage = ({
   label,
   required,
-  page,
-  section,
+  path,
   className,
 }: ConfigImageProps) => {
   const [isDisable, setIsDisable] = useState(true);
@@ -45,7 +43,7 @@ const ConfigImage = ({
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `/api/images?page=${page}&section=${section}`
+          `${path}`
         );
         if (!response.ok) {
           console.error("Error fetching data:", response.statusText);
@@ -65,7 +63,7 @@ const ConfigImage = ({
   const handleSave = async () => {
     try {
       const response = await fetch(
-        `/api/images?page=${page}&section=${section}`,
+        `${path}`,
         {
           method: "PUT",
           headers: {
