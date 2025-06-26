@@ -39,7 +39,7 @@ interface configDictType {
 }
 
 const fetchData = async (path:string) => {
-    const res = await fetch(`http://localhost:3000/api/${path}`)
+    const res = await fetch(`${process.env.BACKEND_URL}/api/${path}`)
     const data = await res.json()
     return data
 }
@@ -59,7 +59,7 @@ export default async function ConfigWhyJoinPage() {
 
 
     return (
-        <div className="min-h-dvh bg-white flex flex-row">
+        <div className="min-h-dvh ml-80 bg-white flex flex-row">
             <Sidebar/>
             <div className="flex flex-col">
                  {
