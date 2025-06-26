@@ -6,22 +6,19 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Username', type: 'text' },
-        password: { label: 'Password', type: 'password' },
+        basicAuth: { label: 'Basic Auth', type: 'text' },
       },
       async authorize(credentials, req) {
-        if (!credentials?.username || !credentials?.password) {
+        if (!credentials?.basicAuth) {
           throw new Error('Missing credentials');
         }
-
-        const authString = btoa(`${credentials.username}:${credentials.password}`);
 
         try {
             const response = await fetch(`${process.env.BACKEND_URL}/api/auth`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Basic ${authString}`,
+                    'Authorization': `Basic ${credentials.basicAuth}`,
                 },
             }).then(res => res.json());
 

@@ -15,8 +15,7 @@ export default function AdminLoginPage() {
     setError('');
 
     const formData = {
-      username,
-      password,
+      basicAuth: btoa(`${username}:${password}`),
     };
 
     try {
@@ -32,7 +31,7 @@ export default function AdminLoginPage() {
           setError(result.error);
         }
       } else {
-        router.push('/admin/home'); // Redirect to admin home page
+        router.push('/admin/home');
       }
     } catch (err) {
       setError('An unexpected error occurred');
