@@ -1,10 +1,7 @@
-'use client'
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Card } from "../../../interface";
+import { CardConfig } from "../../../interface";
 
-interface ConfigCardProps extends Card {
+interface ConfigCardProps extends CardConfig {
     path: string;
 }
 

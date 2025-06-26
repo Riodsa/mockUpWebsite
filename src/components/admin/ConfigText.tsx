@@ -5,30 +5,35 @@ import { IoPencil } from "react-icons/io5";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useSession } from "next-auth/react";
+import { TextConfig } from "../../../interface";
 
-type ConfigTextProps = {
-  label: string;
-  required?: boolean;
+interface ConfigTextProps extends TextConfig {
+  label?: string;
   path: string;
   className?: string;
 };
 
 const ConfigText = ({
+  id,
+  text,
+  text_en,
   label,
-  required,
   path,
+  page,
+  section,
+  type,
   className,
 }: ConfigTextProps) => {
   const [isDisable, setIsDisable] = useState(true);
   const [isDisableEn, setIsDisableEn] = useState(true);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
-  const [text, setText] = useState("");
-  const [textEn, setTextEn] = useState("");
+  const [textTh, setTextTh] = useState(text);
+  const [textEn, setTextEn] = useState(text_en);
 
   const { data: session } = useSession();
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
+    setTextTh(event.target.value);
   };
 
    const handleTextEnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,23 +52,10 @@ const ConfigText = ({
     setIsDisableEn(!isDisableEn);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `${path}`
-      );
-      const data = await response.json();
-      setText(data[0].text);
-      setTextEn(data[0].text_en);
-    };
-
-    fetchData();
-  }, []);
-
   const handleSave = async (lang: "th" | "en") => {
     try {
       const response = await fetch(
-        `${path}`,
+        `/api/${path}`,
         {
           method: "PUT",
           headers: {
@@ -72,7 +64,7 @@ const ConfigText = ({
           },
           body: JSON.stringify({
             ...(lang === "th"
-              ? { text: text }
+              ? { text: textTh }
               : lang === "en"
                 ? { text_en: textEn }
                 : {}),
@@ -101,9 +93,9 @@ const ConfigText = ({
       <div className="flex flex-row justify-start items-center gap-5">
         <TextField
           variant="outlined"
-          required={required || false}
+          required={true}
           disabled={isDisable}
-          value={text}
+          value={textTh}
           onChange={handleTextChange}
           className="mr-5 w-80"
         />
@@ -123,13 +115,13 @@ const ConfigText = ({
       <div className="flex flex-row justify-start items-center gap-5">
         <TextField
           variant="outlined"
-          required={required || false}
-          disabled={isDisable}
+          required={true}
+          disabled={isDisableEn}
           value={textEn}
           onChange={handleTextEnChange}
           className="mr-5 w-80"
         />
-        {!isDisable ? (
+        {!isDisableEn ? (
           <button
             onClick={() => { handleSave("en") }}
             className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"

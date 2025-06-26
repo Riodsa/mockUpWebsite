@@ -278,7 +278,7 @@ INSERT INTO LifeAtMitrpholCards (
         'Team Building Activities', 
         'จัดกิจกรรมสร้างความสัมพันธ์ในทีมงานอย่างสม่ำเสมอ', 
         'Regular team relationship building activities', 
-        '',
+        '/mock-award.png',
         null, 
         true
     ),
@@ -386,7 +386,7 @@ INSERT INTO BusinessCards (
 
 -- Insert mock data for Images
 INSERT INTO Images (image_url, page, section) VALUES
-('./homeHeroBg.png', 'home', 'hero');
+('/homeHeroBg.png', 'home', 'hero');
 
 -- Insert mock data for Texts
 INSERT INTO 
