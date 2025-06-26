@@ -36,7 +36,7 @@ const ConfigText = ({
     setTextTh(event.target.value);
   };
 
-   const handleTextEnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTextEnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTextEn(event.target.value);
   };
 
@@ -73,7 +73,11 @@ const ConfigText = ({
       );
 
       if (response.ok) {
-        setIsDisable(true);
+        if (lang === "th") {
+          setIsDisable(true);
+        } else {
+          setIsDisableEn(true);
+        }
         console.log("Text changed successfully!");
         openSnackbar();
       } else {
@@ -85,28 +89,32 @@ const ConfigText = ({
   };
 
   return (
-    <div className={`w-100 mb-5 flex flex-col ${className}`}>
-      <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
-        <label>{label || "This is label"}</label>
-        <IoPencil onClick={handleEdit} className="cursor-pointer" />
-      </div>
-      <div className="flex flex-row justify-start items-center gap-5">
-        <TextField
-          variant="outlined"
-          required={true}
-          disabled={isDisable}
-          value={textTh}
-          onChange={handleTextChange}
-          className="mr-5 w-80"
-        />
-        {!isDisable ? (
-          <button
-            onClick={() => { handleSave("th") }}
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
-          >
-            Save
-          </button>
-        ) : null}
+    <div className={`w-100 mb-5 flex flex-col gap-3 ${className}`}>
+      <div>
+        <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
+          <label>{label || "This is label"}</label>
+          <IoPencil onClick={handleEdit} className="cursor-pointer" />
+        </div>
+        <div className="flex flex-row justify-start items-center gap-5">
+          <TextField
+            variant="outlined"
+            required={true}
+            disabled={isDisable}
+            value={textTh}
+            onChange={handleTextChange}
+            className="mr-5 w-80"
+          />
+          {!isDisable ? (
+            <button
+              onClick={() => {
+                handleSave("th");
+              }}
+              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
+            >
+              Save
+            </button>
+          ) : null}
+        </div>{" "}
       </div>
       <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
         <label>{label + " (EN)" || "This is label"}</label>

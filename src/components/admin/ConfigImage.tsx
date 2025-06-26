@@ -7,7 +7,6 @@ import Image from "next/image";
 import { ImageConfig } from "../../../interface";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import CircularProgress from "@mui/material/CircularProgress";
 
 interface ConfigImageProps extends ImageConfig {
   label?: string;
@@ -99,7 +98,7 @@ const ConfigImage = ({
         alt={label ? label : "Image"}
         width={300}
         height={200}
-        className="mt-4 rounded-md"
+        className="mt-4 rounded-md ml-3"
       />
       <Snackbar
         open={isSnackbarOpen}
