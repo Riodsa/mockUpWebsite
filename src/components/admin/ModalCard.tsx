@@ -11,7 +11,13 @@ type EditCardModalProps = {
   openSnackbar: Function;
 };
 
-const EditCardModal = ({ isOpen, onClose, data, path, openSnackbar }: EditCardModalProps) => {
+const EditCardModal = ({
+  isOpen,
+  onClose,
+  data,
+  path,
+  openSnackbar,
+}: EditCardModalProps) => {
   const [formData, setFormData] = useState<any>({
     id: data.id,
     image_url: data.image_url,
@@ -79,7 +85,7 @@ const EditCardModal = ({ isOpen, onClose, data, path, openSnackbar }: EditCardMo
               onClick={handleClose}
               className="text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <X size={24} />
+              <X className="cursor-pointer" size={24} />
             </button>
           </div>
 
@@ -182,17 +188,17 @@ const EditCardModal = ({ isOpen, onClose, data, path, openSnackbar }: EditCardMo
             <div className="flex justify-end space-x-3 pt-4">
               <button
                 type="button"
-                onClick={handleClose}
-                className="px-6 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
                 onClick={handleSubmit}
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors cursor-pointer"
               >
                 Save Changes
+              </button>
+              <button
+                type="button"
+                onClick={handleClose}
+                className="px-6 py-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors cursor-pointer"
+              >
+                Cancel
               </button>
             </div>
           </div>

@@ -12,8 +12,13 @@ type EditCardModalProps = {
   openSnackbar: Function;
 };
 
-const ConfirmModal = ({ isOpen, onClose, data, path, openSnackbar }: EditCardModalProps) => {
-
+const ConfirmModal = ({
+  isOpen,
+  onClose,
+  data,
+  path,
+  openSnackbar,
+}: EditCardModalProps) => {
   const handleSubmit = async () => {
     try {
       const response = await fetch(path, {
@@ -45,10 +50,10 @@ const ConfirmModal = ({ isOpen, onClose, data, path, openSnackbar }: EditCardMod
         <div className="flex flex-col text-3xl justify-center items-center py-5 gap-5">
           <IoIosWarning className="text-red-600" size={70} />
           <h1>Are you sure?</h1>
-          <p className="text-lg text-center ">
-            This action cannot be undone.
-            <div></div>
-            Please confirm if you want to proceed.
+          <p className="text-lg text-center whitespace-pre-line">
+            {
+              " This action cannot be undone. \n Please confirm if you want to proceed."
+            }
           </p>
         </div>
         <button
