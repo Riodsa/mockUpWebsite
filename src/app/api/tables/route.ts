@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
 import {query} from "@/libs/db"
-import { authMiddleware } from "@/libs/controllers/auth";
+import { authMiddleware } from "@/middlewares/auth";
 
 export async function GET(request: NextRequest) {
   try {

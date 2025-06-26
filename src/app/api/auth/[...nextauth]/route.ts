@@ -1,6 +1,5 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import { login } from '@/libs/controllers/auth';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -8,16 +7,23 @@ export const authOptions: NextAuthOptions = {
       name: 'Credentials',
       credentials: {
         username: { label: 'Username', type: 'text' },
-        email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials, req) {
-        if (!(credentials?.username || credentials?.email) || !credentials?.password) {
+        if (!credentials?.username || !credentials?.password) {
           throw new Error('Missing credentials');
         }
 
+        const authString = btoa(`${credentials.username}:${credentials.password}`);
+
         try {
-            const response = await login(credentials.username, credentials.email, credentials.password) as { success: boolean; user?: any; message?: string ; token?: string };
+            const response = await fetch(`${process.env.BACKEND_URL}/api/auth`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Basic ${authString}`,
+                },
+            }).then(res => res.json());
 
             if (response instanceof Error) {
                 throw new Error(response.message || 'Authentication failed');
@@ -27,7 +33,6 @@ export const authOptions: NextAuthOptions = {
                 console.log(response)
                 return {
                     id: response.user.id,
-                    email: response.user.email,
                     name: response.user.name,
                     token: response.token
                 };
@@ -41,7 +46,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: '/admin', // Custom Uppercase custom login page
+    signIn: '/admin',
   },
   callbacks: {
     async jwt({ token, user }) {

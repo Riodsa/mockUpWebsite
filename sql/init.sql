@@ -1,8 +1,8 @@
 -- Users Table
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
-    user_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) unique NOT NULL,
+    password TEXT NOT NULL,
     name VARCHAR(255) NOT NULL
 );
 
@@ -111,24 +111,6 @@ CREATE TABLE Texts (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-INSERT INTO
-    Users (
-    user_name,
-    email, 
-    name
-)  VALUES
-        (
-            'A.Phatdanai',
-            'A.Phatdanai@mitrphol.com',
-            'Phatdanai Arsomngern'
-        ),
-        (
-            'R.Phon',
-            'R.Phon@mitrphol.com',
-            'Phon Rattanapichai'
-        );
-
 
 INSERT INTO 
     CareerGrowthCards (
@@ -420,3 +402,41 @@ CREATE TRIGGER update_lifeatmitrpholcards_updated_at BEFORE UPDATE ON LifeAtMitr
 CREATE TRIGGER update_businesscards_updated_at BEFORE UPDATE ON BusinessCards FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_images_updated_at BEFORE UPDATE ON Images FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_texts_updated_at BEFORE UPDATE ON Texts FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE OR REPLACE FUNCTION hash_password(password TEXT)
+RETURNS TEXT AS $$
+BEGIN
+  RETURN crypt(password, gen_salt('bf', 10)); -- 'bf' for bcrypt, 10 is the cost factor
+END;
+$$ LANGUAGE plpgsql;
+
+INSERT INTO
+    Users (
+    username,
+    password, 
+    name
+)  VALUES
+        (
+            'careerpage_admin_1',
+            hash_password('admin_1'),
+            'Career Page Admin 1'
+        ),
+        (
+            'careerpage_admin_2',
+            hash_password('admin_2'),
+            'Career Page Admin 2'
+        ),
+        (
+            'careerpage_admin_3',
+            hash_password('admin_3'),
+            'Career Page Admin 3'
+        );
+
+CREATE OR REPLACE FUNCTION verify_password(password TEXT, password_hash TEXT)
+RETURNS BOOLEAN AS $$
+BEGIN
+  RETURN crypt(password, password_hash) = password_hash;
+END;
+$$ LANGUAGE plpgsql;
