@@ -1,8 +1,8 @@
 -- Users Table
 CREATE TABLE Users (
     id SERIAL PRIMARY KEY,
-    user_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
+    username VARCHAR(255) unique NOT NULL,
+    password TEXT NOT NULL,
     name VARCHAR(255) NOT NULL
 );
 
@@ -112,24 +112,6 @@ CREATE TABLE Texts (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO
-    Users (
-    user_name,
-    email, 
-    name
-)  VALUES
-        (
-            'A.Phatdanai',
-            'A.Phatdanai@mitrphol.com',
-            'Phatdanai Arsomngern'
-        ),
-        (
-            'R.Phon',
-            'R.Phon@mitrphol.com',
-            'Phon Rattanapichai'
-        );
-
-
 INSERT INTO 
     CareerGrowthCards (
         title, 
@@ -145,7 +127,7 @@ INSERT INTO
         'Leadership Development', 
         'พัฒนาทักษะการเป็นผู้นำที่มีประสิทธิภาพ เรียนรู้การบริหารทีม และการตัดสินใจเชิงกลยุทธ์', 
         'Develop effective leadership skills, learn team management and strategic decision making', 
-        '/images/leadership.jpg',
+        '/iconMock.png',
         null, 
         true
     ),
@@ -154,7 +136,7 @@ INSERT INTO
         'Digital Marketing Course', 
         'เรียนรู้กลยุทธ์การตลาดออนไลน์ SEO SEM และการวิเคราะห์ข้อมูล', 
         'Learn online marketing strategies, SEO, SEM, and data analytics', 
-        '/images/digital-marketing.jpg',
+        '/iconMock.png',
         null, 
         true
     ),
@@ -163,7 +145,7 @@ INSERT INTO
         'Mentorship Program', 
         'รับคำแนะนำจากผู้เชี่ยวชาญในสายงาน เพื่อเร่งการเติบโตในสายอาชีพ', 
         'Get guidance from industry experts to accelerate your career growth', 
-        '/images/mentorship.jpg',
+        '/iconMock.png',
         null, 
         true
     );
@@ -231,7 +213,7 @@ INSERT INTO
         'Best Employer Award 2024', 
         'ได้รับการยอมรับในด้านการดูแลพนักงานและสภาพแวดล้อมการทำงานที่ดี', 
         'Recognized for excellent employee care and work environment', 
-        '/images/best-employer.jpg',
+        '/mock-award.png',
         null, 
         true
     ),
@@ -240,7 +222,7 @@ INSERT INTO
         'Innovation Company Award', 
         'ได้รับรางวัลจากการพัฒนาผลิตภัณฑ์และบริการที่สร้างสรรค์', 
         'Awarded for developing creative products and services', 
-        '/images/innovation-award.jpg',
+        '/mock-award.png',
         null, 
         true
     ),
@@ -249,7 +231,7 @@ INSERT INTO
         'CSR Excellence Award', 
         'ยกย่องในด้านการดำเนินธุรกิจที่มีความรับผิดชอบต่อสังคม', 
         'Recognized for socially responsible business practices', 
-        '/images/csr-award.jpg',
+        '/mock-award.png',
         null, 
         true
     ),
@@ -258,7 +240,7 @@ INSERT INTO
         'Top 100 Great Places to Work', 
         'ติดอันดับ 100 บริษัทที่น่าทำงานที่สุดในประเทศไทย', 
         'Ranked among top 100 best companies to work for in Thailand', 
-        '/images/top100.jpg',
+        '/mock-award.png',
         null, 
         true
     );
@@ -278,7 +260,7 @@ INSERT INTO LifeAtMitrpholCards (
         'Team Building Activities', 
         'จัดกิจกรรมสร้างความสัมพันธ์ในทีมงานอย่างสม่ำเสมอ', 
         'Regular team relationship building activities', 
-        '/images/team-building.jpg',
+        '/mock-award.png',
         null, 
         true
     ),
@@ -287,7 +269,7 @@ INSERT INTO LifeAtMitrpholCards (
         'Annual Sports Day', 
         'แข่งขันกีฬาสีสันสนุกสนาน เสริมสร้างสุขภาพและมิตรภาพ', 
         'Fun colorful sports competition promoting health and friendship', 
-        '/images/sports-day.jpg',
+        '/mock-award.png',
         null, 
         true
     ),
@@ -296,7 +278,7 @@ INSERT INTO LifeAtMitrpholCards (
         'International Food Festival', 
         'ลิ้มรสอาหารจากทั่วโลก และแบ่งปันวัฒนธรรมที่หลากหลาย', 
         'Taste food from around the world and share diverse cultures', 
-        '/images/food-festival.jpg',
+        '/mock-award.png',
         null, 
         true
     ),
@@ -305,7 +287,7 @@ INSERT INTO LifeAtMitrpholCards (
         'Recreation & Game Zone', 
         'พื้นที่พักผ่อนที่ทันสมัย พร้อมเกมและกิจกรรมผ่อนคลาย', 
         'Modern recreation area with games and relaxing activities', 
-        '/images/game-zone.jpg',
+        '/mock-award.png',
         null, 
         true
     ),
@@ -314,7 +296,7 @@ INSERT INTO LifeAtMitrpholCards (
         'Volunteer Program', 
         'ร่วมกิจกรรมเพื่อสังคม และสร้างความหมายให้กับการทำงาน', 
         'Participate in social activities and create meaningful work', 
-        '/images/volunteer.jpg',
+        '/mock-award.png',
         null, 
         true
     );
@@ -334,7 +316,7 @@ INSERT INTO BusinessCards (
         'Complete Digital Solutions', 
         'ให้บริการพัฒนาแอปพลิเคชัน เว็บไซต์ และระบบดิจิทัลแบบครบวงจร', 
         'Comprehensive app development, website, and digital system services', 
-        '/images/digital-solutions.jpg', 
+        '/mock-business.avif', 
         null, 
         true
     ),
@@ -343,7 +325,7 @@ INSERT INTO BusinessCards (
         'Business Consulting', 
         'ปรึกษาเชิงกลยุทธ์ วิเคราะห์ธุรกิจ และวางแผนการเติบโต', 
         'Strategic consulting, business analysis, and growth planning', 
-        '/images/consulting.jpg', 
+        '/mock-business.avif', 
         null, 
         true
     ),
@@ -352,7 +334,7 @@ INSERT INTO BusinessCards (
         'Data Management Systems', 
         'พัฒนาระบบจัดการข้อมูลและการวิเคราะห์ที่มีประสิทธิภาพ', 
         'Develop efficient data management and analytics systems', 
-        '/images/data-management.jpg', 
+        '/mock-business.avif', 
         null, 
         true
     ),
@@ -361,7 +343,7 @@ INSERT INTO BusinessCards (
         'Cloud & Infrastructure Services', 
         'จัดการโครงสร้างพื้นฐาน IT และบริการคลาวด์ที่ปลอดภัย', 
         'Manage IT infrastructure and secure cloud services', 
-        '/images/cloud-services.jpg', 
+        '/mock-business.avif', 
         null, 
         true
     ),
@@ -370,7 +352,7 @@ INSERT INTO BusinessCards (
         'Cloud & Infrastructure Services', 
         'จัดการโครงสร้างพื้นฐาน IT และบริการคลาวด์ที่ปลอดภัย', 
         'Manage IT infrastructure and secure cloud services', 
-        '/images/cloud-services.jpg', 
+        '/mock-business.avif', 
         null, 
         true
     ),
@@ -379,14 +361,14 @@ INSERT INTO BusinessCards (
         'Cloud & Infrastructure Services', 
         'จัดการโครงสร้างพื้นฐาน IT และบริการคลาวด์ที่ปลอดภัย', 
         'Manage IT infrastructure and secure cloud services', 
-        '/images/cloud-services.jpg', 
+        '/mock-business.avif', 
         null, 
         true
     );
 
 -- Insert mock data for Images
 INSERT INTO Images (image_url, page, section) VALUES
-('./homeHeroBg.png', 'home', 'hero');
+('/homeHeroBg.png', 'home', 'hero');
 
 -- Insert mock data for Texts
 INSERT INTO 
@@ -420,3 +402,41 @@ CREATE TRIGGER update_lifeatmitrpholcards_updated_at BEFORE UPDATE ON LifeAtMitr
 CREATE TRIGGER update_businesscards_updated_at BEFORE UPDATE ON BusinessCards FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_images_updated_at BEFORE UPDATE ON Images FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 CREATE TRIGGER update_texts_updated_at BEFORE UPDATE ON Texts FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE OR REPLACE FUNCTION hash_password(password TEXT)
+RETURNS TEXT AS $$
+BEGIN
+  RETURN crypt(password, gen_salt('bf', 10)); -- 'bf' for bcrypt, 10 is the cost factor
+END;
+$$ LANGUAGE plpgsql;
+
+INSERT INTO
+    Users (
+    username,
+    password, 
+    name
+)  VALUES
+        (
+            'careerpage_admin_1',
+            hash_password('admin_1'),
+            'Career Page Admin 1'
+        ),
+        (
+            'careerpage_admin_2',
+            hash_password('admin_2'),
+            'Career Page Admin 2'
+        ),
+        (
+            'careerpage_admin_3',
+            hash_password('admin_3'),
+            'Career Page Admin 3'
+        );
+
+CREATE OR REPLACE FUNCTION verify_password(password TEXT, password_hash TEXT)
+RETURNS BOOLEAN AS $$
+BEGIN
+  RETURN crypt(password, password_hash) = password_hash;
+END;
+$$ LANGUAGE plpgsql;

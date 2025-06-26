@@ -15,17 +15,8 @@ export default function AdminLoginPage() {
     setError('');
 
     const formData = {
-      username,
-      email: '',
-      password,
+      basicAuth: btoa(`${username}:${password}`),
     };
-
-    if (formData.username.includes('@')) {
-      formData.email = formData.username;
-      formData.username = '';
-    }
-
-    console.log(formData);
 
     try {
       const result = await signIn('credentials', {
@@ -34,9 +25,13 @@ export default function AdminLoginPage() {
       });
 
       if (result?.error) {
-        setError(result.error);
+        if (result.status === 401) {
+          setError('Invalid Credentials');
+        } else {
+          setError(result.error);
+        }
       } else {
-        router.push('/admin/home'); // Redirect to admin home page
+        router.push('/admin/home');
       }
     } catch (err) {
       setError('An unexpected error occurred');
@@ -51,7 +46,7 @@ export default function AdminLoginPage() {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-              Username or Email
+              Username
             </label>
             <input
               type="text"

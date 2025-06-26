@@ -1,7 +1,7 @@
 "use client";
 import Navbar from "@/components/Navbar";
 import { motion } from "motion/react";
-import { Card } from "../../../../interface";
+import { CardConfig } from "../../../../interface";
 import CardLAMWhyJoin from "@/components/CardLAMWhyJoin";
 import {
   Carousel,
@@ -30,7 +30,7 @@ export default function WhyJoinPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        next: { revalidate: 600 }
       });
       const data = await response.json();
       setCareerGrowthCards(data);
@@ -47,7 +47,7 @@ export default function WhyJoinPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        next: { revalidate: 600 },
       });
       const data = await response.json();
       setLifeAtMitrpholCards(data);
@@ -114,7 +114,7 @@ export default function WhyJoinPage() {
             ]}
           >
             <CarouselContent className="ml-30">
-              {lifeAtMitrpholCards.map((card: Card, index) => (
+              {lifeAtMitrpholCards.map((card: CardConfig, index) => (
                 <CarouselItem key={index} className="pl-2">
                   <CardLAMWhyJoin
                     title={card.title}
@@ -161,7 +161,7 @@ export default function WhyJoinPage() {
                 initial="hidden"
                 whileInView="visible"
               >
-                {careerGrowthCards.map((card: Card, index) => (
+                {careerGrowthCards.map((card: CardConfig, index) => (
                   <CardCG
                     key={index}
                     iconSrc={card.image_url}

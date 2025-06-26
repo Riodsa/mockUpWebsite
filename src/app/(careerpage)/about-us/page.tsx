@@ -10,7 +10,7 @@ import AwardCard from "@/components/AwardCard";
 import CultureCard from "@/components/CultureCard";
 import Navbar from "@/components/Navbar";
 import CircularProgress from "@mui/material/CircularProgress";
-import { Card } from "../../../../interface";
+import { CardConfig } from "../../../../interface";
 
 // const cards = [
 //   {
@@ -137,7 +137,7 @@ export default function AboutUsPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        cache: "no-cache",
       });
       const data = await response.json();
       setBusinessCards(data);
@@ -153,7 +153,7 @@ export default function AboutUsPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        cache: "force-cache",
+        next: { revalidate: 600 }
       });
       const data = await response.json();
       setAwardCards(data);
@@ -204,7 +204,7 @@ export default function AboutUsPage() {
       >
         <h1 className="text-5xl font-bold text-white">Our Businesses</h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-20">
-          {businessCards.map((card: Card, index) => (
+          {businessCards.map((card: CardConfig, index) => (
             <BusinessCard
               key={index}
               title={card.title}
@@ -318,7 +318,7 @@ export default function AboutUsPage() {
           Awards
         </h1>
         <div className="relative flex flex-col justify-center gap-10 mt-10">
-          {awardCards.map((card: Card, index) => (
+          {awardCards.map((card: CardConfig, index) => (
             <AwardCard
               key={index}
               number={index}

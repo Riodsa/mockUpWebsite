@@ -1,31 +1,61 @@
-'use client';
+import Sidebar from "@/components/admin/Sidebar";
+import { ConfigDict, Section, ImageConfig, TextConfig } from "../../../../../interface";
+import AdminPanel from "@/components/admin/AdminPanel";
 
-import { useSession, signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+const section : Section[] = [
+  {
+    title: 'Hero Section',
+    configs: [
+      'hero-image',
+      'hero-text'
+    ]
+  }
+]
 
-export default function AdminPage() {
-  const router = useRouter();
-  const { data: session } = useSession();
-  console.log('Session data:', session);
+const configDict : ConfigDict = {
+  'hero-image': {
+    label: 'Hero Image',
+    type: "image",
+    path: "images?page=home&section=hero",
+  },
+  'hero-text': {
+    label: 'Hero Text',
+    type: "text",
+    path: "texts?page=home&section=hero&type=heading",
+  }
+};
 
-  const handleLogout = async () => {
-    try {
-      await signOut({ redirect: true }); // Sign out without immediate redirect
-    //   router.push('/');
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
 
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Welcome, </h1>
-      <button
-        onClick={handleLogout}
-        className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors"
-      >
-        Log Out
-      </button>
-    </div>
-  );
+const fetchData = async (path:string) => {
+    const res = await fetch(`${process.env.BACKEND_URL}/api/${path}`)
+    const data = await res.json()
+    return data
+}
+
+
+const getConfigData = async () => {
+    const keys = Object.keys(configDict);
+    await Promise.all(keys.map(async (key : string) => {
+        const config = configDict[key];
+        const data = await fetchData(config.path);
+        if (config.type === "image") {
+          config.imageData = data[0];
+        } else if (config.type === "text") {
+          config.textData = data[0]
+        } else if (config.type === "card") {
+          config.cardData = data;
+        }
+    }));
+}
+
+export default async function ConfigHomePage() {
+
+    await getConfigData();
+
+    return (
+      <div className="min-h-dvh flex flex-row w-screen">
+        <Sidebar/>
+        <AdminPanel sections={section} configDict={configDict} />
+      </div>
+    );
 }
