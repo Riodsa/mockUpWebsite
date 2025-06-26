@@ -5,25 +5,35 @@ import { IoPencil } from "react-icons/io5";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import { useSession } from "next-auth/react";
+import { TextConfig } from "../../../interface";
 
-type ConfigTextProps = {
-  label: string;
-  required?: boolean;
+interface ConfigTextProps extends TextConfig {
+  label?: string;
   path: string;
   className?: string;
 };
 
-const ConfigText = ({ label, required, path, className }: ConfigTextProps) => {
+const ConfigText = ({
+  id,
+  text,
+  text_en,
+  label,
+  path,
+  page,
+  section,
+  type,
+  className,
+}: ConfigTextProps) => {
   const [isDisable, setIsDisable] = useState(true);
   const [isDisableEn, setIsDisableEn] = useState(true);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
-  const [text, setText] = useState("");
-  const [textEn, setTextEn] = useState("");
+  const [textTh, setTextTh] = useState(text);
+  const [textEn, setTextEn] = useState(text_en);
 
   const { data: session } = useSession();
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setText(event.target.value);
+    setTextTh(event.target.value);
   };
 
   const handleTextEnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,33 +52,25 @@ const ConfigText = ({ label, required, path, className }: ConfigTextProps) => {
     setIsDisableEn(!isDisableEn);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(`${path}`);
-      const data = await response.json();
-      setText(data[0].text);
-      setTextEn(data[0].text_en);
-    };
-
-    fetchData();
-  }, []);
-
   const handleSave = async (lang: "th" | "en") => {
     try {
-      const response = await fetch(`${path}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${session?.user?.token}`,
-        },
-        body: JSON.stringify({
-          ...(lang === "th"
-            ? { text: text }
-            : lang === "en"
-              ? { text_en: textEn }
-              : {}),
-        }),
-      });
+      const response = await fetch(
+        `/api/${path}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${session?.user?.token}`,
+          },
+          body: JSON.stringify({
+            ...(lang === "th"
+              ? { text: textTh }
+              : lang === "en"
+                ? { text_en: textEn }
+                : {}),
+          }),
+        }
+      );
 
       if (response.ok) {
         if (lang === "th") {
@@ -96,9 +98,9 @@ const ConfigText = ({ label, required, path, className }: ConfigTextProps) => {
         <div className="flex flex-row justify-start items-center gap-5">
           <TextField
             variant="outlined"
-            required={required || false}
+            required={true}
             disabled={isDisable}
-            value={text}
+            value={textTh}
             onChange={handleTextChange}
             className="mr-5 w-80"
           />
@@ -114,31 +116,27 @@ const ConfigText = ({ label, required, path, className }: ConfigTextProps) => {
           ) : null}
         </div>{" "}
       </div>
-      <div>
-        <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
-          <label>{label + " (EN)" || "This is label"}</label>
-          <IoPencil onClick={handleEditEn} className="cursor-pointer" />
-        </div>
-        <div className="flex flex-row justify-start items-center gap-5">
-          <TextField
-            variant="outlined"
-            required={required || false}
-            disabled={isDisableEn}
-            value={textEn}
-            onChange={handleTextEnChange}
-            className="mr-5 w-80"
-          />
-          {!isDisableEn ? (
-            <button
-              onClick={() => {
-                handleSave("en");
-              }}
-              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
-            >
-              Save
-            </button>
-          ) : null}
-        </div>
+      <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
+        <label>{label + " (EN)" || "This is label"}</label>
+        <IoPencil onClick={handleEditEn} className="cursor-pointer" />
+      </div>
+      <div className="flex flex-row justify-start items-center gap-5">
+        <TextField
+          variant="outlined"
+          required={true}
+          disabled={isDisableEn}
+          value={textEn}
+          onChange={handleTextEnChange}
+          className="mr-5 w-80"
+        />
+        {!isDisableEn ? (
+          <button
+            onClick={() => { handleSave("en") }}
+            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
+          >
+            Save
+          </button>
+        ) : null}
       </div>
       <Snackbar
         open={isSnackbarOpen}

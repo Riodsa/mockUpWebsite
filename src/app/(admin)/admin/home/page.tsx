@@ -1,105 +1,61 @@
-"use client"
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import ConfigText from "@/components/admin/ConfigText";
-import ConfigImage from "@/components/admin/ConfigImage";
 import Sidebar from "@/components/admin/Sidebar";
-import { configDictType } from "../../../../../interface";
+import { ConfigDict, Section, ImageConfig, TextConfig } from "../../../../../interface";
+import AdminPanel from "@/components/admin/AdminPanel";
 
-const sections = [
-    {
-        title: "Hero Section",
-        configs: [
-            "hero-banner",
-            "hero-title"
-        ]
-    }
+const section : Section[] = [
+  {
+    title: 'Hero Section',
+    configs: [
+      'hero-image',
+      'hero-text'
+    ]
+  }
 ]
 
-const configDict : configDictType = {
-    "hero-banner": {
-        type: "image",
-        label: "Hero Banner",
-        path: "/api/images?page=home&section=hero",
-        data: [],
-    },
-    "hero-title": {
-        type: "text",
-        label: "Title",
-        path: "/api/texts?page=home&section=hero&type=heading",
-        data: [],
-    }
+const configDict : ConfigDict = {
+  'hero-image': {
+    label: 'Hero Image',
+    type: "image",
+    path: "images?page=home&section=hero",
+  },
+  'hero-text': {
+    label: 'Hero Text',
+    type: "text",
+    path: "texts?page=home&section=hero&type=heading",
+  }
+};
+
+
+const fetchData = async (path:string) => {
+    const res = await fetch(`${process.env.BACKEND_URL}/api/${path}`)
+    const data = await res.json()
+    return data
 }
 
-export default function ConfigHomePage() {
-  const router = useRouter();
-  const { data: session } = useSession();
-  console.log("Session data:", session);
 
-  // useEffect(() => {
-  //   console.log("SHOW SNACKBARRRR:", isSnackbarOpen);
-  // }, [isSnackbarOpen]);
+const getConfigData = async () => {
+    const keys = Object.keys(configDict);
+    await Promise.all(keys.map(async (key : string) => {
+        const config = configDict[key];
+        const data = await fetchData(config.path);
+        if (config.type === "image") {
+          config.imageData = data[0];
+        } else if (config.type === "text") {
+          config.textData = data[0]
+        } else if (config.type === "card") {
+          config.cardData = data;
+        }
+    }));
+}
 
-  return (
-    <div className="min-h-screen w-screen pb-100">
-      <Sidebar/>
-      <div className="h-screen w-full flex flex-col flex-wrap">
-        {sections.map((section,index) => (
-          <div key={index} className="mt-10 ml-80 w-fit flex flex-col flex-wrap gap-10">
-            <h1 className="text-5xl">{section.title}</h1>
-            <div className="flex flex-row w-fit flex-wrap">
-              {section.configs.map((item: string) => (
-                <div key={configDict[item].label}>
-                  {(configDict[item].type === "image" && configDict[item].label) ? (
-                    <ConfigImage
-                      label={configDict[item].label}
-                      required
-                      path={configDict[item].path}
-                    />
-                  ) : configDict[item].label && (
-                    <ConfigText
-                      label={configDict[item].label}
-                      required
-                      path={configDict[item].path}
-                    />
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-        {/* <div className="mt-10 ml-80 w-fit flex flex-col gap-10 bg-red-400"> */}
-          {/* <h1 className="text-5xl">Hero Section</h1>
-          <div className="flex flex-row w-screen">
-            <Suspense fallback={<Loading />}>
-              <ConfigImage
-              label="Hero Banner"
-              required
-              page="home"
-              section="hero"
-            />
-            </Suspense>
-            <div className="flex flex-col ml-5">
-              <ConfigText
-                label="คำโปรยภาษาไทย"
-                required
-                page="home"
-                section="hero"
-                type="heading"
-                lang="th"
-              />
-              <ConfigText
-                label="คำโปรยภาษาอังกฤษ"
-                required
-                page="home"
-                section="hero"
-                type="heading"
-                lang="en"
-              />
-            </div>
-          </div> */}
-        {/* </div> */}
+export default async function ConfigHomePage() {
+
+    await getConfigData();
+
+    return (
+      <div className="min-h-dvh flex flex-row w-screen">
+        <Sidebar/>
+        <AdminPanel sections={section} configDict={configDict} />
       </div>
-    </div>
-  );
+    );
 }

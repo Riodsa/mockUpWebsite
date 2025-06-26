@@ -4,24 +4,27 @@ import TextField from "@mui/material/TextField";
 import { IoPencil } from "react-icons/io5";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { ImageConfig } from "../../../interface";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-type ConfigImageProps = {
-  label: string;
-  required?: boolean;
+interface ConfigImageProps extends ImageConfig {
+  label?: string;
   path: string;
   className?: string;
 };
 
 const ConfigImage = ({
+  id,
+  image_url,
   label,
-  required,
   path,
+  page,
+  section,
   className,
 }: ConfigImageProps) => {
   const [isDisable, setIsDisable] = useState(true);
-  const [imageUrl, setImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState(image_url);
   const [isSnackbarOpen, setSnackbarOpen] = useState(false);
 
   const openSnackbar = () => {
@@ -38,31 +41,10 @@ const ConfigImage = ({
     setIsDisable(!isDisable);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${path}`
-        );
-        if (!response.ok) {
-          console.error("Error fetching data:", response.statusText);
-          return;
-        }
-        const data = await response.json();
-        setImageUrl(data[0].image_url);
-        console.log("Fetched image:", data[0].image_url);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   const handleSave = async () => {
     try {
       const response = await fetch(
-        `${path}`,
+        `/api/${path}`,
         {
           method: "PUT",
           headers: {
@@ -96,7 +78,7 @@ const ConfigImage = ({
       <div className="flex flex-row justify-start items-center gap-5">
         <TextField
           variant="outlined"
-          required={required || false}
+          required={true}
           disabled={isDisable}
           value={imageUrl}
           onChange={handleImageChange}
@@ -113,7 +95,7 @@ const ConfigImage = ({
       </div>
       <Image
         src={imageUrl || "/homeHeroBg.png"}
-        alt={label}
+        alt={label ? label : "Image"}
         width={300}
         height={200}
         className="mt-4 rounded-md ml-3"
