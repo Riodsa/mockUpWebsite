@@ -8,15 +8,6 @@ export interface CardConfig {
   href?: string;
   is_active?: boolean;
 }
-export interface configDictType {
-    [key: string]: {
-        type: string;
-        label? : string;
-        path: string;
-        data: Card[]
-    }
-}
-
 export interface ImageConfig {
   id: string;
   image_url: string;

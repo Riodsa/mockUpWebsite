@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import { Card } from "../../../interface";
+import { CardConfig } from "../../../interface";
 import { IoIosWarning } from "react-icons/io";
 
 type EditCardModalProps = {
   isOpen: boolean;
   onClose: Function;
-  data: Card;
+  data: CardConfig;
   path: string;
   openSnackbar: Function;
 };

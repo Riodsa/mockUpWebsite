@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { CardConfig } from "../../../interface";
 import { useEffect, useState } from "react";
-import { Card } from "../../../interface";
 import { IoPencil } from "react-icons/io5";
 import { FaRegTrashAlt } from "react-icons/fa";
 import EditCardModal from "./ModalCard";
@@ -13,8 +12,6 @@ import Alert from "@mui/material/Alert";
 
 interface ConfigCardProps extends CardConfig {
     path: string;
-interface ConfigCardProps extends Card {
-  path: string;
 }
 
 const ConfigCard = ({

@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
-import { Card } from "../../../interface";
+import { CardConfig } from "../../../interface";
 
 type EditCardModalProps = {
   isOpen: boolean;
   onClose: Function;
-  data: Card;
+  data: CardConfig;
   path: string;
   openSnackbar: Function;
 };
@@ -60,7 +60,7 @@ const EditCardModal = ({ isOpen, onClose, data, path, openSnackbar }: EditCardMo
       console.error(error);
     }
   };
-  
+
   const handleClose = () => {
     onClose();
   };
