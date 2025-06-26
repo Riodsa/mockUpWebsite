@@ -31,20 +31,22 @@ const Sidebar = () => {
   }
 
   return (
-    <div className="fixed h-[90%] top-5 w-60 z-10 left-0 flex flex-col items-center border-r-2 border-black/50">
-      <div className="w-full flex flex-col text-black text-2xl gap-20 mt-20 ml-10">
-        {buttons.map((button, index) => (
-          <Link href={`/admin/${button.toLowerCase().replace(" ", "-")}`} className="w-fit" key={index}>
-            <button className="px-4 py-3 w-45 hover:bg-gray-200 rounded-2xl flex flex-row justify-start items-center cursor-pointer">
-              {icons[button]}
-              <p className="ml-2">{button}</p>
-            </button>
-          </Link>
-        ))}
+    <div className="fixed h-[100dvh] w-60 z-10 left-0 py-20 flex flex-col items-center border-r-2 border-black/50">
+      <div className="w-fit h-full flex flex-col text-black text-2xl mx-5 relative justify-between">
+        <div className="flex flex-col gap-20"> 
+          {buttons.map((button, index) => (
+            <Link href={`/admin/${button.toLowerCase().replace(" ", "-")}`} className="w-fit" key={index}>
+              <button className="px-4 py-3 w-45 hover:bg-gray-200 rounded-2xl flex flex-row justify-start items-center cursor-pointer">
+                {icons[button]}
+                <p className="ml-2">{button}</p>
+              </button>
+            </Link>
+          ))}
+        </div>
 
         <button
           onClick={handleLogout}
-          className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600 transition-colors"
+          className="bg-red-500 text-white w-fit py-2 px-4 rounded-md hover:bg-red-600 transition-colors relative self-center"
         >
           Log Out
         </button>
