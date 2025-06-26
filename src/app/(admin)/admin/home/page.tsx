@@ -6,6 +6,7 @@ import ConfigText from "@/components/admin/ConfigText";
 import Snackbar from "@mui/material/Snackbar";
 import { useEffect, useState } from "react";
 import Alert from '@mui/material/Alert';
+import Sidebar from "@/components/admin/Sidebar";
 
 
 export default function ConfigHomePage() {
@@ -25,6 +26,7 @@ export default function ConfigHomePage() {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <Sidebar />
       <div className="h-screen w-full flex flex-col">
         <ConfigText
           label="Hero Section Text"

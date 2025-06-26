@@ -4,29 +4,28 @@ import { Card } from "../../../../../interface";
 
 const sections = [
     {
-        title: "What we do",
+        title: "Life at Mitrphol",
         configs: [
-            "what-we-do-card",
-            // "temp"
+            "life-at-mitrphol-card",
         ]
     },
     {
-        title: "Awards",
+        title: "Career Growth",
         configs: [
-            "award-card"
+            "career-growth-card"
         ]
     }
 ]
 
 const configDict : configDictType = {
-    "what-we-do-card": {
+    "life-at-mitrphol-card": {
         type: "card",
-        path: "business-cards",
+        path: "life-at-mitrphol-cards",
         data: [],
     },
-    "award-card": {
+    "career-growth-card": {
         type: "card",
-        path: "award-cards",
+        path: "career-growth-cards",
         data: [],
     }
 }
@@ -54,12 +53,10 @@ const getConfigData = async () => {
     }));
 }
 
-export default async function ConfigAboutUsPage() {
-
+export default async function ConfigWhyJoinPage() {
 
     await getConfigData();
 
-    // console.log("sectionData", configDict);
 
     return (
         <div className="min-h-dvh bg-white flex flex-row">

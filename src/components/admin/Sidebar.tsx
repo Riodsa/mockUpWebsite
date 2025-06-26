@@ -18,8 +18,8 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="fixed h-[90%] top-5 w-60 z-10 left-0 flex flex-col items-center border-r-2 border-black/50">
-      <div className="w-full flex flex-col text-black text-2xl gap-20 mt-20 ml-10">
+    <div className="h-[90%] top-5 min-w-60 max-w-60 z-10 left-0 flex flex-col items-center border-r-2 border-black/50">
+      <div className="w-fit flex flex-col text-black text-2xl gap-20 mt-20 ml-10">
         <Link href="/admin/home" className="w-fit">
           <button className="px-4 py-2 w-fit rounded flex flex-row justify-between items-center cursor-pointer">
             <FaHome className="mr-2" />
