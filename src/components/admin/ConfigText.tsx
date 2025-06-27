@@ -89,7 +89,7 @@ const ConfigText = ({
   };
 
   return (
-    <div className={`w-100 mb-5 flex flex-col gap-3 ${className}`}>
+    <div className={`w-100 mb-5 flex flex-col gap-6 ${className}`}>
       <div>
         <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
           <label>{label || "This is label"}</label>
@@ -114,29 +114,31 @@ const ConfigText = ({
               Save
             </button>
           ) : null}
-        </div>{" "}
+        </div>
       </div>
-      <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
-        <label>{label + " (EN)" || "This is label"}</label>
-        <IoPencil onClick={handleEditEn} className="cursor-pointer" />
-      </div>
-      <div className="flex flex-row justify-start items-center gap-5">
-        <TextField
-          variant="outlined"
-          required={true}
-          disabled={isDisableEn}
-          value={textEn}
-          onChange={handleTextEnChange}
-          className="mr-5 w-80"
-        />
-        {!isDisableEn ? (
-          <button
-            onClick={() => { handleSave("en") }}
-            className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
-          >
-            Save
-          </button>
-        ) : null}
+      <div>
+        <div className="flex flex-row mb-2 justify-start items-center gap-3 text-lg ">
+          <label>{label + " (EN)" || "This is label"}</label>
+          <IoPencil onClick={handleEditEn} className="cursor-pointer" />
+        </div>
+        <div className="flex flex-row justify-start items-center gap-5">
+          <TextField
+            variant="outlined"
+            required={true}
+            disabled={isDisableEn}
+            value={textEn}
+            onChange={handleTextEnChange}
+            className="mr-5 w-80"
+          />
+          {!isDisableEn ? (
+            <button
+              onClick={() => { handleSave("en") }}
+              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition-colors cursor-pointer"
+            >
+              Save
+            </button>
+          ) : null}
+        </div>
       </div>
       <Snackbar
         open={isSnackbarOpen}
