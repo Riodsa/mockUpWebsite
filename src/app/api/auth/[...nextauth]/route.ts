@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
             }
 
             if (response.success && response.user) {
-                console.log(response)
+                // console.log(response)
                 return {
                     id: response.user.id,
                     name: response.user.name,
