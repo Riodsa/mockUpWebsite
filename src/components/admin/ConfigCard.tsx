@@ -10,7 +10,6 @@ import ConfirmModal from "./ConfirmModal";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import SwitchTabButton from "../SwitchTabButton";
-import { div } from "motion/react-client";
 
 interface ConfigCardProps {
     cardData: CardConfig[];

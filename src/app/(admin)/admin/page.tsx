@@ -1,41 +1,41 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function AdminLoginPage() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     const formData = {
       basicAuth: btoa(`${username}:${password}`),
     };
 
     try {
-      const result = await signIn('credentials', {
+      const result = await signIn("credentials", {
         redirect: false,
         ...formData,
       });
 
       if (result?.error) {
         if (result.status === 401) {
-          setError('Invalid Credentials');
+          setError("Invalid Credentials");
         } else {
           setError(result.error);
         }
       } else {
-        router.push('/admin/home');
+        router.push("/admin/home");
       }
     } catch (err) {
-      setError('An unexpected error occurred');
-      console.error('Sign-in error:', err);
+      setError("An unexpected error occurred");
+      console.error("Sign-in error:", err);
     }
   };
 
@@ -45,7 +45,10 @@ export default function AdminLoginPage() {
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
               Username
             </label>
             <input
@@ -56,9 +59,12 @@ export default function AdminLoginPage() {
               className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
-        
+
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
             <input

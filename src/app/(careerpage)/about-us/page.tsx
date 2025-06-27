@@ -207,9 +207,9 @@ export default function AboutUsPage() {
           {businessCards.map((card: CardConfig, index) => (
             <BusinessCard
               key={index}
-              title={card.title}
-              description={card.body}
-              image={card.image_url}
+              title={card.title ?? "Default Title"}
+              description={card.body ?? "Default Description"}
+              image={card.image_url ?? "/default-image.png"}
             />
           ))}
         </div>
@@ -322,9 +322,9 @@ export default function AboutUsPage() {
             <AwardCard
               key={index}
               number={index}
-              title={card.title}
-              description={card.body}
-              image={card.image_url}
+              title={card.title ?? "Default Title"}
+              description={card.body ?? "Default Description"}
+              image={card.image_url ?? "/default-image.png"}
             />
           ))}
         </div>

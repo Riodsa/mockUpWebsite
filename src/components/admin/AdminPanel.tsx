@@ -1,4 +1,4 @@
-import { CardConfig, Section, ConfigDict } from "../../../interface";
+import { Section, ConfigDict } from "../../../interface";
 import ConfigCard from "./ConfigCard";
 import ConfigText from "./ConfigText";
 import ConfigImage from "./ConfigImage";

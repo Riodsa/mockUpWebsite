@@ -5,8 +5,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "Mitr Phol Careers",
   description: "Join us at Mitr Phol",
