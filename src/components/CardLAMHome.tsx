@@ -27,22 +27,22 @@ const CardLifeAtMitrphol = ({
 
   return (
     <motion.div
-      className={`flex flex-col rounded-2xl relative z-5 overflow-hidden ${className} cursor-default`}
+      className={`flex flex-col rounded-md lg:rounded-2xl relative z-5 overflow-hidden ${className} cursor-default`}
       variants={variant}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      <div className="absolute inset-0 bottom-1/5 rounded-t-2xl -z-10">
+      <div className="absolute inset-0 bottom-1/5 rounded-t-md lg:rounded-t-2xl -z-10">
         <Image
           src={imgSrc}
           alt={imgAlt}
           style={{ objectFit: "cover" }}
           fill
-          className="rounded-t-2xl"
+          className="rounded-t-md lg:rounded-t-2xl"
         />
       </div>
       <motion.div
-        className={`@container relative top-[80%] rounded-b-2xl w-full flex flex-col pl-4 ${color ? `bg-${color}-600` : "black"}`}
+        className={`@container relative top-[80%] rounded-b-md lg:rounded-b-2xl w-full flex flex-col pl-2 lg:pl-4 bg-[#5BB7B9]`}
         animate={
           isHover ? { height: "150%", y: "-30%" } : { height: "100%", y: 0 }
         }

@@ -8,21 +8,21 @@ type heroSectionProps = {
   imageHero: string;
 };
 
-export default function HeroSection({ quoteEng, quoteTh, imageHero }: heroSectionProps) {
+const HeroSection = ({ quoteEng, quoteTh, imageHero }: heroSectionProps) => {
   return (
-    <div className="relative w-full flex max-w-screen flex-col h-180 -z-10 bg-black">
-      <motion.div className="w-full flex">
+    <div className="relative w-full flex max-w-[1536px] flex-col max-[394px]:h-70 max-[460px]:h-80 md:h-120 lg:h-180 bg-black">
+      <motion.div className="overflow-hidden absolute max-w-[1536px] w-screen top-0 left-0 max-[394px]:h-70 max-[460px]:h-80 md:h-120 lg:h-180 flex flex-col items-center">
         <motion.img
           src={imageHero || "/homeHeroBg.png"}
           alt="background"
           className="object-fill absolute opacity-80"
-          initial={{ scale: 1 }}
-          animate={{ scale: 1.15 }}
+          initial={{ scale: 1.15 }}
+          animate={{ scale: 1.4 }}
           transition={{ duration: 15, ease: "linear" }}
         />
       </motion.div>
       <motion.div
-        className="relative top-45 left-25 w-160 flex flex-col max-w-screen cursor-default text-5xl text-white"
+        className="relative top-22 left-15  lg:top-40 lg:left-25 md:top-40 md:left-25 flex flex-col max-w-[1536px] cursor-default text-xl md:text-3xl lg:text-4xl xl:text-5xl text-white"
         variants={Box}
         initial="hidden"
         whileInView="visible"
@@ -44,3 +44,4 @@ export default function HeroSection({ quoteEng, quoteTh, imageHero }: heroSectio
   );
 };
 
+export default HeroSection;

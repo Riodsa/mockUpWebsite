@@ -134,7 +134,7 @@ const Navbar = ({ isAnimate }: { isAnimate: boolean }) => {
 
   return (
     <motion.div
-      className="w-full max-w-screen h-18 pt-2 flex flex-row pl-2 self-center items-center justify-around fixed z-20 mb-18"
+      className="w-full max-w-[1536px] h-18 pt-2 flex flex-row pl-2 self-center items-center justify-around fixed z-51 mb-18"
       initial={{
         backgroundColor: "rgba(255,255,255,0)",
         color: "white",

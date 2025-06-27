@@ -73,7 +73,7 @@ const navItems = ["Home", "About Us", "Why Join?", "Job"];
 
 const Footer = () => {
   return (
-    <div className="relative min-w-screen h-auto flex flex-col justify-center items-center bg-(--footer-blue)">
+    <div className="relative w-screen max-w-[1536px] h-auto flex flex-col justify-center items-center bg-(--footer-blue)">
       <div className="relative bottom-0 h-[70dvh] w-full p-10 pr-15 flex flex-col justify-between max-w-7xl self-center">
         <div className="flex flex-row justify-between relative">
           <div className="flex flex-col">
