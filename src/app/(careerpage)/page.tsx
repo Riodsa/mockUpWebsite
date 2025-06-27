@@ -1,31 +1,36 @@
-"use client";
 import React, { useEffect, useState } from "react";
 import { Box, FloatUp } from "../../variants/variant";
-import {motion} from "motion/react";
+import * as motion from "motion/react-client"
 import CardLifeAtMitrphol from "@/components/CardLAMHome";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Link from "next/dist/client/link";
-import CircularProgress from "@mui/material/CircularProgress";
+import HeroSection from "@/components/home/HeroSection";
 
-const page = () => {
-  const [quoteEng, setQuoteEng] = useState<string>("");
-  const [quoteTh, setQuoteTh] = useState<string>("");
-  const [imageHero, setImageHero] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+export default async function Home() {
+  // const [quoteEng, setQuoteEng] = useState<string>("");
+  // const [quoteTh, setQuoteTh] = useState<string>("");
+  // const [imageHero, setImageHero] = useState<string>("");
+
+  let quoteEng = "";
+  let quoteTh = "";
+  let imageHero = "";
+
   const fetchTexts = async (section: string, type: string) => {
     try {
       const response = await fetch(
-        `/api/texts?page=home&type=${type}&section=${section}`,
+        `${process.env.BACKEND_URL}/api/texts?page=home&type=${type}&section=${section}`,
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
-          next: { revalidate: 600 }
+          next: { revalidate: 600 },
         }
       );
       const data = await response.json();
+      quoteEng = data[0].text_en;
+      quoteTh = data[0].text;
       return data[0];
     } catch (error) {
       console.error("Error fetching texts:", error);
@@ -34,94 +39,36 @@ const page = () => {
 
   const fetchImages = async (section: string) => {
     try {
-      const response = await fetch(`/api/images?page=home&section=${section}`, {
+      const response = await fetch(`${process.env.BACKEND_URL}/api/images?page=home&section=${section}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
-        next: { revalidate: 600 }
+        next: { revalidate: 600 },
       });
       const data = await response.json();
+      imageHero = data[0].image_url;
       return data[0];
     } catch (error) {
       console.error("Error fetching images:", error);
     }
   };
 
-  useEffect(() => {
-    const fetchQuote = async () => {
-      const result = await fetchTexts("hero", "heading");
-      if (result) {
-        console.log("Fetched texts:", result);
-        setQuoteEng(result.text_en);
-        setQuoteTh(result.text);
-      }
-    };
-    const fetchImage = async () => {
-      const result = await fetchImages("hero");
-      if (result) {
-        console.log("Fetched images:", result);
-        setImageHero(result.image_url);
-      }
-    };
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        await Promise.all([fetchQuote(), fetchImage()]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center w-full">
-        <Navbar isAnimate={false} />
-        <div className="flex justify-center items-center h-screen">
-          <CircularProgress />
-        </div>
-      </div>
-    );
+  try{
+    await Promise.all([fetchTexts("hero", "heading"), fetchImages("hero")]);
+  } catch (error) {
+    console.error("Error fetching data:", error);
   }
+  
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden flex flex-col items-center">
       <Navbar isAnimate={true} />
-      <div className="relative w-full flex max-w-screen flex-col h-180 -z-10 bg-black">
-        <motion.div className="w-full flex">
-          <motion.img
-            src={imageHero || "/homeHeroBg.png"}
-            alt="background"
-            className="object-fill absolute opacity-80"
-            initial={{ scale: 1 }}
-            animate={{ scale: 1.15 }}
-            transition={{ duration: 15, ease: "linear" }}
-          />
-        </motion.div>
-        <motion.div
-          className="relative top-50 left-25 w-160 flex flex-col max-w-screen cursor-default text-5xl text-white"
-          variants={Box}
-          initial="hidden"
-          whileInView="visible"
-        >
-          <motion.h1
-            className="mb-3 font-extrabold max-w-[25ch]"
-            variants={FloatUp}
-          >
-            {quoteEng}
-          </motion.h1>
-          <motion.h1
-            className="mb-3 font-extrabold max-w-[20ch]"
-            variants={FloatUp}
-          >
-            {quoteTh}
-          </motion.h1>
-        </motion.div>
-      </div>
+      <HeroSection
+        quoteTh={quoteTh}
+        quoteEng={quoteEng}
+        imageHero={imageHero}
+      />
       <div className="relative w-full flex max-w-screen flex-col h-180 z-1 bg-black">
         <div className="w-full flex -z-10 opacity-80">
           <Image
@@ -231,5 +178,3 @@ const page = () => {
     </div>
   );
 };
-
-export default page;

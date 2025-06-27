@@ -8,7 +8,6 @@ interface props {
   variant?: Variants;
   imgSrc: string;
   imgAlt: string;
-  BGColor: string;
   title: string;
   description: string;
   link?: string;
@@ -19,14 +18,13 @@ const CardLAMWhyJoin = ({
   variant,
   imgSrc,
   imgAlt,
-  BGColor,
   title,
   description,
   link,
 }: props) => {
   return (
     <div
-      className={`w-250 h-80 rounded-2xl overflow-hidden relative bg-[${BGColor}] ${className}`}
+      className={`w-250 h-80 rounded-2xl overflow-hidden relative bg-[#6879ED] ${className}`}
     >
       <div className="absolute w-60 h-65 left-20 my-7 rounded-2xl overflow-hidden bg-gray-200">
         <Image src={imgSrc} alt={imgAlt} layout="fill" objectFit="cover" />
