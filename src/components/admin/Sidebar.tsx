@@ -46,7 +46,7 @@ const Sidebar = () => {
 
         <button
           onClick={handleLogout}
-          className="bg-red-500 text-white w-fit py-2 px-4 rounded-md hover:bg-red-600 transition-colors relative self-center"
+          className="bg-red-500 text-white w-fit py-2 px-4 rounded-md hover:bg-red-600 transition-colors relative self-center cursor-pointer"
         >
           Log Out
         </button>
