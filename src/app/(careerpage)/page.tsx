@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, FloatUp } from "../../variants/variant";
 import * as motion from "motion/react-client"
 import CardLifeAtMitrphol from "@/components/CardLAMHome";

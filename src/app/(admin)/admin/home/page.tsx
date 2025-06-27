@@ -1,9 +1,7 @@
 import Sidebar from "@/components/admin/Sidebar";
 import {
   ConfigDict,
-  Section,
-  ImageConfig,
-  TextConfig,
+  Section
 } from "../../../../../interface";
 import AdminPanel from "@/components/admin/AdminPanel";
 

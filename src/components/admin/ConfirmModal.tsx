@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { X } from "lucide-react";
 import { CardConfig } from "../../../interface";
 import { IoIosWarning } from "react-icons/io";

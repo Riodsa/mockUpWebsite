@@ -10,7 +10,7 @@ export function authMiddleware(req: NextRequest) {
     throw new Error('Internal Server Error');
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err) => {
     if (err) {
       throw new Error('Invalid token');
     }

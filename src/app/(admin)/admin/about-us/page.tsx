@@ -1,5 +1,5 @@
 import Sidebar from "@/components/admin/Sidebar";
-import { CardConfig, ConfigDict } from "../../../../../interface";
+import { ConfigDict } from "../../../../../interface";
 import AdminPanel from "@/components/admin/AdminPanel";
 
 const sections = [

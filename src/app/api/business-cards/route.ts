@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { query } from "@/libs/db";
 import { authMiddleware } from "@/middlewares/auth";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const result = await query("SELECT * FROM businesscards ORDER BY id ASC");
     return NextResponse.json(result.rows);
