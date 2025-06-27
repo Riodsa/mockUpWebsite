@@ -48,7 +48,7 @@ const Cards = ({ cardData, path }: { cardData: CardConfig; path: string }) => {
 
   return (
     (<div className="flex flex-wrap relative" key={`card-${cardData.id}`}>
-        <div className="bg-white  shadow-[0_2px_10px_rgba(0,0,0,0.2)] rounded-lg w-55 lg:w-70 h-85 overflow-hidden">
+        <div className="bg-[rgb(253,253,253)]  shadow-[0_2px_10px_rgba(0,0,0,0.1)] rounded-lg w-55 lg:w-70 h-85 overflow-hidden">
           <div className="relative w-full h-[40%] pl-4 mt-4 flex flex-row justify-between">
             <h2 className="text-xl w-fit font-bold text-black">{cardData.title}</h2>
             <IoPencil
