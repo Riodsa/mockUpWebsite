@@ -13,7 +13,7 @@ let pool = new Pool({
     process.env.DATABASE_URL || "postgres://postgres:postgres@localhost:5433",
 });
 export const query = async (text, params) => {
-  const start = Date.now();
+  // const start = Date.now();
   try {
     const res = await pool.query(text, params);
     // const duration = Date.now() - start;

@@ -123,9 +123,8 @@ export default async function Home() {
               <h1 className="mb-3 font-extrabold text-6xl italic text-(--color-regal-text2)">
                 LIFE@MITR
               </h1>
-              <h1 className="mb-3 font-semibold">
-                More Than Work <div></div>
-                It's Where You Belong
+              <h1 className="mb-3 font-semibold whitespace-pre-line">
+                {"More Than Work\n It's Where You Belong"}
               </h1>
               <Link href="/why-join">
                 <motion.button

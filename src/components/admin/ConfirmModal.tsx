@@ -6,16 +6,16 @@ import { IoIosWarning } from "react-icons/io";
 
 type EditCardModalProps = {
   isOpen: boolean;
-  onClose: Function;
+  onClose:  () => void;
   data: CardConfig;
   path: string;
-  openSnackbar: Function;
+  openSnackbar: () => void;
 };
 
 const ConfirmModal = ({
   isOpen,
   onClose,
-  data,
+  // data,
   path,
   openSnackbar,
 }: EditCardModalProps) => {

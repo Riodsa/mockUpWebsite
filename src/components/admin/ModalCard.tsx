@@ -1,14 +1,14 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { X } from "lucide-react";
 import { CardConfig } from "../../../interface";
 
 type EditCardModalProps = {
   isOpen: boolean;
-  onClose: Function;
+  onClose:  () => void;
   data: CardConfig;
   path: string;
-  openSnackbar: Function;
+  openSnackbar: () => void;
 };
 
 const EditCardModal = ({
@@ -18,7 +18,7 @@ const EditCardModal = ({
   path,
   openSnackbar,
 }: EditCardModalProps) => {
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<CardConfig>({
     id: data.id,
     image_url: data.image_url,
     title: data.title,
@@ -29,20 +29,8 @@ const EditCardModal = ({
     is_active: data.is_active,
   });
 
-  useEffect(() => {
-    setFormData({
-      image_url: data.image_url,
-      title: data.title,
-      title_en: data.title_en,
-      href: data.href,
-      body: data.body,
-      body_en: data.body_en,
-      is_active: data.is_active,
-    });
-  }, [data]);
-
-  const handleInputChange = (field: any, value: any) => {
-    setFormData((prev: any) => ({
+  const handleInputChange = (field: keyof CardConfig, value: string | boolean) => {
+    setFormData((prev) => ({
       ...prev,
       [field]: value,
     }));

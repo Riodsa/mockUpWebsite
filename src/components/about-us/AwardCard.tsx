@@ -1,4 +1,3 @@
-import { number } from "motion";
 import Image from "next/image";
 
 interface AwardCardProps {

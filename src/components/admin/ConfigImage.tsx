@@ -15,12 +15,12 @@ interface ConfigImageProps extends ImageConfig {
 };
 
 const ConfigImage = ({
-  id,
+  // id,
   image_url,
   label,
   path,
-  page,
-  section,
+  // page,
+  // section,
   className,
 }: ConfigImageProps) => {
   const [isDisable, setIsDisable] = useState(true);

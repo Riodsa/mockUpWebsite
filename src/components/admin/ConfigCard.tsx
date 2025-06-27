@@ -10,7 +10,6 @@ import ConfirmModal from "./ConfirmModal";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import SwitchTabButton from "../why-join/SwitchTabButton";
-import { div } from "motion/react-client";
 
 interface ConfigCardProps {
     cardData: CardConfig[];
@@ -118,7 +117,7 @@ const ConfigCard = ({
 
   useEffect(() => {
     setData(cardData.filter((item) => item.is_active === isActiveTab));
-  }, [isActiveTab]);
+  }, [isActiveTab, cardData]);
 
   return (
     <div className="flex flex-col gap-10">

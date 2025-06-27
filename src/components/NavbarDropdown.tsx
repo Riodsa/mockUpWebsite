@@ -25,7 +25,7 @@ const NavbarDropdown = ({
   isActive = false,
   setActive,
   setClose,
-  isVisible,
+  // isVisible,
 }: NavProps) => {
   return (
     <div className="relative group" onMouseLeave={setClose}>

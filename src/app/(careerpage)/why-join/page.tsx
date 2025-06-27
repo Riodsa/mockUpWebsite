@@ -1,13 +1,14 @@
 import Navbar from "@/components/Navbar";
 import CarouselSection from "@/components/why-join/CarouselSection";
 import CGSection from "@/components/why-join/CGSection";
+import { CardConfig } from "../../../../interface";
 
 export default async function WhyJoinPage() {
   // Use useState to manage the fetched data
   // const [careerGrowthCards, setCareerGrowthCards] = useState([]);
   // const [lifeAtMitrpholCards, setLifeAtMitrpholCards] = useState([]);
-  let LAMCards: any[] = [];
-  let careerGrowthCards: any[] = [];
+  let LAMCards: CardConfig[] = [];
+  let careerGrowthCards: CardConfig[] = [];
 
   const fetchCareerGrowthCards = async () => {
     try {

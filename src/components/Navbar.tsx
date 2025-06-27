@@ -47,7 +47,7 @@ const Navbar = ({ isAnimate }: { isAnimate: boolean }) => {
       setIsActive(true);
       setActiveDropdown(null);
     }
-  }, []);
+  }, [isAnimate, scrollY]);
 
   const closeDropdown = () => {
     setActiveDropdown(null);

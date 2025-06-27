@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "../../globals.css"
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { authOptions } from "@/libs/auth";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 
 export const metadata: Metadata = {

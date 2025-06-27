@@ -14,14 +14,14 @@ interface ConfigTextProps extends TextConfig {
 };
 
 const ConfigText = ({
-  id,
+  // id,
   text,
   text_en,
   label,
   path,
-  page,
-  section,
-  type,
+  // page,
+  // section,
+  // type,
   className,
 }: ConfigTextProps) => {
   const [isDisable, setIsDisable] = useState(true);

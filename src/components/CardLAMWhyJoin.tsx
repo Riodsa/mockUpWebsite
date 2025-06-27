@@ -15,7 +15,7 @@ interface props {
 
 const CardLAMWhyJoin = ({
   className,
-  variant,
+  // variant,
   imgSrc,
   imgAlt,
   title,
