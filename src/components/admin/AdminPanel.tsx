@@ -12,21 +12,13 @@ export default function AdminPanel({ sections, configDict }: { sections: Section
                 <div className="flex flex-row w-fit flex-wrap">
                 {section.configs.map((config) => (
                     <div key={`config-${configDict[config].path}`} className="flex flex-wrap gap-15 relative h-auto">
-                    {configDict[config].type === "card" ? 
-                     configDict[config].cardData?.map((card : CardConfig) => (
-                       <ConfigCard
-                            key={`card-${card.id}`}
-                            id={card.id}
-                            title={card.title}
-                            title_en={card.title_en}
-                            image_url={card.image_url}
-                            body={card.body}
-                            body_en={card.body_en}
-                            href={card.href}
-                            is_active={card.is_active ??  true}
-                            path={configDict[config].path}
-                        />
-                     )) : 
+                    {configDict[config].type === "card" && configDict[config].cardData ? 
+                        <ConfigCard
+                              key={`config-${configDict[config].path}`}
+                              cardData={configDict[config].cardData}
+                              path={configDict[config].path}
+                          />
+                      : 
                      configDict[config].type === "text" && configDict[config].textData ? (
                        <ConfigText
                             key={`text-${configDict[config].textData.id}`}

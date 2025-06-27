@@ -26,6 +26,7 @@ const EditCardModal = ({
     href: data.href,
     body: data.body,
     body_en: data.body_en,
+    is_active: data.is_active,
   });
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const EditCardModal = ({
       href: data.href,
       body: data.body,
       body_en: data.body_en,
+      is_active: data.is_active,
     });
   }, [data]);
 
@@ -75,13 +77,21 @@ const EditCardModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-10 p-4">
-      <div className="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto border-2 border-gray-200">
+      <div className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border-2 border-gray-200">
         <div className="p-5">
           <div className="flex items-center justify-between mb-2">
-            <h2 className="text-2xl font-bold text-gray-900">
+            <div className="flex flex-row gap-10"> 
+              <h2 className="text-2xl font-bold text-gray-900">
               Edit Card - {data.id}
-            </h2>
-            <button
+              </h2>
+              <div className="flex flex-row gap-2 mt-1">
+                <label className="block text-lg align-middle font-medium text-gray-900">
+                    Set Active
+                </label>
+                <input type="checkbox" className="align-middle" name="is_active" checked={formData.is_active} onChange={(e) => handleInputChange("is_active", e.target.checked)} />
+              </div>
+            </div>
+          <button
               onClick={handleClose}
               className="text-gray-400 hover:text-gray-600 transition-colors"
             >
@@ -164,7 +174,7 @@ const EditCardModal = ({
                   placeholder="Description"
                   value={formData.body}
                   onChange={(e) => handleInputChange("body", e.target.value)}
-                  rows={2}
+                  rows={2.8}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-gray-500 placeholder-gray-400"
                 />
               </div>
@@ -179,7 +189,7 @@ const EditCardModal = ({
                   placeholder="Description"
                   value={formData.body_en}
                   onChange={(e) => handleInputChange("body_en", e.target.value)}
-                  rows={2}
+                  rows={2.8}
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-gray-500 placeholder-gray-400"
                 />
               </div>
