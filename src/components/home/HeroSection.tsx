@@ -22,7 +22,7 @@ export default function HeroSection({ quoteEng, quoteTh, imageHero }: heroSectio
         />
       </motion.div>
       <motion.div
-        className="relative top-50 left-25 w-160 flex flex-col max-w-screen cursor-default text-5xl text-white"
+        className="relative top-45 left-25 w-160 flex flex-col max-w-screen cursor-default text-5xl text-white"
         variants={Box}
         initial="hidden"
         whileInView="visible"

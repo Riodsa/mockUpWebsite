@@ -55,7 +55,7 @@ const ConfigCard = ({
   };
 
   return (
-    <div className="flex flex-wrap relative">
+    <div className="flex flex-wrap relative mb-5">
       <div className="bg-gray-300 shadow-xl rounded-lg w-40 lg:w-52 h-70">
         <div className="relative w-full h-[40%] pl-4 mt-4 flex flex-row justify-between">
           <h2 className="text-xl w-fit font-bold text-black">{title}</h2>
