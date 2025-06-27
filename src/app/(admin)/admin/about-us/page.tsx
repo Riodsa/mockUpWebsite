@@ -1,29 +1,28 @@
 import Sidebar from "@/components/admin/Sidebar";
-import {
-  ConfigDict,
-  Section,
-  ImageConfig,
-  TextConfig,
-} from "../../../../../interface";
+import { CardConfig, ConfigDict } from "../../../../../interface";
 import AdminPanel from "@/components/admin/AdminPanel";
 
-const section: Section[] = [
+const sections = [
   {
-    title: "Hero Section",
-    configs: ["hero-image", "hero-text"],
+    title: "What we do",
+    configs: ["what-we-do-card"],
+  },
+  {
+    title: "Awards",
+    configs: ["award-card"],
   },
 ];
 
 const configDict: ConfigDict = {
-  "hero-image": {
-    label: "Hero Image",
-    type: "image",
-    path: "images?page=home&section=hero",
+  "what-we-do-card": {
+    type: "card",
+    path: "business-cards",
+    cardData: [],
   },
-  "hero-text": {
-    label: "Hero Text",
-    type: "text",
-    path: "texts?page=home&section=hero&type=heading",
+  "award-card": {
+    type: "card",
+    path: "award-cards",
+    cardData: [],
   },
 };
 
@@ -50,13 +49,13 @@ const getConfigData = async () => {
   );
 };
 
-export default async function ConfigHomePage() {
+export default async function ConfigAboutUsPage() {
   await getConfigData();
 
   return (
-    <div className="min-h-dvh flex flex-row w-screen">
+    <div className="min-h-dvh flex flex-row">
       <Sidebar />
-      <AdminPanel sections={section} configDict={configDict} />
+      <AdminPanel sections={sections} configDict={configDict} />
     </div>
   );
 }

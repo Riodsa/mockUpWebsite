@@ -1,29 +1,28 @@
 import Sidebar from "@/components/admin/Sidebar";
-import {
-  ConfigDict,
-  Section,
-  ImageConfig,
-  TextConfig,
-} from "../../../../../interface";
+import { CardConfig, Section, ConfigDict } from "../../../../../interface";
 import AdminPanel from "@/components/admin/AdminPanel";
 
-const section: Section[] = [
+const sections: Section[] = [
   {
-    title: "Hero Section",
-    configs: ["hero-image", "hero-text"],
+    title: "Life at Mitrphol",
+    configs: ["life-at-mitrphol-card"],
+  },
+  {
+    title: "Career Growth",
+    configs: ["career-growth-card"],
   },
 ];
 
 const configDict: ConfigDict = {
-  "hero-image": {
-    label: "Hero Image",
-    type: "image",
-    path: "images?page=home&section=hero",
+  "life-at-mitrphol-card": {
+    type: "card",
+    path: "life-at-mitrphol-cards",
+    cardData: [],
   },
-  "hero-text": {
-    label: "Hero Text",
-    type: "text",
-    path: "texts?page=home&section=hero&type=heading",
+  "career-growth-card": {
+    type: "card",
+    path: "career-growth-cards",
+    cardData: [],
   },
 };
 
@@ -50,13 +49,13 @@ const getConfigData = async () => {
   );
 };
 
-export default async function ConfigHomePage() {
+export default async function ConfigWhyJoinPage() {
   await getConfigData();
 
   return (
-    <div className="min-h-dvh flex flex-row w-screen">
+    <div className="min-h-dvh flex flex-row">
       <Sidebar />
-      <AdminPanel sections={section} configDict={configDict} />
+      <AdminPanel sections={sections} configDict={configDict} />
     </div>
   );
 }
