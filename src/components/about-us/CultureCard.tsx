@@ -29,7 +29,7 @@ const CultureCard = ({ letter, full, description, isExpanded, allClosed, color, 
         >
             <div className={`absolute inset-0 z-0 ${color}`}>
             </div>
-            <div className="relative z-10 flex flex-col">
+            <div className="relative z-10 flex flex-col cursor-default">
                 <div className="flex-row flex text-white font-bold">
                     <h2 className="text-8xl">
                         {letter}

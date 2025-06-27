@@ -9,7 +9,7 @@ import EditCardModal from "./ModalCard";
 import ConfirmModal from "./ConfirmModal";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
-import SwitchTabButton from "../SwitchTabButton";
+import SwitchTabButton from "../why-join/SwitchTabButton";
 import { div } from "motion/react-client";
 
 interface ConfigCardProps {

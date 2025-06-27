@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface PhilosophyIconProps {
+interface VisionPhilosophyIconProps {
     icon: any;
     text: string;
 }
 
-const PhilosophyIcon = ({ icon, text }: PhilosophyIconProps) => {
+const VisionPhilosophyIcon = ({ icon, text }: VisionPhilosophyIconProps) => {
     return (
         <div className="flex flex-col items-center">
             <div className="bg-white p-4 rounded-full shadow-md">
@@ -16,4 +16,4 @@ const PhilosophyIcon = ({ icon, text }: PhilosophyIconProps) => {
     );
 };
 
-export default PhilosophyIcon;
+export default VisionPhilosophyIcon;

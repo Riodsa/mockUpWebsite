@@ -19,8 +19,8 @@ const AwardCard = ({ number, title, description, image }: AwardCardProps) => {
                 </div> */}
                 <div className={`border-y-transparent -top-10 absolute z-10 border-y-[70dvw]
                 ${number % 2 === 0 ? "border-l-(--color-primary-dark-blue) border-l-[40dvw]" : "border-r-(--color-primary-dark-blue) border-r-[40dvw] right-0"}`}></div>
-
-                <h2 className="text-2xl text-white font-bold z-20 self-end mb-6 mx-6 max-w-[20%]">
+                <h2 className={`text-2xl text-white z-20 self-end font-bold mb-6 mx-6 max-w-[20%]
+                    ${number % 2 === 0 ? "text-left" : "text-right"}`}>
                     {title}
                 </h2>
                 <Image src={image} alt={title} fill={true} style={{ objectFit: "cover" }} className=""/>

@@ -16,7 +16,7 @@ const BusinessCard = ({ title, description, image }: CardProps) => {
 
     return (
         <motion.div
-            className="bg-white shadow-md rounded-lg relative w-60 lg:w-72 h-90 group"
+            className="bg-white shadow-md rounded-lg relative w-60 lg:w-72 h-90 overflow-hidden"
             whileHover={{ scale: 1.05 , opacity: 1,}}
             transition={{ duration: 0.3 }}
             onHoverStart={() => setIsHovered(true)}
