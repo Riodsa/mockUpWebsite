@@ -48,13 +48,13 @@ export async function POST(request: NextRequest) {
 
     sqlQuery += `) VALUES (`;
 
-    let value: any[] = [];
+    const values: string[] = [];
     for (let i = 1; i <= maxParamCount; i++) {
       if (i > 1) sqlQuery += `, `;
       sqlQuery += `$${i}`;
     }
     sqlQuery += `) RETURNING *`;
-    value.push(
+    values.push(
       title,
       title_en,
       body,
@@ -62,15 +62,15 @@ export async function POST(request: NextRequest) {
       image_url
     );
     if (href) {
-      value.push(href);
+      values.push(href);
     }
     if (is_active !== undefined) {
-      value.push(is_active);
+      values.push(is_active);
     }
 
-    console.log("QUERIES : " + sqlQuery + " VALUES : " + value);
+    console.log("QUERIES : " + sqlQuery + " VALUES : " + values);
 
-    const result = await query(sqlQuery, value);
+    const result = await query(sqlQuery, values);
 
     return NextResponse.json({
       status: 200,

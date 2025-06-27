@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
     const section = searchParams.get("section");
 
     let sqlQuery = "SELECT * FROM images WHERE 1=1";
-    let values: any[] = [];
+    const values: string[] = [];
     let paramCount = 0;
 
     if (page) {

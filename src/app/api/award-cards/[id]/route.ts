@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { query } from "@/libs/db";
 
 export async function GET(
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
@@ -63,50 +64,50 @@ export async function PUT(
 
     let sqlQuery = "UPDATE awardcards SET ";
     let paramCount = 0;
-    let value: any[] = [];
+    const values: string[] = [];
 
     if (title) {
       if (paramCount !== 0) sqlQuery += `, `;
       sqlQuery += `title = $${++paramCount}`;
-      value.push(title);
+      values.push(title);
     }
     if (title_en) {
       if (paramCount !== 0) sqlQuery += `, `;
       sqlQuery += `title_en = $${++paramCount}`;
-      value.push(title_en);
+      values.push(title_en);
     }
     if (body) {
       if (paramCount !== 0) sqlQuery += `, `;
       sqlQuery += `body = $${++paramCount}`;
-      value.push(body);
+      values.push(body);
     }
     if (body_en) {
       if (paramCount !== 0) sqlQuery += `, `;
       sqlQuery += `body_en = $${++paramCount}`;
-      value.push(body_en);
+      values.push(body_en);
     }
     if (image_url) {
       if (paramCount !== 0) sqlQuery += `, `;
       sqlQuery += `image_url = $${++paramCount}`;
-      value.push(image_url);
+      values.push(image_url);
     }
     if (href) {
       if (paramCount !== 0) sqlQuery += `, `;
       sqlQuery += `href = $${++paramCount}`;
-      value.push(href);
+      values.push(href);
     }
     if (is_active !== undefined) {
       if (paramCount !== 0) sqlQuery += `, `;
       sqlQuery += `is_active = $${++paramCount}`;
-      value.push(is_active);
+      values.push(is_active);
     }
 
     sqlQuery += ` WHERE id = $${++paramCount} RETURNING *`;
-    value.push(num);
+    values.push(num.toString());
 
-    // console.log("QUERIES : " + sqlQuery + " VALUES : " + value);
+    // console.log("QUERIES : " + sqlQuery + " VALUES : " + values);
 
-    const result = await query(sqlQuery, value);
+    const result = await query(sqlQuery, values);
 
     if (result.rowCount === 0) {
       return NextResponse.json(

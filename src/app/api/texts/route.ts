@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     const section = searchParams.get("section");
 
     let sqlQuery = "SELECT * FROM texts WHERE 1=1";
-    let values: any[] = [];
+    const values: string[] = [];
     let paramCount = 0;
 
     if (page) {
@@ -81,7 +81,7 @@ export async function PUT(request: NextRequest) {
 
     let sqlQuery = "UPDATE Texts SET ";
     let paramCount = 0;
-    let values: any[] = [];
+    const values: string[] = [];
 
     if (text_en) {
       paramCount++;
